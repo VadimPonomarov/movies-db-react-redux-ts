@@ -1,0 +1,14 @@
+.BDrop__Box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.BDrop__Box_Box {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 60%;
+  height: 70%;
+}

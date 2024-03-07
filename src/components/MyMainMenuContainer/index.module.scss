@@ -1,0 +1,21 @@
+$button-w: 130px;
+
+.LG__Stack {
+  display: flex;
+  width: $button-w;
+  align-items: center;
+}
+
+.LG__Button {
+  width: $button-w;
+}
+
+.MUL {
+  height: 4px;
+  width: 0;
+  transition: 1s;
+}
+
+
+
+

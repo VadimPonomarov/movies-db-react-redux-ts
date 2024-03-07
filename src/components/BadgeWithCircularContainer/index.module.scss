@@ -1,0 +1,14 @@
+.Badge__Box {
+  display: flex;
+  align-items: center; 
+  position: absolute;
+  top: 0;
+  left: 0
+}
+.Badge__Box_Box{
+  margin: 8px;
+}
+.Badge__CP{
+  position: absolute;
+  z-index: 2;
+}

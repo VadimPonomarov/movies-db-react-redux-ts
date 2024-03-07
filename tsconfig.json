@@ -1,0 +1,45 @@
+{
+  "exclude": [
+    "node_modules",
+    "public",
+    "src/gql/types"
+  ],
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "src",
+    "target": "ESNext",
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "declaration": true,
+    "removeComments": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "alwaysStrict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "allowUnreachableCode": false,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  }
+}

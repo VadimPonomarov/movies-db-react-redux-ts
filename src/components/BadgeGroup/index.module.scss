@@ -1,0 +1,18 @@
+.BG__Container {
+  display: flex;
+  text-align: center;
+}
+
+.BG__Stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 150px;
+}
+
+.BG__Chip {
+  margin: 5px;
+  color: black !important;
+}

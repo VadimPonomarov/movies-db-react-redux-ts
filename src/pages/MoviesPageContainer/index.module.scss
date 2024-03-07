@@ -1,0 +1,97 @@
+.Ep__Box_Main {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Ep__Container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.Ep__Card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  width: 200px;
+  height: 435px;
+}
+
+.Ep__Card_Button {
+  width: 100%;
+  height: 100%;
+}
+
+.Ep__Card_Box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.Ep__Card_Content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: 1004;
+  height: 100%;
+}
+
+.Ep__Card_Box_Box {
+  display: flex;
+  align-items: flex-end;
+  padding-left: 4px;
+  padding-bottom: 4px;
+}
+
+.Ep__Card_Box_Box_T {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  width: 100%;
+}
+
+.Ep__BG_Box {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100vw;
+  top: 0;
+  z-index: 1000;
+}
+
+.Ep__BG_Box_Box {
+  position: fixed;
+  z-index: 0;
+  top: 45px;
+  width: 20%;
+}
+
+.Ep__BG_Box_Container {
+  display: flex;
+  max-height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie {
+  display: inline-block;
+  margin: .5em;
+  width: 8em;
+  height: 8em;
+  position: relative;
+  border-radius: 50%;
+}
+
+.p4 {
+  background-image: linear-gradient(270deg, transparent 100%, steelblue 50%),
+  linear-gradient(180deg, #ddd 50%, steelblue 50%);
+}
