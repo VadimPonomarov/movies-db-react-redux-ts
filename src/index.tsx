@@ -1,7 +1,7 @@
 import React from "react";
 
 import {MyQueryClientProvider} from "common/hocs";
-import {MyAuthContextProvider} from "common/hocs/MyAuthContextProvider";
+import {MyContextProvider} from "common/hocs/MyAuthContextProvider";
 import {MyThemeProviderMain} from "common/hocs/MyThemeProviderMain";
 import ReactDOM from "react-dom/client";
 import {RouterProvider} from "react-router-dom";
@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <MyAuthContextProvider>
+    <MyContextProvider>
         <MyThemeProviderMain>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
@@ -28,5 +28,5 @@ root.render(
                 </PersistGate>
             </Provider>
         </MyThemeProviderMain>
-    </MyAuthContextProvider>
+    </MyContextProvider>
 );

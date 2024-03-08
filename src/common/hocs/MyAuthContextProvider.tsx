@@ -7,7 +7,7 @@ import {commonSelectors} from "../../storage";
 
 const AuthContext = createContext<IAuthContext>(null);
 
-const MyAuthContextProvider: FC<IProps> = ({children}) => {
+const MyContextProvider: FC<IProps> = ({children}) => {
     const [theme, setTheme] = useState<"light" | "dark">();
     const initContext: IAuthContext = {
         theme,
@@ -21,4 +21,4 @@ const MyAuthContextProvider: FC<IProps> = ({children}) => {
     );
 };
 
-export {AuthContext, MyAuthContextProvider};
+export {AuthContext, MyContextProvider};
