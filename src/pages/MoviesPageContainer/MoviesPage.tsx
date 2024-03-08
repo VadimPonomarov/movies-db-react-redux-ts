@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC} from "react";
+import {FC, useEffect} from "react";
 
 import {Box} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
@@ -9,6 +9,7 @@ import {BackDrop} from "../../components";
 import css from "./index.module.scss";
 import {MovieCard} from "./SubComponents/MovieCard";
 import {MoviesButtonGroup} from "./SubComponents/MoviesButtonGroup";
+import {useAppSelector} from "../../storage";
 
 const MoviesPage: FC = () => {
     const {

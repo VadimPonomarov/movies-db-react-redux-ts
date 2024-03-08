@@ -9,6 +9,7 @@ import {AuthContext} from ".";
 
 const MyThemeProviderMain: FC<IProps> = ({children}) => {
     const {theme} = useContext(AuthContext);
+
     const themePalette: Theme = createTheme({
         palette: {
             mode: theme ? theme : "dark",

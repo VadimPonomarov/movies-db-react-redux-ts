@@ -9,13 +9,15 @@ import Switch from "@mui/material/Switch";
 import {AuthContext} from "common/hocs/MyAuthContextProvider";
 
 import {MyToolBar} from "./SubComponents/MyToolBar";
+import {useSelector} from "react-redux";
+import {authActions, authSelectors, useAppDispatch} from "../../storage";
 
 const MyAppBar: FC = () => {
-    const {isAuth: auth, setIsAuth: setAuth} = useContext(AuthContext);
-
+    const isAuth = useSelector(authSelectors.getIsAuth);
+    const dispatch = useAppDispatch();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAuth(event.target.checked);
+        dispatch(authActions.setIsAuth(event.target.checked));
     };
 
 
@@ -26,12 +28,12 @@ const MyAppBar: FC = () => {
                     <FormControlLabel
                         control={
                             <Switch
-                                checked={auth}
+                                checked={isAuth}
                                 onChange={handleChange}
                                 sx={{zIndex: "1001"}}
                             />
                         }
-                        label={auth ? "Logout" : "Login"}
+                        label={isAuth ? "Logout" : "Login"}
                     />
                 </FormGroup>
                 <AppBar position="static">

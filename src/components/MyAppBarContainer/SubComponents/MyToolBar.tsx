@@ -13,24 +13,23 @@ import {iconButtonMenuProps} from "../constants";
 import css from "../index.module.scss";
 
 import {MyToolbarMenu} from "./MyToolbarMenu";
+import {authSelectors, commonActions, commonSelectors, useAppDispatch, useAppSelector} from "../../../storage";
+import {useSelector} from "react-redux";
 
 
 const MyToolBar: FC = () => {
-    const {
-        userName,
-        isAuth,
-        theme,
-        setTheme
-    } = useContext(AuthContext);
+    const isAuth = useSelector(authSelectors.getIsAuth);
+
+    const themeIsDark = useSelector(commonSelectors.getThemeIsDark);
+    const dispatch = useAppDispatch();
+    const userName = useSelector(authSelectors.getUserName);
     const [anchorEl, setAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
     const handleTheme = () => {
-        theme === "light"
-            ? setTheme("dark")
-            : setTheme("light");
+        dispatch(commonActions.setThemeToggle());
     };
 
     return (

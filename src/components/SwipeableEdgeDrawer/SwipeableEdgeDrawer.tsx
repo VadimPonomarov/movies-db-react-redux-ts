@@ -12,6 +12,8 @@ import {BadgeGroup} from "../BadgeGroup";
 import {drawerBleeding, pullerProps, rootProps} from "./constants";
 import css from "./index.module.scss";
 import {IProps} from "./interfaces";
+import {useSelector} from "react-redux";
+import {authSelectors} from "../../storage";
 
 const Root =
     styled("div")(({theme}) => ({
@@ -32,7 +34,7 @@ const Puller =
     }));
 
 const SwipeableEdgeDrawer: FC<IProps> = (props) => {
-    const {isAuth} = useContext(AuthContext);
+    const isAuth = useSelector(authSelectors.getIsAuth);
     const [open, setOpen] = useState(false);
     const {movieId} = useParams();
     const navigate = useNavigate();

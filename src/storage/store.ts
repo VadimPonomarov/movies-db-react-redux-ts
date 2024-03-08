@@ -4,14 +4,16 @@ import {
     configureStore,
     ThunkAction,
 } from '@reduxjs/toolkit';
-import {createTransform, persistReducer} from 'redux-persist';
+import {persistReducer} from 'redux-persist';
 import persistStore from 'redux-persist/es/persistStore';
 import storage from 'redux-persist/lib/storage';
+import authSlice from './slices/authSlice/authSlice';
+import commonSlice from "./slices/commonSlice/commonSlice";
 
-import commonSlice from "./slices/common/commonSlice";
 
 const rootReducer = combineReducers({
-    common: commonSlice,
+    commonSlice: commonSlice,
+    authSlice: authSlice,
 });
 
 const persistConfig = {

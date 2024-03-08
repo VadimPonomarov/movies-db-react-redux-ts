@@ -14,6 +14,7 @@ import {BadgeWithCircular} from "../../../components";
 import {initMotion} from "../constants";
 import css from "../index.module.scss";
 import {ICardProps} from "../interfaces";
+import {commonActions, useAppDispatch} from "../../../storage";
 
 const MovieCard: FC<ICardProps> = ({props}) => {
     const {
@@ -28,7 +29,8 @@ const MovieCard: FC<ICardProps> = ({props}) => {
         }
     } = props;
     const navigate = useNavigate();
-    const {setBackDropImgPath} = useContext(AuthContext);
+    const dispatch = useAppDispatch();
+
     const [isFullTitle, setIsFullTitle] = useState<boolean>(false);
 
     const handleOnClick = () => {
@@ -37,7 +39,7 @@ const MovieCard: FC<ICardProps> = ({props}) => {
 
     const handleOriginalTitleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         e.stopPropagation();
-        setBackDropImgPath(backdrop_path);
+        dispatch(commonActions.setBackDropImgPath(backdrop_path));
     };
     const handleTitleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         e.stopPropagation();

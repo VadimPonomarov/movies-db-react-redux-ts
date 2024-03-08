@@ -19,14 +19,18 @@ import {formFields} from "./formFields";
 import {formSchema} from "./formSchema";
 import {formInputType, IProps} from "./formTypes";
 import css from "./index.module.scss";
+import {authActions, authSelectors, useAppDispatch, useAppSelector} from "../../storage";
+import {useSelector} from "react-redux";
+import {selectors} from "../../../templates/slices";
 
 
 const LoginForm_: FC<IProps> = ({props}) => {
     const {formLabel = "Form", animate = true} = props;
     const [maxWidth] = useContainerWidthResponsive({});
-    const {setIsAuth, setUserName} = useContext(AuthContext);
+    const setIsAut = useSelector(authSelectors.getIsAuth);
+    const userName = useSelector(authSelectors.getUserName);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const {setIsInit} = useContext(AuthContext)
 
     const {...methods} =
         useForm<formInputType | unknown>({
@@ -36,11 +40,11 @@ const LoginForm_: FC<IProps> = ({props}) => {
     const onSubmit = (data: IAuthCredentials) => {
         const isAuth = isAuthWithCredentials(data);
         if (isAuth) {
-            setIsAuth(true);
+            dispatch(authActions.setIsAuth(true));
             const {name} = getCredentials();
-            setUserName(name);
+            dispatch(authActions.setUserName(name));
         }
-        setIsInit(true)
+        dispatch(authActions.setIsInit(true));
         navigate("/");
     };
 

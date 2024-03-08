@@ -10,7 +10,10 @@ const MenuUnderLine: FC<IProps> = ({props}) => {
         <motion.div
             className={css.MUL}
             animate={{
-                backgroundColor: isActive === caption ? "rgb(255,0,0)" : "default",
+                backgroundColor:
+                    isActive === caption ?
+                        "rgb(255,0,0)" :
+                        "rgba(255,0,0,0)",
                 width: "100%",
             }}
         >

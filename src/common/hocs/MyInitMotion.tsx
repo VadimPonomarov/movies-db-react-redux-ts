@@ -3,19 +3,22 @@ import React, {FC, ReactNode, useContext, useEffect} from "react";
 import {motion} from "framer-motion";
 
 import {AuthContext} from "./MyAuthContextProvider";
+import {useSelector} from "react-redux";
+import {authActions, authSelectors, useAppDispatch} from "../../storage";
 
 interface IProps {
     children: ReactNode;
 }
 
 const MyInitMotion: FC<IProps> = ({children}) => {
-    const {isInit, setIsInit} = useContext(AuthContext);
+    const isInit = useSelector(authSelectors.getIsInit);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         return () => {
-            if (isInit) setIsInit(false);
+            if (!!isInit) dispatch(authActions.setIsInit(false));
         };
-    }, [isInit, setIsInit]);
+    }, [isInit,dispatch]);
 
     return (
         <>

@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom";
 
 import {AuthContext} from "../../../common/hocs";
 import {clearCredentials} from "../../../common/services";
+import {useSelector} from "react-redux";
+import {authActions, authSelectors, useAppDispatch} from "../../../storage";
 
 interface IProps {
     setAnchorEl: Dispatch<React.SetStateAction<HTMLElement>>;
@@ -11,7 +13,8 @@ interface IProps {
 
 const UseAppMenuHandlers = ({setAnchorEl}: IProps) => {
     const navigate = useNavigate();
-    const {setIsAuth} = useContext(AuthContext);
+    const setIsAuth = useSelector(authSelectors.getIsAuth);
+    const dispatch = useAppDispatch()
 
     const handleRegister = () => {
         setAnchorEl(null);
@@ -24,13 +27,13 @@ const UseAppMenuHandlers = ({setAnchorEl}: IProps) => {
     };
     const handleLogout = () => {
         setAnchorEl(null);
-        setIsAuth(false);
+        dispatch(authActions.setIsAuth(false));
     };
 
     const handleClearStore = () => {
         clearCredentials();
         setAnchorEl(null);
-        setIsAuth(false);
+        dispatch(authActions.setIsAuth(false));
         navigate("/registration")
     };
 

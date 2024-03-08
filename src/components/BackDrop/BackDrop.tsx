@@ -7,13 +7,15 @@ import {baseImagesUrl, ImageSizeEnum} from "../../common";
 import {AuthContext} from "../../common/hocs";
 
 import css from "./index.module.scss";
+import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
+import {useSelector} from "react-redux";
 
 
 const BackDrop: FC = () => {
-    const {backDropImgPath, setBackDropImgPath} = useContext(AuthContext);
-
+    const dispatch = useAppDispatch();
+    const backDropImgPath = useSelector(commonSelectors.setBackDropImgPath)
     const handleClose = () => {
-        setBackDropImgPath(undefined);
+        dispatch(commonActions.setBackDropImgPath(undefined));
     };
 
     return (

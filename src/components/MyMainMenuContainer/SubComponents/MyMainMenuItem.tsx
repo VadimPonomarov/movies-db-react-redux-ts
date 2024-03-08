@@ -10,10 +10,12 @@ import {IProps} from "../interfaces";
 import {LayoutGroup} from "framer-motion";
 import css from "../index.module.scss"
 import MenuUnderLine from "./MenuUnderLine";
+import {useSelector} from "react-redux";
+import {commonSelectors} from "../../../storage";
 
 const MyMainMenuItem: FC<IProps> = ({props}) => {
     const {caption, uri, elementProps, isActive, setIsActive} = props;
-    const {searchParams: {with_genres}} = useContext(AuthContext);
+    const {with_genres} = useSelector(commonSelectors.getSearchParams);
 
     return (
         <LayoutGroup id="layoutGroup">

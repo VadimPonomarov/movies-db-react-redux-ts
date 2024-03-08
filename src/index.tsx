@@ -5,6 +5,9 @@ import {MyAuthContextProvider} from "common/hocs/MyAuthContextProvider";
 import {MyThemeProviderMain} from "common/hocs/MyThemeProviderMain";
 import ReactDOM from "react-dom/client";
 import {RouterProvider} from "react-router-dom";
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from './storage';
+import {Provider} from 'react-redux';
 
 import {Router} from "./router";
 
@@ -17,9 +20,13 @@ const root = ReactDOM.createRoot(
 root.render(
     <MyAuthContextProvider>
         <MyThemeProviderMain>
-            <MyQueryClientProvider>
-                <RouterProvider router={Router}/>
-            </MyQueryClientProvider>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <MyQueryClientProvider>
+                        <RouterProvider router={Router}/>
+                    </MyQueryClientProvider>
+                </PersistGate>
+            </Provider>
         </MyThemeProviderMain>
     </MyAuthContextProvider>
 );
