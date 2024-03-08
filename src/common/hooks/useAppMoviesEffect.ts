@@ -1,11 +1,10 @@
-import {useContext, useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import {movieService} from "common/services";
 import {IMovieListInfo, IMovieResult, MovieCategoryEnum} from "common/types";
 import {useParams, useSearchParams} from "react-router-dom";
 
-import {AuthContext} from "../hocs";
-import {commonSelectors, useAppDispatch} from "../../storage";
+import {commonSelectors} from "../../storage";
 import {useSelector} from "react-redux";
 
 const useAppMoviesEffect = () => {
@@ -15,30 +14,35 @@ const useAppMoviesEffect = () => {
     const searchParams = useSelector(commonSelectors.getSearchParams);
     const page = parseInt(query.get("page"));
     const {category} = useParams();
-    const dispatch = useAppDispatch();
+
+    const fetchFunc: () => void =
+        useCallback(async () => {
+            if (category === "discover") {
+                const {results, ...info} =
+                    await movieService.getDiscoverList(Object(MovieCategoryEnum)[category], page,
+                        {
+                            ...searchParams,
+                            with_genres: searchParams.with_genres.join(",")
+                        });
+                setResults(results);
+                setInfo(info);
+
+            } else {
+                const {results, ...info} =
+                    await movieService.getMovieList(Object(MovieCategoryEnum)[category], page);
+                setResults(results);
+                setInfo(info);
+            }
+
+        }, [category, info, page, results, searchParams]);
 
     useEffect(() => {
         setQuery({page: "1"});
-        // eslint-disable-next-line
     }, [category]);
 
     useEffect(() => {
-        if (category === "discover") {
-            movieService.getDiscoverList(Object(MovieCategoryEnum)[category], page,
-                {...searchParams, with_genres: searchParams.with_genres.join(",")})
-                .then(({results, ...info}) => {
-                    setResults(results);
-                    setInfo(info);
-                });
-        } else {
-            movieService.getMovieList(Object(MovieCategoryEnum)[category], page)
-                .then(({results, ...info}) => {
-                    setResults(results);
-                    setInfo(info);
-                });
-        }
-
-    }, [page, category, searchParams]);
+        fetchFunc();
+    }, [fetchFunc]);
 
 
     const nextPage = () => {
