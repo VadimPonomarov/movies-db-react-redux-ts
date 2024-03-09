@@ -1,11 +1,10 @@
-import React, {FC, useContext} from "react";
+import React, {FC} from "react";
 
 import {Button, Stack, Typography} from "@mui/material";
 import _ from "lodash";
 import {NavLink} from "react-router-dom";
 
 import {MovieCategoryEnum} from "../../../common";
-import {AuthContext} from "../../../common/hocs";
 import {IProps} from "../interfaces";
 import {LayoutGroup} from "framer-motion";
 import css from "../index.module.scss"

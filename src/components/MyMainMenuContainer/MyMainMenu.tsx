@@ -9,16 +9,27 @@ import {MyMainMenuItem} from "./SubComponents/MyMainMenuItem";
 
 
 const MyMainMenu: FC = React.memo(() => {
-    const [isActive, setIsActive] = useState<string>()
+    const [isActive, setIsActive] = useState<string>();
 
     return (
-        <ButtonGroup variant="text" sx={{pt: 3}}>
-            <Stack direction={"row"} spacing={2}>
+        <ButtonGroup
+            variant="text"
+            sx={{pt: 3}}
+        >
+            <Stack
+                direction={"row"}
+                spacing={2}
+            >
                 {myMenuItems &&
                     myMenuItems.map(item =>
                         Object.keys(item).map(key =>
-                            <MyMainMenuItem key={v4()}
-                                            props={{...Object(item)[key].props, isActive, setIsActive}}
+                            <MyMainMenuItem
+                                key={v4()}
+                                props={{
+                                    ...Object(item)[key].props,
+                                    isActive,
+                                    setIsActive
+                                }}
                             />
                         ))}
             </Stack>
