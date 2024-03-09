@@ -13,5 +13,5 @@ export const pSlider: SliderProps = {
 
 export const pTextField: TextFieldProps = {
     size: "small",
-    sx: {border: null},
+    sx: {border: "none"},
 };

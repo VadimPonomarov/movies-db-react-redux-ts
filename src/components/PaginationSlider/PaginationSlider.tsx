@@ -17,7 +17,6 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
     const {query, page} = useAppMoviesEffect();
 
     const {
-        value,
         handleSliderChange,
         handleInputChange,
     } = useAppState(current);
@@ -38,7 +37,7 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
                         {...pSlider}
                         min={1}
                         max={500}
-                        value={page}
+                        value={!!page ? +page : 1}
                         onChange={handleSliderChange}
                     />
                 </Grid>
@@ -48,7 +47,7 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
                 >
                     <TextField
                         {...pTextField}
-                        value={!!page ? page : 1}
+                        value={!!page ? +page : 1}
                         onChange={handleInputChange}
                         onBlur={nextPage}
                         inputProps={{
