@@ -9,13 +9,12 @@ import {useAppMoviesEffect} from "../../common/hooks/useAppMoviesEffect";
 import {mSpan, pSlider, pTextField} from "./constants";
 import css from "./index.module.scss";
 import {IProps} from "./interfaces";
-import {useAppState} from "./useAppState";
+import {useAppState} from "../../common/hooks/useAppState";
 
 
 const PaginationSlider: FC<IProps> = React.memo(({props}) => {
     const {step, min, max, current = 1, nextPage} = props;
-    const {query} = useAppMoviesEffect();
-    const page_ = query.get("page");
+    const {query, page} = useAppMoviesEffect();
 
     const {
         value,
@@ -37,10 +36,9 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
                 >
                     <Slider
                         {...pSlider}
-                        defaultValue={1}
                         min={1}
-                        max={+max <= 100 ? +max : 500}
-                        value={value}
+                        max={500}
+                        value={page}
                         onChange={handleSliderChange}
                     />
                 </Grid>
@@ -50,7 +48,7 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
                 >
                     <TextField
                         {...pTextField}
-                        value={page_}
+                        value={!!page ? page : 1}
                         onChange={handleInputChange}
                         onBlur={nextPage}
                         inputProps={{

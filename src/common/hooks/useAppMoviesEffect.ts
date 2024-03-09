@@ -34,10 +34,11 @@ const useAppMoviesEffect = () => {
                 setInfo(info);
             }
 
-        }, [category, info, page, results, searchParams]);
+        }, [category, page, searchParams]);
 
     useEffect(() => {
         setQuery({page: "1"});
+        // eslint-disable-next-line
     }, [category]);
 
     useEffect(() => {
@@ -53,7 +54,7 @@ const useAppMoviesEffect = () => {
         setQuery({page: (+query.get("page") - 1).toString()});
     };
 
-    return {info, setInfo, results, setResults, query, setQuery, prevPage, nextPage};
+    return {info, setInfo, results, setResults, query, setQuery, page, prevPage, nextPage};
 };
 
 export {useAppMoviesEffect};
