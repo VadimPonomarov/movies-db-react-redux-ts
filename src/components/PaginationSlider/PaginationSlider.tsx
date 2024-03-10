@@ -14,7 +14,7 @@ import {useAppState} from "../../common/hooks/useAppState";
 
 const PaginationSlider: FC<IProps> = React.memo(({props}) => {
     const {step, min, max, current = 1, nextPage} = props;
-    const {query, page} = useAppMoviesEffect();
+    const {page} = useAppMoviesEffect();
 
     const {
         handleSliderChange,

@@ -18,7 +18,10 @@ const MoviesButtonGroup: FC<IBGProps> = ({props}) => {
     return (
         <Box className={css.Ep__BG_Box}>
             <Box className={css.Ep__BG_Box_Container}>
-                <ButtonGroup size={"small"} color={"secondary"}>
+                <ButtonGroup
+                    size={"small"}
+                    color={"secondary"}
+                >
                     <Button
                         disabled={page === 1}
                         onClick={prevPage}

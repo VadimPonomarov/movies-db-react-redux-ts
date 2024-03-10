@@ -7,7 +7,7 @@
 .Ep__Container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center
+  justify-content: center;
 }
 
 .Ep__Card {
@@ -65,7 +65,7 @@
   align-items: center;
   width: 100vw;
   top: 0;
-  z-index: 1000;
+  z-index: 1100;
 }
 
 .Ep__BG_Box_Box {
