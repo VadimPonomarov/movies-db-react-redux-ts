@@ -45,7 +45,7 @@ const useAppMoviesEffect = () => {
         }, [category, page, searchParams]);
 
     useEffect(() => {
-        setQuery();
+        setQuery({page: "1"});
         // eslint-disable-next-line
     }, [category]);
 
