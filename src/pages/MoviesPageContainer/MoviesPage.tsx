@@ -26,10 +26,8 @@ const MoviesPage: FC = () => {
     const ref = useRef(null);
 
     const handleInView = () => {
-        if (isInit) {
-            setIsInit(false)
-        };
         ref.current.scrollIntoView();
+        if (isInit) return setIsInit(false);
         deferredNextPage();
     };
 
