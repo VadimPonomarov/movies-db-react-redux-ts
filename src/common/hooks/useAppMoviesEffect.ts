@@ -6,6 +6,7 @@ import {useParams, useSearchParams} from "react-router-dom";
 
 import {commonSelectors} from "../../storage";
 import {useSelector} from "react-redux";
+import {queryClient} from "../hocs";
 
 const useAppMoviesEffect = () => {
     const [results, setResults] = useState<IMovieResult[]>([]);
@@ -13,23 +14,30 @@ const useAppMoviesEffect = () => {
     const [query, setQuery] = useSearchParams({page: "1"});
     const searchParams = useSelector(commonSelectors.getSearchParams);
     const page = parseInt(query.get("page"));
+
     const {category} = useParams();
 
     const fetchFunc: () => void =
         useCallback(async () => {
             if (category === "discover") {
                 const {results, ...info} =
-                    await movieService.getDiscoverList(Object(MovieCategoryEnum)[category], page,
-                        {
-                            ...searchParams,
-                            with_genres: searchParams.with_genres.join(",")
-                        });
+                    await queryClient.fetchQuery({
+                        queryKey: [category, page],
+                        queryFn: () => movieService.getDiscoverList(Object(MovieCategoryEnum)[category], page,
+                            {
+                                ...searchParams,
+                                with_genres: searchParams.with_genres.join(",")
+                            })
+                    });
                 setResults(results);
                 setInfo(info);
 
             } else {
                 const {results, ...info} =
-                    await movieService.getMovieList(Object(MovieCategoryEnum)[category], page);
+                    await queryClient.fetchQuery({
+                        queryKey: [category, page],
+                        queryFn: () => movieService.getMovieList(Object(MovieCategoryEnum)[category], page)
+                    });
                 setResults(results);
                 setInfo(info);
             }
@@ -37,7 +45,7 @@ const useAppMoviesEffect = () => {
         }, [category, page, searchParams]);
 
     useEffect(() => {
-        setQuery({page: "1"});
+        setQuery();
         // eslint-disable-next-line
     }, [category]);
 
