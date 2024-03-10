@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useRef, useState} from "react";
+import {FC, useDeferredValue, useRef, useState} from "react";
 
 import {Box} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
@@ -18,30 +18,51 @@ const MoviesPage: FC = () => {
         prevPage,
         nextPage
     } = useAppMoviesEffect();
+
     const [isInit, setIsInit] = useState<boolean>(true);
+
+    const deferredNextPage = useDeferredValue(nextPage);
 
     const ref = useRef(null);
 
     const handleInView = () => {
         ref.current.scrollIntoView();
         if (isInit) return setIsInit(false);
-        nextPage();
+        deferredNextPage();
     };
 
     return (
         <>
-            {info && <MoviesButtonGroup props={{info, prevPage, nextPage}}/>}
-            <Box ref={ref} className={css.Ep__Container}>
+            {info &&
+                <MoviesButtonGroup
+                    props={{
+                        info,
+                        prevPage,
+                        nextPage
+                    }}
+                />}
+
+            <Box
+                ref={ref}
+                className={css.Ep__Container}
+            >
                 <BackDrop/>
                 {!!results.length &&
                     results.map(item =>
-                        <MovieCard key={item.id} props={{item}}/>
+                        <MovieCard
+                            key={item.id}
+                            props={{
+                                item
+                            }}
+                        />
                     )
                 }
             </Box>
             <InView
                 as="div"
-                onChange={handleInView}
+                onChange={
+                    handleInView
+                }
             />
         </>
     );
