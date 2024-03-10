@@ -1,5 +1,6 @@
-import {ComponentsProps} from "@mui/material";
 import {Dispatch, SetStateAction} from "react";
+
+import {ComponentsProps} from "@mui/material";
 
 interface Props {
     caption: string,

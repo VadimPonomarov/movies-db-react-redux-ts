@@ -2,13 +2,14 @@ import {useCallback, useEffect, useState} from "react";
 
 import {movieService} from "common/services";
 import {IMovieListInfo, IMovieResult, MovieCategoryEnum} from "common/types";
+import {useSelector} from "react-redux";
 import {useParams, useSearchParams} from "react-router-dom";
 
 import {commonSelectors} from "../../storage";
-import {useSelector} from "react-redux";
 import {queryClient} from "../hocs";
 
 const useAppMoviesEffect = () => {
+    const [isInit, setIsInit] = useState<boolean>(true);
     const [results, setResults] = useState<IMovieResult[]>([]);
     const [info, setInfo] = useState<IMovieListInfo>();
     const [query, setQuery] = useSearchParams({page: "1"});
@@ -62,7 +63,7 @@ const useAppMoviesEffect = () => {
         setQuery({page: (+query.get("page") - 1).toString()});
     };
 
-    return {info, setInfo, results, setResults, query, setQuery, page, prevPage, nextPage};
+    return {isInit, setIsInit, info, setInfo, results, setResults, query, setQuery, page, prevPage, nextPage};
 };
 
 export {useAppMoviesEffect};

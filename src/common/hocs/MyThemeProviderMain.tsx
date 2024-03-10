@@ -1,27 +1,34 @@
-import React, {FC, useContext} from "react";
+import React, {FC} from "react";
 
 import {ThemeProvider as MyThemeProvider, createTheme, Theme} from "@mui/material";
 import {myThemeComponents, myThemePalette} from "common/themes";
+import {useSelector} from "react-redux";
+
+import {commonSelectors} from "../../storage";
 
 import {IProps} from "./interfaces";
 
-import {AuthContext} from ".";
-
 const MyThemeProviderMain: FC<IProps> = ({children}) => {
-    const {theme} = useContext(AuthContext);
+    const themeIsDark = useSelector(commonSelectors.getThemeIsDark);
 
-    const themePalette: Theme = createTheme({
+    const extraPalette: Theme = createTheme({
         palette: {
-            mode: theme ? theme : "dark",
+            mode: themeIsDark ? "dark" : "light",
         }
     });
+
     const myThemeMain: Theme = createTheme(
         myThemeComponents,
-        {...myThemePalette, ...themePalette},
+        {
+            ...myThemePalette,
+            ...extraPalette
+        },
     );
 
     return (
-        <MyThemeProvider theme={myThemeMain}>
+        <MyThemeProvider
+            theme={{...myThemeMain}}
+        >
             {children}
         </MyThemeProvider>
     );

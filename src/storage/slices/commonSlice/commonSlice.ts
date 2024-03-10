@@ -1,8 +1,9 @@
 import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {initialAlertInfo, initialState} from "./constants";
-import {IAlertInfo, ThemeType} from "./interfaces";
 import {ISearchParams} from "../../../common/hocs/interfaces";
+
+import {initialAlertInfo, initialState} from "./constants";
+import {IAlertInfo} from "./interfaces";
 
 const createSliceWithThunks = buildCreateSlice({
     creators: {asyncThunk: asyncThunkCreator}
@@ -16,6 +17,7 @@ const commonSlice = createSliceWithThunks({
         getIsPending: state => state.isPending,
         getIsFetching: state => state.isFetching,
         getIsDrawer: state => state.isDrawer,
+        getIsPagination: state => state.isPagination,
         setBackDropImgPath: state => state.backDropImgPath,
         getSearchParams: state => state.searchParams,
         getAlertInfo: state => state.alertInfo,
@@ -26,6 +28,9 @@ const commonSlice = createSliceWithThunks({
         }),
         setIsPending: create.reducer((state, action: PayloadAction<boolean>) => {
             state.isPending = action.payload;
+        }),
+        setIsPagination: create.reducer((state, action: PayloadAction<boolean>) => {
+            state.isPagination = action.payload;
         }),
         setIsFetching: create.reducer((state, action: PayloadAction<boolean>) => {
             state.isFetching = action.payload;

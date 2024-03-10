@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import {v4} from "uuid";
 
 import {getCredentials, isAuthWithCredentials} from "../../common/services";
+import {authActions, useAppDispatch} from "../../storage";
 import {IAuthCredentials} from "../MyRegistrationForm/formTypes";
 
 import {FormField} from "./FormField";
@@ -18,15 +19,11 @@ import {formFields} from "./formFields";
 import {formSchema} from "./formSchema";
 import {formInputType, IProps} from "./formTypes";
 import css from "./index.module.scss";
-import {authActions, authSelectors, useAppDispatch} from "../../storage";
-import {useSelector} from "react-redux";
 
 
 const LoginForm_: FC<IProps> = ({props}) => {
     const {formLabel = "Form", animate = true} = props;
     const [maxWidth] = useContainerWidthResponsive({});
-    const setIsAut = useSelector(authSelectors.getIsAuth);
-    const userName = useSelector(authSelectors.getUserName);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 

@@ -16,8 +16,12 @@ const MoviesButtonGroup: FC<IBGProps> = ({props}) => {
     } = props;
 
     return (
-        <Box className={css.Ep__BG_Box}>
-            <Box className={css.Ep__BG_Box_Container}>
+        <Box
+            className={css.Ep__BG_Box}
+        >
+            <Box
+                className={css.Ep__BG_Box_Container}
+            >
                 <ButtonGroup
                     size={"small"}
                     color={"secondary"}
@@ -36,7 +40,9 @@ const MoviesButtonGroup: FC<IBGProps> = ({props}) => {
                     </Button>
                 </ButtonGroup>
             </Box>
-            <Box className={css.Ep__BG_Box_Box}>
+            <Box
+                className={css.Ep__BG_Box_Box}
+            >
                 <PaginationSlider
                     props={{
                         min: 1,

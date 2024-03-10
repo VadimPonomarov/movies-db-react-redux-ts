@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useContext, useState} from "react";
+import {FC, useState} from "react";
 
 import {Box, Button, Card, CardContent, Typography} from "@mui/material";
 import {MyInitMotion} from "common/hocs/MyInitMotion";
@@ -9,12 +9,11 @@ import moment from "moment";
 import {useNavigate} from "react-router-dom";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
-import {AuthContext} from "../../../common/hocs";
 import {BadgeWithCircular} from "../../../components";
+import {commonActions, useAppDispatch} from "../../../storage";
 import {initMotion} from "../constants";
 import css from "../index.module.scss";
 import {ICardProps} from "../interfaces";
-import {commonActions, useAppDispatch} from "../../../storage";
 
 const MovieCard: FC<ICardProps> = ({props}) => {
     const {

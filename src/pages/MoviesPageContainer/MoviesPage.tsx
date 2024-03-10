@@ -1,15 +1,17 @@
 import * as React from "react";
-import {FC, useDeferredValue, useRef, useState} from "react";
+import {FC, useCallback, useDeferredValue, useRef} from "react";
 
 import {Box} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
+import {InView} from "react-intersection-observer";
+import {useSelector} from "react-redux";
 
 import {BackDrop} from "../../components";
+import {authSelectors, commonActions, commonSelectors, useAppDispatch} from "../../storage";
 
 import css from "./index.module.scss";
 import {MovieCard} from "./SubComponents/MovieCard";
 import {MoviesButtonGroup} from "./SubComponents/MoviesButtonGroup";
-import {InView} from "react-intersection-observer";
 
 const MoviesPage: FC = () => {
     const {
@@ -19,17 +21,19 @@ const MoviesPage: FC = () => {
         nextPage
     } = useAppMoviesEffect();
 
-    const [isInit, setIsInit] = useState<boolean>(true);
-
+    const dispatch = useAppDispatch();
+    const ref = useRef(null);
+    const isInit = useSelector(authSelectors.getIsInit);
+    const isPagination = useSelector(commonSelectors.getIsPagination);
     const deferredNextPage = useDeferredValue(nextPage);
 
-    const ref = useRef(null);
-
-    const handleInView = () => {
-        ref.current.scrollIntoView();
-        if (isInit) return setIsInit(false);
-        deferredNextPage();
-    };
+    const handleInView = useCallback(() => {
+        if (!isInit && isPagination) {
+            ref.current.scrollIntoView();
+            return deferredNextPage();
+        }
+        dispatch(commonActions.setIsPagination(true));
+    }, [dispatch, isInit, deferredNextPage]);
 
     return (
         <>

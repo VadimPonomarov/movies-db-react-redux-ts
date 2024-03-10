@@ -1,13 +1,12 @@
-import React, {FC, useContext, useEffect} from "react";
+import React, {FC, useEffect} from "react";
 
+import {useSelector} from "react-redux";
 import {Navigate, useNavigate} from "react-router-dom";
 
+import {authSelectors} from "../../storage";
 import {getCredentials} from "../services";
 
 import {IProps} from "./interfaces";
-import {AuthContext} from "./MyAuthContextProvider";
-import {useSelector} from "react-redux";
-import {authSelectors} from "../../storage";
 
 
 const MyAuthRequired: FC<IProps> = ({children}) => {

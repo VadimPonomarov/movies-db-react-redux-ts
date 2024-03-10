@@ -1,7 +1,9 @@
 import React, {FC} from 'react';
+
 import {motion} from "framer-motion";
-import {IProps} from "../interfaces";
+
 import css from "../index.module.scss"
+import {IProps} from "../interfaces";
 
 const MenuUnderLine: FC<IProps> = ({props}) => {
     const {caption, isActive} = props

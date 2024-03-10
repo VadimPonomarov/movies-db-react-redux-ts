@@ -1,9 +1,8 @@
-import React, {FC, ReactNode, useContext, useEffect} from "react";
+import React, {FC, ReactNode, useEffect} from "react";
 
 import {motion} from "framer-motion";
-
-import {AuthContext} from "./MyAuthContextProvider";
 import {useSelector} from "react-redux";
+
 import {authActions, authSelectors, useAppDispatch} from "../../storage";
 
 interface IProps {
@@ -18,7 +17,7 @@ const MyInitMotion: FC<IProps> = ({children}) => {
         return () => {
             if (!!isInit) dispatch(authActions.setIsInit(false));
         };
-    }, [isInit,dispatch]);
+    }, [isInit, dispatch]);
 
     return (
         <>

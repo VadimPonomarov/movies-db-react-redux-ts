@@ -1,11 +1,9 @@
-import React, {Dispatch, useContext} from "react";
+import React, {Dispatch} from "react";
 
 import {useNavigate} from "react-router-dom";
 
-import {AuthContext} from "../../../common/hocs";
-import {clearCredentials} from "../../../common/services";
-import {useSelector} from "react-redux";
-import {authActions, authSelectors, useAppDispatch} from "../../../storage";
+import {authActions, useAppDispatch} from "../../storage";
+import {clearCredentials} from "../services";
 
 interface IProps {
     setAnchorEl: Dispatch<React.SetStateAction<HTMLElement>>;
@@ -13,7 +11,6 @@ interface IProps {
 
 const UseAppMenuHandlers = ({setAnchorEl}: IProps) => {
     const navigate = useNavigate();
-    const setIsAuth = useSelector(authSelectors.getIsAuth);
     const dispatch = useAppDispatch()
 
     const handleRegister = () => {

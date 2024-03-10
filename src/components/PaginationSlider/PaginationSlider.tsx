@@ -5,11 +5,11 @@ import {Grid, Slider, TextField} from "@mui/material";
 import {motion} from "framer-motion";
 
 import {useAppMoviesEffect} from "../../common/hooks/useAppMoviesEffect";
+import {useAppState} from "../../common/hooks/useAppState";
 
 import {mSpan, pSlider, pTextField} from "./constants";
 import css from "./index.module.scss";
 import {IProps} from "./interfaces";
-import {useAppState} from "../../common/hooks/useAppState";
 
 
 const PaginationSlider: FC<IProps> = React.memo(({props}) => {

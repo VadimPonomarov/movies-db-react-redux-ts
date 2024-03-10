@@ -1,16 +1,19 @@
 import React, {FC} from "react";
 
 import {Button, Stack, Typography} from "@mui/material";
+import {LayoutGroup} from "framer-motion";
 import _ from "lodash";
+import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 import {MovieCategoryEnum} from "../../../common";
-import {IProps} from "../interfaces";
-import {LayoutGroup} from "framer-motion";
-import css from "../index.module.scss"
-import MenuUnderLine from "./MenuUnderLine";
-import {useSelector} from "react-redux";
 import {commonSelectors} from "../../../storage";
+import css from "../index.module.scss"
+import {IProps} from "../interfaces";
+
+import MenuUnderLine from "./MenuUnderLine";
+
+
 
 const MyMainMenuItem: FC<IProps> = ({props}) => {
     const {caption, uri, elementProps, isActive, setIsActive} = props;

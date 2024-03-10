@@ -1,5 +1,6 @@
-import {IAlertInfo, IInitialState} from "./interfaces";
 import {ISearchParams} from "../../../common/hocs/interfaces";
+
+import {IAlertInfo, IInitialState} from "./interfaces";
 
 export enum AlertTypeEnum {
     SUCCESS = "Success",
@@ -24,6 +25,7 @@ export const initialSearchParams: ISearchParams = {
 export const initialState: IInitialState = {
     themeIsDark: true,
     isDrawer: false,
+    isPagination: true,
     alertInfo: initialAlertInfo,
     isPending: false,
     isFetching: false,

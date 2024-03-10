@@ -1,11 +1,10 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 import {difference, indexOf} from "lodash";
+import {useSelector} from "react-redux";
 
 import {IGenre} from "../../common";
-import {AuthContext} from "../../common/hocs";
 import {movieService} from "../../common/services";
-import {useSelector} from "react-redux";
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 
 const useAppBg = () => {

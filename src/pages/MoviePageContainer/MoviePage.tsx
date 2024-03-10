@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 
 import {IMovieDetails} from "../../common";
 import {movieService} from "../../common/services";
+import {commonActions, useAppDispatch} from "../../storage";
 
 import {IProps} from "./interfaces";
 import {MovieDetailsCard} from "./MovieDetailsCard";
@@ -13,14 +14,15 @@ import {MovieDetailsCard} from "./MovieDetailsCard";
 const MoviePage: FC<IProps> = () => {
     const {movieId} = useParams();
     const [movieDetails, setMovieDetails] = useState<IMovieDetails>();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (movieId) {
             movieService.getMovieById(+movieId)
                 .then(details => setMovieDetails(details));
         }
-
-    }, [movieId]);
+        dispatch(commonActions.setIsPagination(false));
+    }, [dispatch, movieId]);
 
     return (
         <>

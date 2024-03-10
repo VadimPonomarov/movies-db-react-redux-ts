@@ -1,6 +1,6 @@
 import  {useEffect, useState} from "react";
 
-import {getCredentials} from "../../common/services";
+import {getCredentials} from "../services";
 
 const UseAppToolBar = () => {
     const [registered, setIsRegistered] = useState<boolean>();

@@ -1,14 +1,13 @@
 import * as React from "react";
-import {FC, useContext} from "react";
+import {FC} from "react";
 
 import {Box, Modal} from "@mui/material";
+import {useSelector} from "react-redux";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../common";
-import {AuthContext} from "../../common/hocs";
+import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 
 import css from "./index.module.scss";
-import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
-import {useSelector} from "react-redux";
 
 
 const BackDrop: FC = () => {

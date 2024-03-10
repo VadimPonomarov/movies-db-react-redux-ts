@@ -1,19 +1,18 @@
 import * as React from "react";
-import {FC, useContext, useState} from "react";
+import {FC, useState} from "react";
 
 import {Global} from "@emotion/react";
 import {Box, Button, Container, CssBaseline, styled, SwipeableDrawer, Typography} from "@mui/material";
 import {grey} from "@mui/material/colors";
+import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
-import {AuthContext} from "../../common/hocs";
+import {authSelectors} from "../../storage";
 import {BadgeGroup} from "../BadgeGroup";
 
 import {drawerBleeding, pullerProps, rootProps} from "./constants";
 import css from "./index.module.scss";
 import {IProps} from "./interfaces";
-import {useSelector} from "react-redux";
-import {authSelectors} from "../../storage";
 
 const Root =
     styled("div")(({theme}) => ({

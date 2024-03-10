@@ -1,16 +1,14 @@
 import React from "react";
 
 import {MyQueryClientProvider} from "common/hocs";
-import {MyContextProvider} from "common/hocs/MyAuthContextProvider";
-import {MyThemeProviderMain} from "common/hocs/MyThemeProviderMain";
 import ReactDOM from "react-dom/client";
+import {Provider} from "react-redux";
 import {RouterProvider} from "react-router-dom";
-import {PersistGate} from 'redux-persist/integration/react';
-import {persistor, store} from './storage';
-import {Provider} from 'react-redux';
+import {PersistGate} from "redux-persist/integration/react";
 
+import {MyThemeProviderMain} from "./common/hocs/MyThemeProviderMain";
 import {Router} from "./router";
-
+import {persistor, store} from "./storage";
 import "./index.scss";
 
 const root = ReactDOM.createRoot(
@@ -18,15 +16,18 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <MyContextProvider>
-        <MyThemeProviderMain>
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <MyQueryClientProvider>
-                        <RouterProvider router={Router}/>
-                    </MyQueryClientProvider>
-                </PersistGate>
-            </Provider>
-        </MyThemeProviderMain>
-    </MyContextProvider>
+    <Provider store={store}>
+        <PersistGate
+            loading={null}
+            persistor={persistor}
+        >
+            <MyQueryClientProvider>
+                <MyThemeProviderMain>
+                    <RouterProvider
+                        router={Router}
+                    />
+                </MyThemeProviderMain>
+            </MyQueryClientProvider>
+        </PersistGate>
+    </Provider>
 );
