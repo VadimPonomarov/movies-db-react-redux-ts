@@ -130,3 +130,9 @@ export interface IGenre {
 export interface IGenreListResponse {
     genres: IGenre[];
 }
+
+export enum LanguageEnum {
+    en = "en-Us",
+    uk = "uk-Uk",
+    ru = "ru-Ru",
+}

@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import {myHttpUrls} from "../constants";
+import {ISearchParams} from "../hocs/interfaces";
 import {AuthSessionIdResponseType, IGenreListResponse, IMovieDetails, IMovieList, MovieCategoryEnum} from "../types";
 
 import {apiService} from "./apiService";
@@ -13,10 +14,11 @@ const movieService = {
                 console.log(error);
             }),
     getMovieList: (category: MovieCategoryEnum = MovieCategoryEnum.popular,
-                   page: number): Promise<IMovieList> =>
+                   page: number, extraParams: ISearchParams): Promise<IMovieList> =>
         apiService.get(myHttpUrls.list.getList(category), {
             params: {
-                page: _.max<number>([page, 1])
+                page: _.max<number>([page, 1]),
+                ...extraParams
             }
         })
             .then(({data}) => data)

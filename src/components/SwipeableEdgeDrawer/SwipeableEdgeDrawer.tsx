@@ -4,6 +4,8 @@ import {FC, useState} from "react";
 import {Global} from "@emotion/react";
 import {Box, Button, Container, CssBaseline, styled, SwipeableDrawer, Typography} from "@mui/material";
 import {grey} from "@mui/material/colors";
+import _ from "lodash";
+import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -37,6 +39,7 @@ const SwipeableEdgeDrawer: FC<IProps> = (props) => {
     const [open, setOpen] = useState(false);
     const {movieId} = useParams();
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -71,7 +74,7 @@ const SwipeableEdgeDrawer: FC<IProps> = (props) => {
                                 variant={"caption"}
                                 onClick={toggleDrawer(true)}
                             >
-                                Genres
+                                {t("genres")}
                             </Typography>
                         }
                     </Button>
@@ -97,7 +100,7 @@ const SwipeableEdgeDrawer: FC<IProps> = (props) => {
                 >
                     <Puller/>
                     <Typography sx={{p: 2, color: "text.secondary"}}>
-                        "Genres"
+                        {_.upperCase(t("genres"))}
                     </Typography>
                 </StyledBox>
                 <Container className={css.Sed__BG_Container}>

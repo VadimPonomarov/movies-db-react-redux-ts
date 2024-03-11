@@ -4,8 +4,9 @@ import {FC} from "react";
 import {Chip, Container, Stack} from "@mui/material";
 import {indexOf} from "lodash";
 
+import {useAppBg} from "../../common/hooks/useAppBG";
+
 import css from "./index.module.scss";
-import {useAppBg} from "./useAppBG";
 
 
 const BadgeGroup: FC = React.memo(() => {

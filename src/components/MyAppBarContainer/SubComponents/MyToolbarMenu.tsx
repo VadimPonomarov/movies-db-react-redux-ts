@@ -1,6 +1,8 @@
 import React, {FC} from "react";
 
 import Menu from "@mui/material/Menu";
+import _ from "lodash";
+import {useTranslation} from "react-i18next";
 
 import {UseAppMenuHandlers} from "../../../common/hooks/useAppMenuHandlers";
 import {menuProps} from "../constants";
@@ -14,6 +16,8 @@ const MyToolbarMenu: FC<IProps> = ({props}) => {
     const {handleRegister, handleLogin, handleLogout, handleClearStore} =
         UseAppMenuHandlers({setAnchorEl});
 
+    const {t} = useTranslation();
+
     return (
         <Menu
             anchorEl={anchorEl}
@@ -23,10 +27,10 @@ const MyToolbarMenu: FC<IProps> = ({props}) => {
                 () => setAnchorEl(null)
             }
         >
-            <MyToolBarMenuItem props={{caption: "Register", onClick: handleRegister}}/>
-            <MyToolBarMenuItem props={{caption: "Login", onClick: handleLogin}}/>
-            <MyToolBarMenuItem props={{caption: "Logout", onClick: handleLogout}}/>
-            <MyToolBarMenuItem props={{caption: "Clear store", onClick: handleClearStore}}/>
+            <MyToolBarMenuItem props={{caption: _.capitalize(t("register")), onClick: handleRegister}}/>
+            <MyToolBarMenuItem props={{caption: _.capitalize(t("login")), onClick: handleLogin}}/>
+            <MyToolBarMenuItem props={{caption: _.capitalize(t("logout")), onClick: handleLogout}}/>
+            <MyToolBarMenuItem props={{caption: _.capitalize(t("clear store")), onClick: handleClearStore}}/>
         </Menu>
     );
 };

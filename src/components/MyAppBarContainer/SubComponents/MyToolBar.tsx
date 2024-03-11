@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import {getCredentials} from "../../../common/services";
 import {authSelectors, commonActions, useAppDispatch} from "../../../storage";
 import {MyMainMenu} from "../../MyMainMenuContainer";
+import {SelectLanguage} from "../../SelectLanguage";
 import {iconButtonMenuProps} from "../constants";
 import css from "../index.module.scss";
 
@@ -45,6 +46,7 @@ const MyToolBar: FC = () => {
                 badgeContent={userName || ""}
             >
                 <Box>
+                    <SelectLanguage/>
                     <IconButton
                         {...iconButtonMenuProps}
                         aria-haspopup="true"
@@ -53,6 +55,7 @@ const MyToolBar: FC = () => {
                         {!!getCredentials()
                             && <AccountCircle/>}
                     </IconButton>
+
                     <MyToolbarMenu
                         props={{
                             anchorEl,

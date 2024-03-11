@@ -15,7 +15,7 @@ const useAppMoviesEffect = () => {
     const [query, setQuery] = useSearchParams({page: "1"});
     const searchParams = useSelector(commonSelectors.getSearchParams);
     const page = parseInt(query.get("page"));
-
+    const {language} = useSelector(commonSelectors.getSearchParams);
     const {category} = useParams();
 
     const fetchFunc: () => void =
@@ -23,7 +23,7 @@ const useAppMoviesEffect = () => {
             if (category === "discover") {
                 const {results, ...info} =
                     await queryClient.fetchQuery({
-                        queryKey: [category, page],
+                        queryKey: [language, category, page],
                         queryFn: () => movieService.getDiscoverList(Object(MovieCategoryEnum)[category], page,
                             {
                                 ...searchParams,
@@ -36,8 +36,11 @@ const useAppMoviesEffect = () => {
             } else {
                 const {results, ...info} =
                     await queryClient.fetchQuery({
-                        queryKey: [category, page],
-                        queryFn: () => movieService.getMovieList(Object(MovieCategoryEnum)[category], page)
+                        queryKey: [language, category, page],
+                        queryFn: () => movieService.getMovieList(Object(MovieCategoryEnum)[category],
+                            page,
+                            searchParams
+                        )
                     });
                 setResults(results);
                 setInfo(info);

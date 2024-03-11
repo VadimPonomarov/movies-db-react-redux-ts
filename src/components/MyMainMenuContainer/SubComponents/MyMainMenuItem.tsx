@@ -3,21 +3,22 @@ import React, {FC} from "react";
 import {Button, Stack, Typography} from "@mui/material";
 import {LayoutGroup} from "framer-motion";
 import _ from "lodash";
+import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 import {MovieCategoryEnum} from "../../../common";
 import {commonSelectors} from "../../../storage";
-import css from "../index.module.scss"
+import css from "../index.module.scss";
 import {IProps} from "../interfaces";
 
 import MenuUnderLine from "./MenuUnderLine";
 
 
-
 const MyMainMenuItem: FC<IProps> = ({props}) => {
     const {caption, uri, elementProps, isActive, setIsActive} = props;
     const {with_genres} = useSelector(commonSelectors.getSearchParams);
+    const {t} = useTranslation();
 
     return (
         <LayoutGroup id="layoutGroup">
@@ -40,7 +41,7 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
                             }
                             {
                                 caption !== MovieCategoryEnum.discover
-                                && _.replace(caption, "_", " ")
+                                && t(_.replace(caption, "_", " "))
                             }
                         </Typography>
                         <MenuUnderLine

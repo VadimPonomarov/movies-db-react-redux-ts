@@ -2,10 +2,11 @@ import React, {FC} from "react";
 
 import {Box, CircularProgress, Fab} from "@mui/material";
 
+import {UseAppEffectHook} from "../../common/hooks/useAppEffectHook";
+
 import {defaultProps} from "./constants";
 import css from "./index.module.scss";
 import {FabColorType, IBadgeGrProps} from "./interfaces";
-import {UseAppEffectHook} from "./useAppEffectHook";
 
 const BadgeWithCircular: FC<IBadgeGrProps> = ({props = {...defaultProps}}) => {
     const {

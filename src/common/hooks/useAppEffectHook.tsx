@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {ContentType} from "./interfaces";
+import {ContentType} from "../../components/BadgeWithCircularContainer/interfaces";
 
 const UseAppEffectHook = () => {
 

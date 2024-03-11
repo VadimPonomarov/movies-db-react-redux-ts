@@ -40,7 +40,7 @@ const commonSlice = createSliceWithThunks({
             state.backDropImgPath = action.payload;
         }),
         setSearchParams: create.reducer((state, action: PayloadAction<ISearchParams>) => {
-            state.searchParams = action.payload;
+            state.searchParams = {...state.searchParams, ...action.payload};
         }),
     })
 });

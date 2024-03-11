@@ -3,9 +3,9 @@ import {useEffect, useState} from "react";
 import {difference, indexOf} from "lodash";
 import {useSelector} from "react-redux";
 
-import {IGenre} from "../../common";
-import {movieService} from "../../common/services";
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
+import {IGenre} from "../index";
+import {movieService} from "../services";
 
 const useAppBg = () => {
     const [genres, setGenres] = useState<IGenre[]>([]);

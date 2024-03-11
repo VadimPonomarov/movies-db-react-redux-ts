@@ -1,9 +1,11 @@
+import {LanguageEnum} from "../../../common";
 import {ISearchParams} from "../../../common/hocs/interfaces";
 
 import {IInitialState} from "./interfaces";
 
 export const initialSearchParams: ISearchParams = {
-    with_genres: []
+    with_genres: [],
+    language: LanguageEnum.en
 };
 
 export const initialState: IInitialState = {

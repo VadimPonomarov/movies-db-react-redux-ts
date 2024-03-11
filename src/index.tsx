@@ -7,6 +7,7 @@ import {RouterProvider} from "react-router-dom";
 import {PersistGate} from "redux-persist/integration/react";
 
 import {MyThemeProviderMain} from "./common/hocs/MyThemeProviderMain";
+import {MyTranslations} from "./common/hocs/MyTranslations";
 import {Router} from "./router";
 import {persistor, store} from "./storage";
 import "./index.scss";
@@ -23,9 +24,11 @@ root.render(
         >
             <MyQueryClientProvider>
                 <MyThemeProviderMain>
-                    <RouterProvider
-                        router={Router}
-                    />
+                    <MyTranslations>
+                        <RouterProvider
+                            router={Router}
+                        />
+                    </MyTranslations>
                 </MyThemeProviderMain>
             </MyQueryClientProvider>
         </PersistGate>
