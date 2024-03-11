@@ -10,5 +10,15 @@ export const initMotion: MotionProps = {
     },
 };
 
+export const divMoreMotion: MotionProps = {
+    initial: {opacity: 0},
+    animate: {opacity: 1},
+    transition: {
+        opacity: {
+            delay: 4
+        }
+    },
+};
+
 
 

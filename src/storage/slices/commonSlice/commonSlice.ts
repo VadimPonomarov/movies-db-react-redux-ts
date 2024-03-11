@@ -2,8 +2,7 @@ import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolk
 
 import {ISearchParams} from "../../../common/hocs/interfaces";
 
-import {initialAlertInfo, initialState} from "./constants";
-import {IAlertInfo} from "./interfaces";
+import {initialState} from "./constants";
 
 const createSliceWithThunks = buildCreateSlice({
     creators: {asyncThunk: asyncThunkCreator}
@@ -20,7 +19,6 @@ const commonSlice = createSliceWithThunks({
         getIsPagination: state => state.isPagination,
         setBackDropImgPath: state => state.backDropImgPath,
         getSearchParams: state => state.searchParams,
-        getAlertInfo: state => state.alertInfo,
     },
     reducers: create => ({
         setThemeToggle: create.reducer((state) => {
@@ -43,12 +41,6 @@ const commonSlice = createSliceWithThunks({
         }),
         setSearchParams: create.reducer((state, action: PayloadAction<ISearchParams>) => {
             state.searchParams = action.payload;
-        }),
-        setAlertInfo: create.reducer((state, action: PayloadAction<IAlertInfo>) => {
-            state.alertInfo = action.payload;
-            setTimeout(() => {
-                state.alertInfo = initialAlertInfo;
-            }, 5 * 1000);
         }),
     })
 });
