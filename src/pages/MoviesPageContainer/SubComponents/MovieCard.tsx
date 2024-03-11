@@ -2,7 +2,7 @@ import * as React from "react";
 import {FC, useState} from "react";
 
 import {Box, Button, Card, CardContent, Typography} from "@mui/material";
-import {MyInitMotion} from "common/hocs/MyInitMotion";
+import {MyInitMotionProvider} from "common/hocs/MyInitMotionProvider";
 import {motion} from "framer-motion";
 import {slice} from "lodash";
 import moment from "moment";
@@ -47,7 +47,7 @@ const MovieCard: FC<ICardProps> = ({props}) => {
 
 
     return (
-        <MyInitMotion>
+        <MyInitMotionProvider>
             <Card className={css.Ep__Card}>
                 <Button
                     className={css.Ep__Card_Button}
@@ -125,7 +125,7 @@ const MovieCard: FC<ICardProps> = ({props}) => {
                     }}
                 />
             </Card>
-        </MyInitMotion>
+        </MyInitMotionProvider>
     );
 };
 

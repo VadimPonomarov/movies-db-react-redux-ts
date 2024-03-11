@@ -9,7 +9,7 @@ import {getCredentials} from "../services";
 import {IProps} from "./interfaces";
 
 
-const MyAuthRequired: FC<IProps> = ({children}) => {
+const MyAuthRequiredProvider: FC<IProps> = ({children}) => {
     const isAuth = useSelector(authSelectors.getIsAuth);
     const navigate = useNavigate();
 
@@ -27,4 +27,4 @@ const MyAuthRequired: FC<IProps> = ({children}) => {
     );
 };
 
-export {MyAuthRequired};
+export {MyAuthRequiredProvider};

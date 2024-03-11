@@ -9,7 +9,7 @@ import {commonSelectors} from "../../storage";
 import {IProps} from "./interfaces";
 
 
-const MyTranslations: FC<IProps> = ({children}) => {
+const MyTranslationsProvider: FC<IProps> = ({children}) => {
     const {language} = useSelector(commonSelectors.getSearchParams);
 
     i18n
@@ -58,4 +58,4 @@ const MyTranslations: FC<IProps> = ({children}) => {
     );
 };
 
-export {MyTranslations};
+export {MyTranslationsProvider};

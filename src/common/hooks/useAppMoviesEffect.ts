@@ -20,33 +20,21 @@ const useAppMoviesEffect = () => {
 
     const fetchFunc: () => void =
         useCallback(async () => {
-            if (category === "discover") {
-                const {results, ...info} =
-                    await queryClient.fetchQuery({
-                        queryKey: [language, category, page],
-                        queryFn: () => movieService.getDiscoverList(Object(MovieCategoryEnum)[category], page,
-                            {
-                                ...searchParams,
-                                with_genres: searchParams.with_genres.join(",")
-                            })
-                    });
-                setResults(results);
-                setInfo(info);
+            const {results, ...info} =
+                await queryClient.fetchQuery({
+                    queryKey: [language, category, page],
+                    queryFn: () =>
+                        movieService
+                            .getDiscoverList(Object(MovieCategoryEnum)[category], page,
+                                {
+                                    ...searchParams,
+                                    with_genres: searchParams.with_genres.join(",")
+                                })
+                });
+            setResults(results);
+            setInfo(info);
 
-            } else {
-                const {results, ...info} =
-                    await queryClient.fetchQuery({
-                        queryKey: [language, category, page],
-                        queryFn: () => movieService.getMovieList(Object(MovieCategoryEnum)[category],
-                            page,
-                            searchParams
-                        )
-                    });
-                setResults(results);
-                setInfo(info);
-            }
-
-        }, [category, page, searchParams]);
+        }, [category, page, searchParams, language]);
 
     useEffect(() => {
         setQuery({page: "1"});

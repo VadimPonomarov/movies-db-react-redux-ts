@@ -21,7 +21,7 @@ const SelectLanguage: FC<IProps> = () => {
     };
 
     return (
-        <FormControl sx={{m: 1, minWidth: 120}} size="small">
+        <FormControl sx={{m: 1, minWidth: 70}} size="small">
             <Select
                 labelId="demo-select-small-label"
                 id="demo-select-small"

@@ -1,6 +1,6 @@
 import React from "react";
 
-import {MyAuthRequired} from "common/hocs/MyAuthRequired";
+import {MyAuthRequiredProvider} from "common/hocs/MyAuthRequiredProvider";
 import {LoginPage, RegistrationPage} from "pages";
 import {MoviePage} from "pages/MoviePageContainer";
 import {MoviesPage} from "pages/MoviesPageContainer";
@@ -15,7 +15,7 @@ const Router = createBrowserRouter([
         path: "", element: <MainLayout/>, errorElement: <NotFound404/>,
         children: [
             {
-                element: <MyAuthRequired><PrivateLayout/></MyAuthRequired>, children: [
+                element: <MyAuthRequiredProvider><PrivateLayout/></MyAuthRequiredProvider>, children: [
                     {index: true, element: <Navigate to={"/popular"}/>},
                     {path: "/:category", element: <MoviesPage/>},
                     {path: "/:category/:movieId", element: <MoviePage/>},
