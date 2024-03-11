@@ -1,6 +1,8 @@
 import React, {FC} from "react";
 
 import {Box, Button, ButtonGroup} from "@mui/material";
+import {t} from "i18next";
+import _ from "lodash";
 
 import {PaginationSlider} from "../../../components";
 import css from "../index.module.scss";
@@ -12,7 +14,9 @@ const MoviesButtonGroup: FC<IBGProps> = ({props}) => {
         info: {
             total_pages,
             page,
-        }, prevPage, nextPage
+        },
+        prevPage,
+        nextPage
     } = props;
 
     return (
@@ -30,13 +34,13 @@ const MoviesButtonGroup: FC<IBGProps> = ({props}) => {
                         disabled={page === 1}
                         onClick={prevPage}
                     >
-                        Prev
+                        {_.capitalize(t("prev"))}
                     </Button>
                     <Button
                         disabled={page === total_pages}
                         onClick={nextPage}
                     >
-                        Next
+                        {_.capitalize(t("next"))}
                     </Button>
                 </ButtonGroup>
             </Box>

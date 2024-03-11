@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useEffect, useState} from "react";
+import {FC, memo, useEffect, useState} from "react";
 
 import {useParams} from "react-router-dom";
 
@@ -11,7 +11,7 @@ import {IProps} from "./interfaces";
 import {MovieDetailsCard} from "./MovieDetailsCard";
 
 
-const MoviePage: FC<IProps> = () => {
+const MoviePage_: FC<IProps> = () => {
     const {movieId} = useParams();
     const [movieDetails, setMovieDetails] = useState<IMovieDetails>();
     const dispatch = useAppDispatch();
@@ -35,4 +35,4 @@ const MoviePage: FC<IProps> = () => {
     );
 };
 
-export {MoviePage};
+export const MoviePage = memo(MoviePage_);

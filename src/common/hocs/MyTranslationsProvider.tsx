@@ -5,6 +5,7 @@ import {initReactI18next} from "react-i18next";
 import {useSelector} from "react-redux";
 
 import {commonSelectors} from "../../storage";
+import {I18InitProps} from "../constants/i18InitProps";
 
 import {IProps} from "./interfaces";
 
@@ -15,40 +16,8 @@ const MyTranslationsProvider: FC<IProps> = ({children}) => {
     i18n
         .use(initReactI18next)
         .init({
-            resources: {
-                ru: {
-                    translation: {
-                        "upcoming": "ожидаемые",
-                        "popular": "популярные",
-                        "now playing": "смотрят",
-                        "top rated": "лучшие",
-                        "register": "зарегистрироваться",
-                        "login": "войти",
-                        "logout": "выйти",
-                        "clear store": "очистить",
-                        "genres": "жанры"
-                    }
-                },
-                uk: {
-                    translation: {
-                        "upcoming": "незабаром",
-                        "popular": "популярні",
-                        "now playing": "дивляться",
-                        "top rated": "найкращі",
-                        "register": "реєстрація",
-                        "login": "зайти",
-                        "logout": "вийти",
-                        "clear store": "очистити",
-                        "genres": "жанри"
-                    }
-                }
-            },
+            ...I18InitProps,
             lng: language,
-            fallbackLng: "en",
-
-            interpolation: {
-                escapeValue: false
-            }
         });
 
     return (
