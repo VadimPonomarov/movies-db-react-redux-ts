@@ -36,7 +36,7 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
                     <Slider
                         {...pSlider}
                         min={1}
-                        max={500}
+                        max={100}
                         value={!!page ? +page : 1}
                         onChange={handleSliderChange}
                     />
