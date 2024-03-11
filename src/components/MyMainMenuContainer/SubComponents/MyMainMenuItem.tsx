@@ -20,9 +20,21 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     const {with_genres} = useSelector(commonSelectors.getSearchParams);
     const {t} = useTranslation();
 
+    const handleDisplay = () => {
+        if (caption === "discover" && !!with_genres.length) return "block";
+        if (caption !== "discover") return "block";
+        return "none";
+    };
     return (
-        <LayoutGroup id="layoutGroup">
-            <Button className={css.LG__Button}>
+        <LayoutGroup
+            id="layoutGroup"
+        >
+            <Button
+                className={css.LG__Button}
+                sx={{
+                    display: handleDisplay()
+                }}
+            >
                 <Stack
                     className={css.LG__Stack}
                     spacing={0}
@@ -37,7 +49,7 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
                         <Typography variant={"subtitle1"}>
                             {
                                 (caption === MovieCategoryEnum.discover && !!with_genres.length)
-                                && caption
+                                && t(caption)
                             }
                             {
                                 caption !== MovieCategoryEnum.discover
