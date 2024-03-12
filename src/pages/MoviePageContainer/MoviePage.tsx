@@ -1,7 +1,7 @@
 import * as React from "react";
 import {FC, memo, useEffect, useState} from "react";
 
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 import {IMovieDetails} from "../../common";
 import {movieService} from "../../common/services";
@@ -21,7 +21,6 @@ const MoviePage_: FC<IProps> = () => {
             movieService.getMovieById(+movieId)
                 .then(details => setMovieDetails(details));
         }
-        dispatch(commonActions.setIsPagination(false));
     }, [dispatch, movieId]);
 
     return (

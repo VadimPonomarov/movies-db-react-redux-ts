@@ -4,8 +4,9 @@ import {ISearchParams} from "../../../common/hocs/interfaces";
 import {IInitialState} from "./interfaces";
 
 export const initialSearchParams: ISearchParams = {
+    page: "1",
+    language: LanguageEnum.en,
     with_genres: [],
-    language: LanguageEnum.en
 };
 
 export const initialState: IInitialState = {

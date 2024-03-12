@@ -75,24 +75,24 @@ const MoviesPage: FC = () => {
                     )
                 }
             </Box>
-            <InView
-                as="div"
-                onChange={
-                    handleInView
-                }
-            >
-                {!!isMoreVisible &&
-                    <motion.div
-                        {...divMoreMotion}
-                    >
-                        <Button
-                            className={css.InView__Button_More}
-                            onClick={handleMore}>
-                            More ...
-                        </Button>
-                    </motion.div>
-                }
-            </InView>
+            {/*<InView*/}
+            {/*    as="div"*/}
+            {/*    onChange={*/}
+            {/*        handleInView*/}
+            {/*    }*/}
+            {/*>*/}
+            {/*    {!!isMoreVisible &&*/}
+            {/*        <motion.div*/}
+            {/*            {...divMoreMotion}*/}
+            {/*        >*/}
+            {/*            <Button*/}
+            {/*                className={css.InView__Button_More}*/}
+            {/*                onClick={handleMore}>*/}
+            {/*                More ...*/}
+            {/*            </Button>*/}
+            {/*        </motion.div>*/}
+            {/*    }*/}
+            {/*</InView>*/}
         </>
     );
 };

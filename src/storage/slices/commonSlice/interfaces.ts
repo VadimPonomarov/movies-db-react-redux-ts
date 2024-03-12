@@ -8,6 +8,6 @@ export interface IInitialState {
     isPagination: boolean,
     isPending: boolean;
     isFetching: boolean;
-    backDropImgPath?: string,
-    searchParams?: ISearchParams
+    backDropImgPath: string,
+    searchParams: Partial<ISearchParams>
 }

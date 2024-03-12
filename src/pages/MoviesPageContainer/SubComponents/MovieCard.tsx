@@ -6,7 +6,7 @@ import {MyInitMotionProvider} from "common/hocs/MyInitMotionProvider";
 import {motion} from "framer-motion";
 import {slice} from "lodash";
 import moment from "moment";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
 import {BadgeWithCircular} from "../../../components";
@@ -29,11 +29,12 @@ const MovieCard: FC<ICardProps> = ({props}) => {
     } = props;
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const [query] = useSearchParams()
 
     const [isFullTitle, setIsFullTitle] = useState<boolean>(false);
 
     const handleOnClick = () => {
-        navigate(`${id}`);
+        navigate(`${id}`, {state:{page: query.get("page")}});
     };
 
     const handleOriginalTitleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {

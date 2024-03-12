@@ -12,6 +12,7 @@ export interface IProps {
 }
 
 export interface ISearchParams {
-    language?: LanguageEnum;
-    with_genres?: number[];
+    page: string,
+    language: LanguageEnum;
+    with_genres: number[];
 }

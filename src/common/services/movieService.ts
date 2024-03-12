@@ -13,14 +13,8 @@ const movieService = {
             .catch((error) => {
                 console.log(error);
             }),
-    getMovieList: (category: MovieCategoryEnum = MovieCategoryEnum.popular,
-                   page: number, extraParams: ISearchParams): Promise<IMovieList> =>
-        apiService.get(myHttpUrls.list.getList(category), {
-            params: {
-                page: _.max<number>([page, 1]),
-                ...extraParams
-            }
-        })
+    getMovieList: (category: MovieCategoryEnum = MovieCategoryEnum.popular, params: Partial<ISearchParams>): Promise<IMovieList> =>
+        apiService.get(myHttpUrls.list.getList(category), {params})
             .then(({data}) => data)
             .catch((error) => {
                 console.log(error);
@@ -38,13 +32,9 @@ const movieService = {
                 console.log(error);
             }),
     getDiscoverList: (category: MovieCategoryEnum = MovieCategoryEnum.discover,
-                      page: number, extraParams: any): Promise<IMovieList> =>
-        apiService.get(myHttpUrls.list.discoverList, {
-            params: {
-                page: _.max<number>([page, 1]),
-                ...extraParams
-            }
-        }).then(({data}) => data)
+                      params: Partial<ISearchParams>): Promise<IMovieList> =>
+        apiService.get(myHttpUrls.list.discoverList, {params})
+            .then(({data}) => data)
             .catch((error) => {
                 console.log(error);
             }),

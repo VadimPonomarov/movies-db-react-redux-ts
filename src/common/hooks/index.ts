@@ -6,3 +6,4 @@ export * from "./useAppMoviesEffect";
 export * from "./useAppState";
 export * from "./useAppToolBar";
 export * from "./useAppBG";
+export * from "./useAppDetails"
