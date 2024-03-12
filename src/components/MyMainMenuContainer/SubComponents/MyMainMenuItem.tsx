@@ -25,6 +25,7 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
         if (caption !== "discover") return "block";
         return "none";
     };
+
     return (
         <LayoutGroup
             id="layoutGroup"
@@ -47,14 +48,7 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
                         }
                     >
                         <Typography variant={"subtitle1"}>
-                            {
-                                (caption === MovieCategoryEnum.discover && !!with_genres.length)
-                                && t(caption)
-                            }
-                            {
-                                caption !== MovieCategoryEnum.discover
-                                && t(_.replace(caption, "_", " "))
-                            }
+                            {t(_.replace(caption, "_", " "))}
                         </Typography>
                         <MenuUnderLine
                             props={{caption, isActive}}
