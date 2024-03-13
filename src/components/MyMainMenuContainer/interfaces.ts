@@ -1,5 +1,3 @@
-import {Dispatch, SetStateAction} from "react";
-
 import {ComponentsProps} from "@mui/material";
 
 interface Props {
@@ -7,7 +5,6 @@ interface Props {
     uri: string,
     elementProps: ComponentsProps,
     isActive: string,
-    setIsActive: Dispatch<SetStateAction<string>>
 }
 
 export interface IProps {

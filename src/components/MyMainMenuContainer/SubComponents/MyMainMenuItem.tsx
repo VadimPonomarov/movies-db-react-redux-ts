@@ -15,7 +15,7 @@ import MenuUnderLine from "./MenuUnderLine";
 
 
 const MyMainMenuItem: FC<IProps> = ({props}) => {
-    const {caption, uri, elementProps, isActive, setIsActive} = props;
+    const {caption, uri, elementProps, isActive} = props;
     const {with_genres} = useSelector(commonSelectors.getSearchParams);
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
@@ -27,7 +27,6 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     };
 
     const handleOnClick = () => {
-        setIsActive(caption);
         dispatch(commonActions.setIsCategoryChanged(true));
         setTimeout(() => {
             dispatch(commonActions.setIsCategoryChanged(false));
