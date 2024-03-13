@@ -29,7 +29,7 @@ const MyInitMotionProvider: FC<IProps> = ({children}) => {
                         animate={{opacity: 1}}
                         transition={{
                             delay: Math.random(),
-                            ease: "linear"
+                            ease: "linear",
                         }}
 
                     >
