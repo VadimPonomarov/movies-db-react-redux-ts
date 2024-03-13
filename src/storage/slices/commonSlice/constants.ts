@@ -16,6 +16,7 @@ export const initialState: IInitialState = {
     isPending: false,
     isFetching: false,
     backDropImgPath: undefined,
-    searchParams: initialSearchParams
+    searchParams: initialSearchParams,
+    isCategoryChanged: false
 };
 

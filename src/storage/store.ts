@@ -31,7 +31,7 @@ export const store = configureStore({
         immutableCheck: {warnAfter: 300},
         serializableCheck: false,
     }),
-    devTools: process.env.NODE_ENV !== 'production',
+    // devTools: process.env.NODE_ENV !== 'production',
 
 });
 

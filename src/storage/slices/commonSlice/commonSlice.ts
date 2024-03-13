@@ -42,6 +42,9 @@ const commonSlice = createSliceWithThunks({
         setSearchParams: create.reducer((state, action: PayloadAction<Partial<ISearchParams>>) => {
             state.searchParams = {...state.searchParams, ...action.payload};
         }),
+        setIsCategoryChanged: create.reducer((state, action: PayloadAction<boolean>) => {
+            state.isCategoryChanged = action.payload;
+        }),
     })
 });
 

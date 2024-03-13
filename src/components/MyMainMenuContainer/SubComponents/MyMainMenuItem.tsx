@@ -7,8 +7,7 @@ import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
-import {MovieCategoryEnum} from "../../../common";
-import {commonSelectors} from "../../../storage";
+import {commonActions, commonSelectors, useAppDispatch} from "../../../storage";
 import css from "../index.module.scss";
 import {IProps} from "../interfaces";
 
@@ -19,11 +18,19 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     const {caption, uri, elementProps, isActive, setIsActive} = props;
     const {with_genres} = useSelector(commonSelectors.getSearchParams);
     const {t} = useTranslation();
+    const dispatch = useAppDispatch();
 
     const handleDisplay = () => {
         if (caption === "discover" && !!with_genres.length) return "block";
         if (caption !== "discover") return "block";
         return "none";
+    };
+
+    const handleOnClick = () => {
+        dispatch(commonActions.setIsCategoryChanged(true));
+        setTimeout(() => {
+            dispatch(commonActions.setIsCategoryChanged(false));
+        }, 300);
     };
 
     return (
@@ -43,9 +50,7 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
                     <NavLink
                         to={uri}
                         {...elementProps}
-                        onClick={
-                            () => setIsActive(caption)
-                        }
+                        onClick={handleOnClick}
                     >
                         <Typography variant={"subtitle1"}>
                             {t(_.replace(caption, "_", " "))}

@@ -5,7 +5,7 @@ import {IMovieListInfo, IMovieResult, MovieCategoryEnum} from "common/types";
 import {useSelector} from "react-redux";
 import {useParams, useSearchParams} from "react-router-dom";
 
-import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
+import {commonActions, commonSelectors, useAppDispatch, useAppSelector} from "../../storage";
 import {queryClient} from "../hocs";
 import {ISearchParams} from "../hocs/interfaces";
 
@@ -17,6 +17,7 @@ const useAppMoviesEffect = () => {
     const params = useSelector(commonSelectors.getSearchParams);
     const {category} = useParams();
     const {page} = params;
+    const {isCategoryChanged} = useAppSelector(state => state.commonSlice);
 
     const dispatch = useAppDispatch();
 
@@ -42,8 +43,12 @@ const useAppMoviesEffect = () => {
         }, [category, getFetchService, params]);
 
     useEffect(() => {
-        dispatch(commonActions.setSearchParams({page: "1"}));
-    }, [category, dispatch]);
+        if (isCategoryChanged) {
+            dispatch(
+                commonActions.setSearchParams({page: "1"})
+            );
+        }
+    }, [category, dispatch, isCategoryChanged]);
 
     useEffect(() => {
         fetchFunc();
