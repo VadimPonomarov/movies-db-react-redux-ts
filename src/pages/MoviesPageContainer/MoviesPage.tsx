@@ -7,10 +7,8 @@ import {motion} from "framer-motion";
 import {t} from "i18next";
 import _ from "lodash";
 import {InView} from "react-intersection-observer";
-import {useSelector} from "react-redux";
 
 import {BackDrop} from "../../components";
-import {authSelectors, commonSelectors, useAppDispatch} from "../../storage";
 
 import {divMoreMotion} from "./constants";
 import css from "./index.module.scss";
