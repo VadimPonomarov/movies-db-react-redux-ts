@@ -2,28 +2,41 @@ import * as React from "react";
 
 import {BehaviorSubject, delay, switchMap} from "rxjs";
 
+import {commonActions, useAppDispatch} from "../../storage";
+
 import {useAppMoviesEffect} from "./useAppMoviesEffect";
 
 const useAppState = (initial: number) => {
-    const [value, setValue] = React.useState(initial);
+    const dispatch = useAppDispatch();
     const {setQuery} = useAppMoviesEffect();
-    const flow$ = new BehaviorSubject({page: "1"});
-    flow$.pipe(switchMap(async (value) => value), delay(1000));
+    const flow$ =
+        new BehaviorSubject({page: "1"});
+    flow$
+        .pipe(
+            switchMap(async (value) => value),
+            delay(1000)
+        );
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
-        setValue(newValue as number);
-        flow$.next({page: "" + newValue});
-        const subscription = flow$.subscribe(event => setQuery(event));
+        const newPage =
+            {page: "" + newValue};
+        flow$.next(newPage);
+        dispatch(commonActions.setSearchParams(newPage));
+        const subscription =
+            flow$.subscribe(page => setQuery(page));
         subscription.unsubscribe();
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value === "" ? 1 : Number(event.target.value));
-        flow$.next({page: "" + event.target.value});
-        const subscription = flow$.subscribe(event => setQuery(event));
+        const newPage =
+            {page: "" + event.target.value};
+        flow$.next(newPage);
+        dispatch(commonActions.setSearchParams(newPage));
+        const subscription =
+            flow$.subscribe(page => setQuery(page));
         subscription.unsubscribe();
     };
 
-    return {value, setValue, handleSliderChange, handleInputChange};
+    return {handleSliderChange, handleInputChange};
 };
 
 export {useAppState};
