@@ -1,12 +1,11 @@
 import * as React from "react";
 import {FC, useDeferredValue, useRef, useState} from "react";
 
-import {Box, Button, Container} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
 import {motion} from "framer-motion";
 import {t} from "i18next";
 import _ from "lodash";
-import {InView} from "react-intersection-observer";
 
 import {BackDrop} from "../../components";
 
@@ -27,13 +26,10 @@ const MoviesPage: FC = () => {
     const ref = useRef(null);
     const deferredNextPage = useDeferredValue(nextPage);
 
-    const handleMore = () => {
-        if (Math.abs(ref.current.getBoundingClientRect().y) > 200) {
-            deferredNextPage();
-            window.scrollTo(0, 0);
-        }
+    const handleClickMore = () => {
+        nextPage();
+        window.scrollTo(0, 0);
     };
-
 
     return (
         <>
@@ -62,26 +58,19 @@ const MoviesPage: FC = () => {
                     )
                 }
             </Box>
-            <InView
-                as="div"
-                onChange={handleMore}
-                threshold={.9}
-            >
-                {!!isMoreVisible &&
-                    <motion.div
-                        {...divMoreMotion}
-                    >
-                        <Container sx={{height: "70vh"}}>
-                            <Button
-                                ref={ref}
-                                className={css.InView__Button_More}
-                                onClick={handleMore}>
-                                {_.capitalize(t("more"))+" ..."}
-                            </Button>
-                        </Container>
-                    </motion.div>
-                }
-            </InView>
+            {!!isMoreVisible &&
+                <motion.div
+                    {...divMoreMotion}
+                >
+                    <Button
+                        ref={ref}
+                        variant={"text"}
+                        className={css.InView__Button_More}
+                        onClick={handleClickMore}>
+                        {_.capitalize(t("more")) + " ..."}
+                    </Button>
+                </motion.div>
+            }
         </>
     );
 };
