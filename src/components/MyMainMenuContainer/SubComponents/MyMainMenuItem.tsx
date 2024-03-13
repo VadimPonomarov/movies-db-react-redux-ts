@@ -27,6 +27,7 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     };
 
     const handleOnClick = () => {
+        setIsActive(caption);
         dispatch(commonActions.setIsCategoryChanged(true));
         setTimeout(() => {
             dispatch(commonActions.setIsCategoryChanged(false));
