@@ -1,7 +1,7 @@
 import * as React from "react";
 import {FC, useCallback, useDeferredValue, useRef, useState} from "react";
 
-import {Box, Button} from "@mui/material";
+import {Box, Button, Container} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
 import {motion} from "framer-motion";
 import {InView} from "react-intersection-observer";
@@ -31,22 +31,12 @@ const MoviesPage: FC = () => {
     const deferredNextPage = useDeferredValue(nextPage);
 
     const handleMore = () => {
-        setIsMoreVisible(false);
-        dispatch(commonActions.setIsPagination(false));
-        deferredNextPage();
-        setTimeout(() => {
-            dispatch(commonActions.setIsPagination(true));
-        }, 4000);
+        if (Math.abs(ref.current.getBoundingClientRect().y) > 200) {
+            nextPage();
+            window.scrollTo(0, 0);
+        }
     };
 
-    const handleInView = useCallback(() => {
-        if (!isInit && isPagination) {
-            ref.current.scrollIntoView();
-            return deferredNextPage();
-        }
-        dispatch(commonActions.setIsPagination(true));
-
-    }, [dispatch, isInit, deferredNextPage, isPagination]);
 
     return (
         <>
@@ -75,24 +65,26 @@ const MoviesPage: FC = () => {
                     )
                 }
             </Box>
-            {/*<InView*/}
-            {/*    as="div"*/}
-            {/*    onChange={*/}
-            {/*        handleInView*/}
-            {/*    }*/}
-            {/*>*/}
-            {/*    {!!isMoreVisible &&*/}
-            {/*        <motion.div*/}
-            {/*            {...divMoreMotion}*/}
-            {/*        >*/}
-            {/*            <Button*/}
-            {/*                className={css.InView__Button_More}*/}
-            {/*                onClick={handleMore}>*/}
-            {/*                More ...*/}
-            {/*            </Button>*/}
-            {/*        </motion.div>*/}
-            {/*    }*/}
-            {/*</InView>*/}
+            <InView
+                as="div"
+                onChange={handleMore}
+                threshold={.9}
+            >
+                {!!isMoreVisible &&
+                    <motion.div
+                        {...divMoreMotion}
+                    >
+                        <Container sx={{height: "70vh"}}>
+                            <Button
+                                ref={ref}
+                                className={css.InView__Button_More}
+                                onClick={handleMore}>
+                                More ...
+                            </Button>
+                        </Container>
+                    </motion.div>
+                }
+            </InView>
         </>
     );
 };

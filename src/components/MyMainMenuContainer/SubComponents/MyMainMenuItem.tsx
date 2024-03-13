@@ -21,8 +21,8 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     const dispatch = useAppDispatch();
 
     const handleDisplay = () => {
-        if (caption === "discover" && !!with_genres.length) return "block";
-        if (caption !== "discover") return "block";
+        if (caption === "discover" && !!with_genres.length) return "flex";
+        if (caption !== "discover") return "flex";
         return "none";
     };
 

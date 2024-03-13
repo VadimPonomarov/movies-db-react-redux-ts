@@ -6,7 +6,7 @@ import {MyInitMotionProvider} from "common/hocs/MyInitMotionProvider";
 import {motion} from "framer-motion";
 import {slice} from "lodash";
 import moment from "moment";
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
 import {BadgeWithCircular} from "../../../components";
