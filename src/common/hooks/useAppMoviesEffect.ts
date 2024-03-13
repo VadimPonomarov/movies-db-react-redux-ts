@@ -30,7 +30,7 @@ const useAppMoviesEffect = () => {
         useCallback(async () => {
             const {results, ...info} =
                 await queryClient.fetchQuery({
-                    queryKey: [category, params],
+                    queryKey: [category, JSON.stringify(params)],
                     queryFn: () =>
                         getFetchService(
                             Object(MovieCategoryEnum)[category],

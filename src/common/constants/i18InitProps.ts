@@ -16,6 +16,7 @@ export const I18InitProps: InitOptions = {
                 "genres": "жанры",
                 "prev": "назад",
                 "next": "вперед",
+                "more": "еще",
             }
         },
         uk: {
@@ -32,6 +33,7 @@ export const I18InitProps: InitOptions = {
                 "genres": "жанри",
                 "prev": "назад",
                 "next": "вперед",
+                "more": "далі",
             }
         }
     },

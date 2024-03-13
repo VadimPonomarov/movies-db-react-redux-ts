@@ -4,6 +4,8 @@ import {FC, useCallback, useDeferredValue, useRef, useState} from "react";
 import {Box, Button, Container} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
 import {motion} from "framer-motion";
+import {t} from "i18next";
+import _ from "lodash";
 import {InView} from "react-intersection-observer";
 import {useSelector} from "react-redux";
 
@@ -79,7 +81,7 @@ const MoviesPage: FC = () => {
                                 ref={ref}
                                 className={css.InView__Button_More}
                                 onClick={handleMore}>
-                                More ...
+                                {_.capitalize(t("more"))+" ..."}
                             </Button>
                         </Container>
                     </motion.div>
