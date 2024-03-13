@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useCallback, useDeferredValue, useRef, useState} from "react";
+import {FC, useDeferredValue, useRef, useState} from "react";
 
 import {Box, Button, Container} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
@@ -10,7 +10,7 @@ import {InView} from "react-intersection-observer";
 import {useSelector} from "react-redux";
 
 import {BackDrop} from "../../components";
-import {authSelectors, commonActions, commonSelectors, useAppDispatch} from "../../storage";
+import {authSelectors, commonSelectors, useAppDispatch} from "../../storage";
 
 import {divMoreMotion} from "./constants";
 import css from "./index.module.scss";
@@ -25,16 +25,13 @@ const MoviesPage: FC = () => {
         nextPage
     } = useAppMoviesEffect();
 
-    const [isMoreVisible, setIsMoreVisible] = useState(true);
-    const dispatch = useAppDispatch();
+    const [isMoreVisible] = useState(true);
     const ref = useRef(null);
-    const isInit = useSelector(authSelectors.getIsInit);
-    const isPagination = useSelector(commonSelectors.getIsPagination);
     const deferredNextPage = useDeferredValue(nextPage);
 
     const handleMore = () => {
         if (Math.abs(ref.current.getBoundingClientRect().y) > 200) {
-            nextPage();
+            deferredNextPage();
             window.scrollTo(0, 0);
         }
     };
