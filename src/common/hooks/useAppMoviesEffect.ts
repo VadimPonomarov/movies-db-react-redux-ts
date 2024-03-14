@@ -41,9 +41,10 @@ const useAppMoviesEffect = () => {
                 setResults(results);
             } else {
                 setResults((prevState) => [...prevState, ...results]);
+                setIsMoreActive(false);
             }
             setInfo(info);
-
+            // eslint-disable-next-line
         }, [category, getFetchService, params]);
 
     useEffect(() => {

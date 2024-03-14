@@ -31,9 +31,6 @@ const MoviesPage: FC = () => {
         setIsMoreActive(true);
         nextPage();
         ref.current.scrollIntoView();
-        setTimeout(() => {
-            setIsMoreActive(false);
-        }, 4000);
     };
 
     return (
