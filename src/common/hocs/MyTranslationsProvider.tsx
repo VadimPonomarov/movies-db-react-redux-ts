@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
@@ -11,14 +11,19 @@ import {IProps} from "./interfaces";
 
 
 const MyTranslationsProvider: FC<IProps> = ({children}) => {
+    const [lng, setLng] = useState("en");
     const {language} = useSelector(commonSelectors.getSearchParams);
 
     i18n
         .use(initReactI18next)
         .init({
             ...I18InitProps,
-            lng: language,
+            lng,
         });
+
+    useEffect(() => {
+        setLng(language);
+    }, [language]);
 
     return (
         <>

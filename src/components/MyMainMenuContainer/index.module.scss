@@ -17,6 +17,12 @@ $button-w: 130px;
   transition-timing-function: linear;
 }
 
+.BG__Box_Container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
 
 
 

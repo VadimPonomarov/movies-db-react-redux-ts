@@ -1,11 +1,12 @@
 import * as React from "react";
 import {FC, useEffect, useState} from "react";
 
-import {ButtonGroup, Stack} from "@mui/material";
+import {Box, ButtonGroup} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {v4} from "uuid";
 
 import {myMenuItems} from "./constants";
+import css from "./index.module.scss";
 import {MyMainMenuItem} from "./SubComponents/MyMainMenuItem";
 
 
@@ -20,11 +21,9 @@ const MyMainMenu: FC = React.memo(() => {
     return (
         <ButtonGroup
             variant="text"
-            sx={{pt: 3}}
         >
-            <Stack
-                direction={"row"}
-                spacing={2}
+            <Box
+                className={css.BG__Box_Container}
             >
                 {myMenuItems &&
                     myMenuItems.map(item =>
@@ -37,7 +36,7 @@ const MyMainMenu: FC = React.memo(() => {
                                 }}
                             />
                         ))}
-            </Stack>
+            </Box>
         </ButtonGroup>
     );
 });

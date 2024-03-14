@@ -6,8 +6,7 @@ import {Provider} from "react-redux";
 import {RouterProvider} from "react-router-dom";
 import {PersistGate} from "redux-persist/integration/react";
 
-import {MyThemeProviderMain} from "./common/hocs/MyThemeProviderMain";
-import {MyTranslationsProvider} from "./common/hocs/MyTranslationsProvider";
+import {MyThemeProviderMain, MyTranslationsProvider} from "./common/hocs";
 import {Router} from "./router";
 import {persistor, store} from "./storage";
 import "./index.scss";
