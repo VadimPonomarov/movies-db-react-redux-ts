@@ -34,7 +34,7 @@ const Puller =
         backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
     }));
 
-const SwipeableEdgeDrawer: FC<IProps> = (props) => {
+const SwipeableEdgeDrawer: FC<IProps> = () => {
     const isAuth = useSelector(authSelectors.getIsAuth);
     const [open, setOpen] = useState(false);
     const {movieId} = useParams();
