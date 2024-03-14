@@ -41,7 +41,6 @@ const useAppMoviesEffect = () => {
                 setResults(results);
             } else {
                 setResults((prevState) => [...prevState, ...results]);
-                setIsMoreActive(false);
             }
             setInfo(info);
 
