@@ -33,6 +33,7 @@ const SelectLanguage: FC<IProps> = () => {
                 {Object.keys(LanguageEnum)
                     .map(item =>
                         <MenuItem
+                            key={Object(LanguageEnum)[item]}
                             value={Object(LanguageEnum)[item]}
                         >
                             {_.upperCase(item)}
