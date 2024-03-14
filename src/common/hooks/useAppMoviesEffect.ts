@@ -2,6 +2,7 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 
 import {movieService} from "common/services";
 import {IMovieListInfo, IMovieResult, MovieCategoryEnum} from "common/types";
+import _ from "lodash";
 import {useSelector} from "react-redux";
 import {useParams, useSearchParams} from "react-router-dom";
 
@@ -40,7 +41,7 @@ const useAppMoviesEffect = () => {
             if (!isMoreActive) {
                 setResults(results);
             } else {
-                setResults((prevState) => [...prevState, ...results]);
+                setResults((prevState) => _.union(prevState, results));
                 setIsMoreActive(false);
             }
             setInfo(info);
