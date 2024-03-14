@@ -71,6 +71,7 @@ const SwipeableEdgeDrawer: FC<IProps> = (props) => {
                                 👈
                             </Typography> :
                             <Typography
+                                sx={{zIndex: 1300, position: "fixed", bottom: "7px", left: "10px"}}
                                 variant={"caption"}
                                 onClick={toggleDrawer(true)}
                             >
@@ -100,7 +101,7 @@ const SwipeableEdgeDrawer: FC<IProps> = (props) => {
                 >
                     <Puller/>
                     <Typography sx={{p: 2, color: "text.secondary"}}>
-                        {_.upperCase(t("genres"))}
+                        {!_.upperCase(t("genres"))}
                     </Typography>
                 </StyledBox>
                 <Container className={css.Sed__BG_Container}>
