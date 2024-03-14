@@ -19,7 +19,8 @@ const MoviesPage: FC = () => {
         info,
         results,
         prevPage,
-        nextPage
+        nextPage,
+        setIsMoreActive
     } = useAppMoviesEffect();
 
     const [isMoreVisible] = useState(true);
@@ -27,8 +28,9 @@ const MoviesPage: FC = () => {
     const deferredNextPage = useDeferredValue(nextPage);
 
     const handleClickMore = () => {
+        setIsMoreActive(true);
         nextPage();
-        window.scrollTo(0, 0);
+        ref.current.scrollIntoView();
     };
 
     return (
@@ -43,7 +45,6 @@ const MoviesPage: FC = () => {
                 />}
 
             <Box
-                ref={ref}
                 className={css.Ep__Container}
             >
                 <BackDrop/>

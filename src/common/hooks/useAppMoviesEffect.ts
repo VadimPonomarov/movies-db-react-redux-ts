@@ -14,6 +14,7 @@ const useAppMoviesEffect = () => {
     const [results, setResults] = useState<IMovieResult[]>([]);
     const [info, setInfo] = useState<IMovieListInfo>();
     const [query, setQuery] = useSearchParams({page: "1"});
+    const [isMoreActive, setIsMoreActive] = useState(false);
     const params = useSelector(commonSelectors.getSearchParams);
     const {category} = useParams();
     const {page} = params;
@@ -36,8 +37,12 @@ const useAppMoviesEffect = () => {
                             Object(MovieCategoryEnum)[category],
                             {...params})
                 });
-
-            setResults(results);
+            if (!isMoreActive) {
+                setResults(results);
+            } else {
+                setResults((prevState) => [...prevState, ...results]);
+                setIsMoreActive(false);
+            }
             setInfo(info);
 
         }, [category, getFetchService, params]);
@@ -71,7 +76,20 @@ const useAppMoviesEffect = () => {
         dispatch(commonActions.setSearchParams(prevPage));
     };
 
-    return {isInit, setIsInit, info, setInfo, results, setResults, query, setQuery, page, prevPage, nextPage};
+    return {
+        isInit,
+        setIsInit,
+        info,
+        setInfo,
+        results,
+        setResults,
+        query,
+        setQuery,
+        page,
+        prevPage,
+        nextPage,
+        setIsMoreActive
+    };
 };
 
 export {useAppMoviesEffect};

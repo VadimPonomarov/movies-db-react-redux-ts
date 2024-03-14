@@ -7,8 +7,9 @@ import {IProps} from "./interfaces";
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: Infinity
-        }
+            staleTime: Infinity,
+            placeholderData: "keepPreviousData",
+        },
     }
 });
 const MyQueryClientProvider: FC<IProps> = ({children}) => {
