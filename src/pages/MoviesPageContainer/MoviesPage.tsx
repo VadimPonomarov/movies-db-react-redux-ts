@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useDeferredValue, useRef, useState} from "react";
+import {FC, useRef, useState} from "react";
 
 import {Box, Button} from "@mui/material";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
@@ -25,7 +25,6 @@ const MoviesPage: FC = () => {
 
     const [isMoreVisible] = useState(true);
     const ref = useRef(null);
-    const deferredNextPage = useDeferredValue(nextPage);
 
     const handleClickMore = () => {
         setIsMoreActive(true);
