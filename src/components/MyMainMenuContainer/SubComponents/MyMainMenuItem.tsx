@@ -38,7 +38,11 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
             id="layoutGroup"
         >
             <Button
-                className={["Button__menu_main", css.LG__Button].join(" ")}
+                className={[
+                    "Button__menu_main",
+                    css.LG__Button]
+                    .join(" ")
+                }
                 sx={{
                     display: handleDisplay()
                 }}
