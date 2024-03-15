@@ -11,7 +11,7 @@ import css from "./index.module.scss";
 import {IProps} from "./interfaces";
 
 
-const PaginationSlider: FC<IProps> = React.memo(({props}) => {
+const PaginationSlider: FC<IProps> = ({props}) => {
     const {step, min, max, current = 1, nextPage} = props;
     const {page} = useAppMoviesEffect();
 
@@ -65,6 +65,6 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
             </Grid>
         </motion.span>
     );
-});
+}
 
 export {PaginationSlider};
