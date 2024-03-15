@@ -15,7 +15,7 @@ export const I18InitProps: InitOptions = {
                 "clear store": "очистить",
                 "genres": "жанры",
                 "prev": "назад",
-                "next": "вперед",
+                "next": "след",
                 "more": "еще",
                 "clear": "очистить"
             }
