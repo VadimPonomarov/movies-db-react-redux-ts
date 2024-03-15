@@ -8,7 +8,7 @@ const createSliceWithThunks = buildCreateSlice({
     creators: {asyncThunk: asyncThunkCreator}
 });
 
-const commonSlice = createSliceWithThunks({
+export const commonSlice = createSliceWithThunks({
     name: "commonSlice",
     initialState,
     selectors: {
@@ -55,5 +55,3 @@ export const {
 export const {
     ...commonSelectors
 } = commonSlice.selectors;
-
-export default commonSlice.reducer;

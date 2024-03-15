@@ -18,7 +18,7 @@ const PaginationSlider: FC<IProps> = ({props}) => {
     const {
         handleSliderChange,
         handleInputChange,
-    } = useAppState(current);
+    } = useAppState();
 
     const handleSelect = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
         e.target.select();

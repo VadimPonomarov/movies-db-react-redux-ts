@@ -1,24 +1,21 @@
-import {
-    Action,
-    combineReducers,
-    configureStore,
-    ThunkAction,
-} from '@reduxjs/toolkit';
-import {persistReducer} from 'redux-persist';
-import persistStore from 'redux-persist/es/persistStore';
-import storage from 'redux-persist/lib/storage';
+import {Action, combineReducers, configureStore, ThunkAction,} from "@reduxjs/toolkit";
+import {persistReducer} from "redux-persist";
+import persistStore from "redux-persist/es/persistStore";
+import storage from "redux-persist/lib/storage";
 
-import authSlice from './slices/authSlice/authSlice';
-import commonSlice from "./slices/commonSlice/commonSlice";
+import {authSlice} from "./slices/authSlice";
+import {commonSlice} from "./slices/commonSlice";
+import {moviesSlice} from "./slices/moviesSlice";
 
 
 const rootReducer = combineReducers({
-    commonSlice: commonSlice,
-    authSlice: authSlice,
+    commonSlice: commonSlice.reducer,
+    authSlice: authSlice.reducer,
+    moviesSlice: moviesSlice.reducer
 });
 
 const persistConfig = {
-    key: 'root',
+    key: "root",
     storage,
 };
 

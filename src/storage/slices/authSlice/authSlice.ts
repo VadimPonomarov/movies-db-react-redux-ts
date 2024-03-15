@@ -8,7 +8,7 @@ const createSliceWithThunks = buildCreateSlice({
 });
 
 
-const authSlice = createSliceWithThunks({
+export const authSlice = createSliceWithThunks({
     name: "authSlice",
     initialState,
     selectors: {
@@ -18,13 +18,13 @@ const authSlice = createSliceWithThunks({
     },
     reducers: (create) => ({
         setUserName: create.reducer((state, action: PayloadAction<string>) => {
-            state.userName = action.payload
+            state.userName = action.payload;
         }),
         setIsAuth: create.reducer((state, action: PayloadAction<boolean>) => {
-            state.isAuth = action.payload
+            state.isAuth = action.payload;
         }),
         setIsInit: create.reducer((state, action: PayloadAction<boolean>) => {
-            state.isInit = action.payload
+            state.isInit = action.payload;
         }),
     }),
 });
@@ -38,4 +38,3 @@ export const {
     ...authSelectors
 } = authSlice.selectors;
 
-export default authSlice.reducer

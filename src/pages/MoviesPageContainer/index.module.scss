@@ -41,7 +41,17 @@
   flex-direction: column;
   z-index: 1004;
   height: 100%;
+
+  .Original_Title {
+    transform: scale(.5, .5);
+
+    &:hover {
+      transform: scale(1, 1);
+      transition-duration: .5s;
+    }
+  }
 }
+
 
 .Ep__Card_Box_Box {
   display: flex;

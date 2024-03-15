@@ -64,6 +64,7 @@ const MovieCard: FC<ICardProps> = ({props}) => {
                             className={css.Ep__Card_Content}
                         >
                             <Typography
+                                className={css.Original_Title}
                                 variant="h5"
                                 onClick={
                                     (e) =>

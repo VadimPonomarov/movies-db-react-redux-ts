@@ -1,24 +1,23 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
 
 import {movieService} from "common/services";
-import {IMovieListInfo, IMovieResult, MovieCategoryEnum} from "common/types";
+import {MovieCategoryEnum} from "common/types";
 import _ from "lodash";
 import {useSelector} from "react-redux";
 import {useParams, useSearchParams} from "react-router-dom";
 
 import {commonActions, commonSelectors, useAppDispatch, useAppSelector} from "../../storage";
+import {movieActions} from "../../storage/slices/moviesSlice";
 import {queryClient} from "../hocs";
 import {ISearchParams} from "../hocs/interfaces";
 
 const useAppMoviesEffect = () => {
-    const [isInit, setIsInit] = useState<boolean>(true);
-    const [results, setResults] = useState<IMovieResult[]>([]);
-    const [info, setInfo] = useState<IMovieListInfo>();
-    const [query, setQuery] = useSearchParams({page: "1"});
     const [isMoreActive, setIsMoreActive] = useState(false);
-    const params = useSelector(commonSelectors.getSearchParams);
+    const {isInit, info, movies: results} =
+        useAppSelector(state => state.moviesSlice);
+    const [query, setQuery] = useSearchParams({page: "1"});
     const {category} = useParams();
-    const {page} = params;
+    const params = useSelector(commonSelectors.getSearchParams);
     const {isCategoryChanged} = useAppSelector(state => state.commonSlice);
 
     const dispatch = useAppDispatch();
@@ -30,7 +29,7 @@ const useAppMoviesEffect = () => {
 
     const fetchFunc: () => void =
         useCallback(async () => {
-            const {results, ...info} =
+            const {results: responseRes, ...responseInfo} =
                 await queryClient.fetchQuery({
                     queryKey: [category, JSON.stringify(params)],
                     queryFn: () =>
@@ -39,12 +38,12 @@ const useAppMoviesEffect = () => {
                             {...params})
                 });
             if (!isMoreActive) {
-                setResults(results);
+                dispatch(movieActions.setMovies(responseRes));
             } else {
-                setResults((prevState) => _.union(prevState, results));
+                dispatch(movieActions.setMovies(_.union(results, responseRes)));
                 setIsMoreActive(false);
             }
-            setInfo(info);
+            dispatch(movieActions.setInfo(responseInfo));
             // eslint-disable-next-line
         }, [category, getFetchService, params]);
 
@@ -61,8 +60,8 @@ const useAppMoviesEffect = () => {
     }, [fetchFunc]);
 
     useEffect(() => {
-        setQuery({page});
-    }, [page, setQuery]);
+        setQuery({page: params.page});
+    }, [params.page, setQuery]);
 
 
     const nextPage = () => {
@@ -79,17 +78,14 @@ const useAppMoviesEffect = () => {
 
     return {
         isInit,
-        setIsInit,
         info,
-        setInfo,
         results,
-        setResults,
         query,
         setQuery,
-        page,
         prevPage,
         nextPage,
-        setIsMoreActive
+        page: params.page,
+        setIsMoreActive,
     };
 };
 
