@@ -2,22 +2,24 @@ import * as React from "react";
 import {FC, useState} from "react";
 
 import {Box, Button, Card, CardContent, Typography} from "@mui/material";
-import {MyInitMotionProvider} from "common/hocs/MyInitMotionProvider";
+import {MyInitMotionProvider} from "common/hocs";
 import {motion} from "framer-motion";
-import _, {slice} from "lodash";
+import {slice} from "lodash";
 import moment from "moment";
 import {useSelector} from "react-redux";
-import {useNavigate, useSearchParams} from "react-router-dom";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
+import {UseAppCircularBadgeProps} from "../../../common/hooks/useAppCircularBadgeProps";
 import {BadgeWithCircular} from "../../../components";
-import {commonActions, useAppDispatch} from "../../../storage";
 import {movieSelectors} from "../../../storage/slices/moviesSlice";
 import {initMotion} from "../constants";
 import css from "../index.module.scss";
 import {ICardProps} from "../interfaces";
 
+
 const MovieCard: FC<ICardProps> = ({props}) => {
+    const activeCardList = useSelector(movieSelectors.getActiveCardList);
+    const [isFullTitle, setIsFullTitle] = useState<boolean>(false);
     const {
         item: {
             id,
@@ -30,26 +32,13 @@ const MovieCard: FC<ICardProps> = ({props}) => {
         }
     } = props;
 
-    const activeCardList = useSelector(movieSelectors.getActiveCardList);
-
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
-    const [query] = useSearchParams();
-
-    const [isFullTitle, setIsFullTitle] = useState<boolean>(false);
-
-    const handleOnClick = () => {
-        navigate(`${id}`, {state: {page: query.get("page")}});
-    };
-
-    const handleOriginalTitleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-        e.stopPropagation();
-        dispatch(commonActions.setBackDropImgPath(backdrop_path));
-    };
-    const handleTitleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-        e.stopPropagation();
-        setIsFullTitle(!isFullTitle);
-    };
+    const {
+        handleOriginalTitleClick,
+        handleOnClick,
+        handleTitleClick,
+        getProps
+    } =
+        UseAppCircularBadgeProps({id, backdrop_path, setIsFullTitle, vote_average});
 
     return (
         <MyInitMotionProvider>
@@ -113,29 +102,7 @@ const MovieCard: FC<ICardProps> = ({props}) => {
                 </Button>
                 <BadgeWithCircular
                     movieId={id}
-                    props={{
-                        rate: vote_average * 10,
-                        content: {
-                            initial_:
-                                Math.floor(vote_average * 10),
-                            whileLoading:
-                                <Typography
-                                    variant={"h6"} color={"blue"}
-                                >
-                                    UA
-                                </Typography>,
-                            success_:
-                                <Typography>
-                                    {Math.floor(vote_average * 10)}
-                                </Typography>
-                        },
-                        ...(() => !_.includes(activeCardList, id) ? {
-                                btn: {
-                                    bgColor: "default"
-                                }
-                            } : null
-                        )()
-                    }}
+                    props={getProps()}
                 />
             </Card>
         </MyInitMotionProvider>
