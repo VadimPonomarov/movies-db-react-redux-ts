@@ -4,13 +4,15 @@ import {FC, useState} from "react";
 import {Box, Button, Card, CardContent, Typography} from "@mui/material";
 import {MyInitMotionProvider} from "common/hocs/MyInitMotionProvider";
 import {motion} from "framer-motion";
-import {slice} from "lodash";
+import _, {slice} from "lodash";
 import moment from "moment";
+import {useSelector} from "react-redux";
 import {useNavigate, useSearchParams} from "react-router-dom";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
 import {BadgeWithCircular} from "../../../components";
 import {commonActions, useAppDispatch} from "../../../storage";
+import {movieSelectors} from "../../../storage/slices/moviesSlice";
 import {initMotion} from "../constants";
 import css from "../index.module.scss";
 import {ICardProps} from "../interfaces";
@@ -27,14 +29,17 @@ const MovieCard: FC<ICardProps> = ({props}) => {
             vote_average,
         }
     } = props;
+
+    const activeCardList = useSelector(movieSelectors.getActiveCardList);
+
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [query] = useSearchParams()
+    const [query] = useSearchParams();
 
     const [isFullTitle, setIsFullTitle] = useState<boolean>(false);
 
     const handleOnClick = () => {
-        navigate(`${id}`, {state:{page: query.get("page")}});
+        navigate(`${id}`, {state: {page: query.get("page")}});
     };
 
     const handleOriginalTitleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -45,7 +50,6 @@ const MovieCard: FC<ICardProps> = ({props}) => {
         e.stopPropagation();
         setIsFullTitle(!isFullTitle);
     };
-
 
     return (
         <MyInitMotionProvider>
@@ -108,6 +112,7 @@ const MovieCard: FC<ICardProps> = ({props}) => {
                     </Box>
                 </Button>
                 <BadgeWithCircular
+                    movieId={id}
                     props={{
                         rate: vote_average * 10,
                         content: {
@@ -120,10 +125,16 @@ const MovieCard: FC<ICardProps> = ({props}) => {
                                     UA
                                 </Typography>,
                             success_:
-                                <h2>
+                                <Typography>
                                     {Math.floor(vote_average * 10)}
-                                </h2>
-                        }
+                                </Typography>
+                        },
+                        ...(() => !_.includes(activeCardList, id) ? {
+                                btn: {
+                                    bgColor: "default"
+                                }
+                            } : null
+                        )()
                     }}
                 />
             </Card>

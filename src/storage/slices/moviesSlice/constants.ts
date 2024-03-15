@@ -4,5 +4,6 @@ export const initialState: IInitialState = {
     isInit: true,
     info: undefined,
     movies: [],
-    genres: []
+    genres: [],
+    activeCardList: []
 };

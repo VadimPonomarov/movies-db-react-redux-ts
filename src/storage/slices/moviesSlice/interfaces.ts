@@ -4,6 +4,7 @@ export interface IInitialState {
     isInit: boolean,
     info: IMovieListInfo,
     movies: IMovieResult[],
-    genres: IGenre[]
+    genres: IGenre[],
+    activeCardList: number[]
 }
 

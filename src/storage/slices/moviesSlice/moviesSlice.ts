@@ -1,4 +1,5 @@
 import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolkit";
+import _ from "lodash";
 
 import {IGenre, IMovieListInfo, IMovieResult} from "../../../common";
 
@@ -18,6 +19,7 @@ export const moviesSlice = createSliceWithThunks({
         getInfo: state => state.info,
         getMovies: state => state.movies,
         getGenres: state => state.genres,
+        getActiveCardList: state => state.activeCardList,
     },
     reducers: create => ({
         setIsInit: create.reducer((state, action: PayloadAction<boolean>) => {
@@ -31,6 +33,13 @@ export const moviesSlice = createSliceWithThunks({
         }),
         setGenres: create.reducer((state, action: PayloadAction<IGenre[]>) => {
             state.genres = action.payload;
+        }),
+        toggleActiveCardList: create.reducer((state, action: PayloadAction<number>) => {
+            if (_.includes(state.activeCardList, action.payload)) {
+                state.activeCardList = _.difference(state.activeCardList, [action.payload]);
+                return;
+            }
+            state.activeCardList = _.union(state.activeCardList, [action.payload]);
         }),
     }),
 });

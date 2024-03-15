@@ -38,5 +38,6 @@ export interface IBadgeGr {
 }
 
 export interface IBadgeGrProps {
-    props?: Partial<IBadgeGr>;
+    props?: Partial<IBadgeGr>,
+    movieId?: number,
 }

@@ -2,13 +2,15 @@ import React, {FC} from "react";
 
 import {Box, CircularProgress, Fab} from "@mui/material";
 
-import {UseAppEffectHook} from "../../common/hooks/useAppEffectHook";
+import {UseAppEffectHook} from "../../common";
+import {useAppDispatch} from "../../storage";
+import {movieActions} from "../../storage/slices/moviesSlice";
 
 import {defaultProps} from "./constants";
 import css from "./index.module.scss";
 import {FabColorType, IBadgeGrProps} from "./interfaces";
 
-const BadgeWithCircular: FC<IBadgeGrProps> = ({props = {...defaultProps}}) => {
+const BadgeWithCircular: FC<IBadgeGrProps> = ({props = {...defaultProps}, movieId}) => {
     const {
         btn: {
             bgColor,
@@ -18,7 +20,9 @@ const BadgeWithCircular: FC<IBadgeGrProps> = ({props = {...defaultProps}}) => {
         fab: {fabColor},
         content: {initial_, success_, whileLoading},
         rate
-    } = {...defaultProps,...props};
+    } = {...defaultProps, ...props};
+
+    const dispatch = useAppDispatch();
 
     const {
         loading,
@@ -36,13 +40,18 @@ const BadgeWithCircular: FC<IBadgeGrProps> = ({props = {...defaultProps}}) => {
         }),
     };
 
+    const handleClick = () => {
+        handleButtonClick();
+        dispatch(movieActions.toggleActiveCardList(movieId));
+    };
+
     return (
         <Box className={css.Badge__Box}>
             <Box className={css.Badge__Box_Box}>
                 <Fab
                     color={fabColor as FabColorType}
                     sx={buttonSx}
-                    onClick={handleButtonClick}
+                    onClick={handleClick}
                 >
                     <>
                         {!(success || loading) && valOrFunc(initial_)}
