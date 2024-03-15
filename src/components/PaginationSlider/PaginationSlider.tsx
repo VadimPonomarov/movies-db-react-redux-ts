@@ -39,7 +39,7 @@ const PaginationSlider: FC<IProps> = ({props}) => {
                     <Slider
                         {...pSlider}
                         min={1}
-                        max={100}
+                        max={(+page + 100) < 500 ? +page + 100 : 500}
                         value={!!page ? +page : 1}
                         onChange={handleSliderChange}
                     />
@@ -65,6 +65,6 @@ const PaginationSlider: FC<IProps> = ({props}) => {
             </Grid>
         </motion.span>
     );
-}
+};
 
 export {PaginationSlider};

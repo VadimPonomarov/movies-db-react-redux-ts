@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {BehaviorSubject, delay, switchMap} from "rxjs";
+import {BehaviorSubject, debounceTime, switchMap} from "rxjs";
 
 import {commonActions, useAppDispatch} from "../../storage";
 
@@ -13,8 +13,8 @@ const useAppState = (initial: number) => {
         new BehaviorSubject({page: "1"});
     flow$
         .pipe(
+            debounceTime(500),
             switchMap(async (value) => value),
-            delay(1000)
         );
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
         const newPage =

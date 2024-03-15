@@ -21,6 +21,10 @@ export const mSpan: MotionProps = {
 
 export const pSlider: SliderProps = {
     color: "secondary",
+    size: "small",
+    marks: true,
+    valueLabelDisplay: "auto",
+    step: 1
 };
 
 export const pTextField: TextFieldProps = {
