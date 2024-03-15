@@ -41,8 +41,11 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
     const navigate = useNavigate();
     const {t} = useTranslation();
 
-    const toggleDrawer = (newOpen: boolean) => () => {
-        setOpen(newOpen);
+    const toggleDrawer = (newOpen: boolean | undefined = undefined) => () => {
+        if (newOpen) {
+            return setOpen(newOpen);
+        }
+        setOpen((prevState) => !prevState);
     };
 
     return (
@@ -71,9 +74,9 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                                 👈
                             </Typography> :
                             <Typography
-                                sx={{zIndex: 1300, position: "fixed", bottom: "7px", left: "10px"}}
+                                className={css.Typography__Genres}
                                 variant={"caption"}
-                                onClick={toggleDrawer(true)}
+                                onClick={toggleDrawer()}
                             >
                                 {t("genres")}
                             </Typography>
@@ -100,7 +103,12 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                     }}
                 >
                     <Puller/>
-                    <Typography sx={{p: 2, color: "text.secondary"}}>
+                    <Typography
+                        sx={{
+                            p: 2,
+                            color: "text.secondary"
+                        }}
+                    >
                         {!_.upperCase(t("genres"))}
                     </Typography>
                 </StyledBox>

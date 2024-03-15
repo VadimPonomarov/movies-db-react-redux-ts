@@ -20,7 +20,20 @@
 
 .Pointer {
   position: absolute;
-  top:-50px;
-  left:-5px;
+  top: -50px;
+  left: -5px;
+}
+
+.Typography__Genres {
+  z-index: 1300;
+  position: fixed;
+  bottom: 7px;
+  left: 10px;
+  opacity: .4;
+
+  &:hover {
+    opacity: 1;
+    transform: translateX(10px) scale(1.4, 1.4);
+  }
 }
 
