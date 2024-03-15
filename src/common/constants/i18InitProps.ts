@@ -17,6 +17,7 @@ export const I18InitProps: InitOptions = {
                 "prev": "назад",
                 "next": "вперед",
                 "more": "еще",
+                "clear": "очистить"
             }
         },
         uk: {
@@ -34,6 +35,7 @@ export const I18InitProps: InitOptions = {
                 "prev": "назад",
                 "next": "вперед",
                 "more": "далі",
+                "clear": "очистити"
             }
         }
     },

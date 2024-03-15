@@ -4,12 +4,16 @@ import {FC, useState} from "react";
 import {Global} from "@emotion/react";
 import {Box, Button, Container, CssBaseline, styled, SwipeableDrawer, Typography} from "@mui/material";
 import {grey} from "@mui/material/colors";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import Switch from "@mui/material/Switch";
 import _ from "lodash";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
-import {authSelectors} from "../../storage";
+import {authSelectors, commonActions, useAppDispatch} from "../../storage";
+import {movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
 
 import {drawerBleeding, pullerProps, rootProps} from "./constants";
@@ -36,7 +40,9 @@ const Puller =
 
 const SwipeableEdgeDrawer: FC<IProps> = () => {
     const isAuth = useSelector(authSelectors.getIsAuth);
+    const genres = useSelector(movieSelectors.getGenres);
     const [open, setOpen] = useState(false);
+    const dispatch = useAppDispatch();
     const {movieId} = useParams();
     const navigate = useNavigate();
     const {t} = useTranslation();
@@ -113,6 +119,17 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                     </Typography>
                 </StyledBox>
                 <Container className={css.Sed__BG_Container}>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={!!genres.length}
+                                    onChange={() => dispatch(commonActions.setSearchParams({with_genres: []}))}
+                                />
+                            }
+                            label={t("clear")}
+                        />
+                    </FormGroup>
                     <BadgeGroup/>
                 </Container>
             </SwipeableDrawer>

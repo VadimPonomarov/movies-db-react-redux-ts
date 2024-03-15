@@ -41,6 +41,9 @@ export const moviesSlice = createSliceWithThunks({
             }
             state.activeCardList = _.union(state.activeCardList, [action.payload]);
         }),
+        cleanActiveCardList: create.reducer((state) => {
+            state.activeCardList = [];
+        }),
     }),
 });
 

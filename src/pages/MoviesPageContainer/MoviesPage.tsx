@@ -2,17 +2,24 @@ import * as React from "react";
 import {FC, useRef, useState} from "react";
 
 import {Box, Button} from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import Switch from "@mui/material/Switch";
 import {useAppMoviesEffect} from "common/hooks/useAppMoviesEffect";
 import {motion} from "framer-motion";
 import {t} from "i18next";
 import _ from "lodash";
+import {useSelector} from "react-redux";
 
 import {BackDrop} from "../../components";
+import {useAppDispatch} from "../../storage";
+import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 
 import {divMoreMotion} from "./constants";
 import css from "./index.module.scss";
 import {MovieCard} from "./SubComponents/MovieCard";
 import {MoviesButtonGroup} from "./SubComponents/MoviesButtonGroup";
+
 
 const MoviesPage: FC = () => {
     const {
@@ -25,6 +32,8 @@ const MoviesPage: FC = () => {
 
     const [isMoreVisible] = useState(true);
     const ref = useRef(null);
+    const movieChoiceLIst = useSelector(movieSelectors.getActiveCardList);
+    const dispatch = useAppDispatch();
 
     const handleClickMore = () => {
         setIsMoreActive(true);
@@ -42,6 +51,19 @@ const MoviesPage: FC = () => {
                         nextPage
                     }}
                 />}
+
+            <FormGroup
+                sx={{zIndex: 1300, position: "fixed", bottom: "2px", right: "2px"}}>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={!!movieChoiceLIst.length}
+                            onChange={() => dispatch(movieActions.cleanActiveCardList())}
+                        />
+                    }
+                    label={!!movieChoiceLIst.length ? t("clear") : ""}
+                />
+            </FormGroup>
 
             <Box
                 className={css.Ep__Container}

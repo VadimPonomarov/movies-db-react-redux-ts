@@ -2,9 +2,10 @@ import * as React from "react";
 import {FC, useState} from "react";
 
 import {Box, Button, Card, CardContent, Typography} from "@mui/material";
+import {red} from "@mui/material/colors";
 import {MyInitMotionProvider} from "common/hocs";
 import {motion} from "framer-motion";
-import {slice} from "lodash";
+import _, {slice} from "lodash";
 import moment from "moment";
 import {useSelector} from "react-redux";
 
@@ -42,15 +43,25 @@ const MovieCard: FC<ICardProps> = ({props}) => {
 
     return (
         <MyInitMotionProvider>
-            <Card className={css.Ep__Card}>
+            <Card
+                className={css.Ep__Card}
+            >
                 <Button
                     className={css.Ep__Card_Button}
+                    sx={
+                        _.includes(activeCardList, id) ?
+                            {border: `2px solid ${red[500]}`}
+                            : null
+                    }
                     onClick={handleOnClick}
                 >
                     <Box className={css.Ep__Card_Box}
                          sx={{
                              backgroundImage: `url(${baseImagesUrl}${ImageSizeEnum.w300}${poster_path})`,
-                             overflow: !isFullTitle ? "hidden" : "standart"
+                             overflow:
+                                 !isFullTitle ?
+                                     "hidden" :
+                                     "standard"
                          }}
                     >
                         <CardContent
