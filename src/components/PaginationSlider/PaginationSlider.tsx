@@ -12,7 +12,7 @@ import {IProps} from "./interfaces";
 
 
 const PaginationSlider: FC<IProps> = ({props}) => {
-    const {step, min, max, current = 1, nextPage} = props;
+    const {step, min, max, nextPage} = props;
     const {page} = useAppMoviesEffect();
 
     const {

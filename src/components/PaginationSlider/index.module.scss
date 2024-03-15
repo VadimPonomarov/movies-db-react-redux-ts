@@ -1,5 +1,4 @@
 .PSl__Grid{
-
   display: flex;
   align-items: center;
   gap: 16px;
@@ -7,7 +6,9 @@
 
 .PSl__Grid_Grid1{
   position: relative;
-  top: -20px;
+  top: -15px;
+  padding-bottom: 0;
+  height: 10px;
 }
 
 .PSl__Grid_Grid2{
