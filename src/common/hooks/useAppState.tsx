@@ -6,7 +6,7 @@ import {commonActions, useAppDispatch} from "../../storage";
 
 import {useAppMoviesEffect} from "./useAppMoviesEffect";
 
-const useAppState = (initial: number) => {
+const useAppState = () => {
     const dispatch = useAppDispatch();
     const {setQuery} = useAppMoviesEffect();
     const flow$ =
