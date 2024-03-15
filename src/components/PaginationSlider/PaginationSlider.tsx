@@ -1,11 +1,10 @@
 import * as React from "react";
-import {FC,} from "react";
+import {FC} from "react";
 
 import {Grid, Slider, TextField} from "@mui/material";
 import {motion} from "framer-motion";
 
-import {useAppMoviesEffect} from "../../common/hooks/useAppMoviesEffect";
-import {useAppState} from "../../common/hooks/useAppState";
+import {useAppMoviesEffect, useAppState} from "../../common";
 
 import {mSpan, pSlider, pTextField} from "./constants";
 import css from "./index.module.scss";
@@ -20,6 +19,10 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
         handleSliderChange,
         handleInputChange,
     } = useAppState(current);
+
+    const handleSelect = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
+        e.target.select();
+    };
 
     return (
         <motion.span
@@ -49,6 +52,7 @@ const PaginationSlider: FC<IProps> = React.memo(({props}) => {
                         {...pTextField}
                         value={!!page ? +page : 1}
                         onChange={handleInputChange}
+                        onFocus={(e) => handleSelect(e)}
                         onBlur={nextPage}
                         inputProps={{
                             step,

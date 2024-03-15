@@ -10,7 +10,8 @@
 }
 
 .PSl__Grid_Grid2{
-  position: absolute;
-  right: -100px;
-  transform: translateY(-50%);
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translate(130%, -22%);
 }

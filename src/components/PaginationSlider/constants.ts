@@ -24,6 +24,6 @@ export const pSlider: SliderProps = {
 };
 
 export const pTextField: TextFieldProps = {
-    variant: "outlined",
+    variant: "standard",
     size: "small",
 };
