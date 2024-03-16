@@ -66,7 +66,7 @@ export const moviesSlice = createSliceWithThunks({
                     state.genres = action.payload.genres;
                     state.error = null;
                 },
-                settled: (state, action) => {
+                settled: (state) => {
                     state.loading = false;
                 }
             }
