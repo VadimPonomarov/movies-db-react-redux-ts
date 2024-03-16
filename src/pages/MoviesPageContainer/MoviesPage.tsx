@@ -24,7 +24,7 @@ import {MoviesButtonGroup} from "./SubComponents/MoviesButtonGroup";
 const MoviesPage: FC = () => {
     const {
         info,
-        results,
+        getFilteredResults,
         prevPage,
         nextPage,
         setIsMoreActive
@@ -41,6 +41,7 @@ const MoviesPage: FC = () => {
         ref.current.scrollIntoView();
     };
 
+
     return (
         <>
             {info &&
@@ -53,7 +54,8 @@ const MoviesPage: FC = () => {
                 />}
 
             <FormGroup
-                sx={{zIndex: 1200, position: "fixed", bottom: "2px", right: "2px"}}>
+                className={css.FG}
+            >
                 <FormControlLabel
                     control={
                         <Switch
@@ -69,8 +71,8 @@ const MoviesPage: FC = () => {
                 className={css.Ep__Container}
             >
                 <BackDrop/>
-                {!!results.length &&
-                    results.map(item =>
+                {!!getFilteredResults.length &&
+                    getFilteredResults.map(item =>
                         <MovieCard
                             key={item.id}
                             props={{

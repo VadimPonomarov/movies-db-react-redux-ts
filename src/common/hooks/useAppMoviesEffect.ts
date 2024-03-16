@@ -18,6 +18,7 @@ const useAppMoviesEffect = () => {
     const [query, setQuery] = useSearchParams({page: "1"});
     const {category} = useParams();
     const params = useSelector(commonSelectors.getSearchParams);
+    const {with_genres} = useSelector(commonSelectors.getSearchParams);
     const {isCategoryChanged} = useAppSelector(state => state.commonSlice);
 
     const dispatch = useAppDispatch();
@@ -63,6 +64,14 @@ const useAppMoviesEffect = () => {
         setQuery({page: params.page});
     }, [params.page, setQuery]);
 
+    const getFilteredResults = useMemo(() => {
+        if (!with_genres.length) return results;
+        return results
+            .filter(item =>
+                !!_.intersection(item.genre_ids, with_genres).length
+            );
+    }, [results, with_genres]);
+
 
     const nextPage = () => {
         const nextPage: Partial<ISearchParams> =
@@ -79,7 +88,7 @@ const useAppMoviesEffect = () => {
     return {
         isInit,
         info,
-        results,
+        getFilteredResults,
         query,
         setQuery,
         prevPage,
