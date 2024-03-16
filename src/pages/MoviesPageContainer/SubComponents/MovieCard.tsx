@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useState} from "react";
+import {FC, memo, useState} from "react";
 
 import {Box, Button, Card, CardContent, Typography} from "@mui/material";
 import {red} from "@mui/material/colors";
@@ -18,7 +18,7 @@ import css from "../index.module.scss";
 import {ICardProps} from "../interfaces";
 
 
-const MovieCard: FC<ICardProps> = ({props}) => {
+const MovieCard_: FC<ICardProps> = ({props}) => {
     const activeCardList = useSelector(movieSelectors.getActiveCardList);
     const [isFullTitle, setIsFullTitle] = useState<boolean>(false);
     const {
@@ -120,4 +120,4 @@ const MovieCard: FC<ICardProps> = ({props}) => {
     );
 };
 
-export {MovieCard};
+export const MovieCard = memo(MovieCard_);
