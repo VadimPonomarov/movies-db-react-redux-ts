@@ -5,6 +5,8 @@ export interface IInitialState {
     info: IMovieListInfo,
     movies: IMovieResult[],
     genres: IGenre[],
-    activeCardList: number[]
+    activeCardList: number[],
+    loading: boolean;
+    error: string | null;
 }
 

@@ -1,7 +1,8 @@
 import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolkit";
 import _ from "lodash";
 
-import {IGenre, IMovieListInfo, IMovieResult} from "../../../common";
+import {IGenre, IGenreListResponse, IMovieListInfo, IMovieResult} from "../../../common";
+import {movieService} from "../../../common/services";
 
 import {initialState} from "./constants";
 
@@ -44,6 +45,32 @@ export const moviesSlice = createSliceWithThunks({
         cleanActiveCardList: create.reducer((state) => {
             state.activeCardList = [];
         }),
+        getGenreList: create.asyncThunk<IGenreListResponse, void>(
+            async (_, {fulfillWithValue, rejectWithValue}) => {
+                const res = await movieService.getGenreList();
+                if (!res) {
+                    return rejectWithValue("Error message !");
+                }
+                return fulfillWithValue(res);
+            },
+            {
+                pending: state => {
+                    state.loading = true;
+                    state.error = null;
+                },
+                rejected: (state, action) => {
+                    state.loading = false;
+                    state.error = action.error.message || null;
+                },
+                fulfilled: (state, action) => {
+                    state.genres = action.payload.genres;
+                    state.error = null;
+                },
+                settled: (state, action) => {
+                    state.loading = false;
+                }
+            }
+        )
     }),
 });
 

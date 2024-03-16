@@ -53,7 +53,7 @@ const MoviesPage: FC = () => {
                 />}
 
             <FormGroup
-                sx={{zIndex: 1300, position: "fixed", bottom: "2px", right: "2px"}}>
+                sx={{zIndex: 1200, position: "fixed", bottom: "2px", right: "2px"}}>
                 <FormControlLabel
                     control={
                         <Switch

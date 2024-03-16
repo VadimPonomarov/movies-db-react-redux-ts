@@ -5,16 +5,14 @@ import {useSelector} from "react-redux";
 
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
-import {movieService} from "../services";
 
 const useAppBg = () => {
     const genres = useSelector(movieSelectors.getGenres);
     const searchParams = useSelector(commonSelectors.getSearchParams);
     const dispatch = useAppDispatch();
-    
+
     useEffect(() => {
-        movieService.getGenreList()
-            .then(resp => dispatch(movieActions.setGenres(resp.genres)));
+        dispatch(movieActions.getGenreList());
     }, [dispatch]);
 
     const handleClick = (id: number) => {

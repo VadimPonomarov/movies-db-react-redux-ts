@@ -5,5 +5,7 @@ export const initialState: IInitialState = {
     info: undefined,
     movies: [],
     genres: [],
-    activeCardList: []
+    activeCardList: [],
+    loading: false,
+    error: null,
 };

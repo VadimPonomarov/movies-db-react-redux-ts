@@ -1,1 +1,1 @@
-export * from './SwipeableEdgeDrawer'
+export * from "./SwipeAbleEdgeDrawer";

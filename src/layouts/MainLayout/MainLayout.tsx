@@ -1,14 +1,14 @@
 import {MyAppBar} from "components/MyAppBarContainer/MyAppBar";
 import {Outlet} from "react-router-dom";
 
-import {SwipeableEdgeDrawer} from "../../components";
+import {SwipeAbleEdgeDrawer} from "../../components";
 
 const MainLayout = () => {
 
     return (
         <>
             <MyAppBar/>
-            <SwipeableEdgeDrawer/>
+            <SwipeAbleEdgeDrawer/>
             <Outlet/>
         </>
     );
