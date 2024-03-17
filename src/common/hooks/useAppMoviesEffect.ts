@@ -41,7 +41,17 @@ const useAppMoviesEffect = () => {
             if (!isMoreActive) {
                 dispatch(movieActions.setMovies(responseRes));
             } else {
-                dispatch(movieActions.setMovies(_.union(results, responseRes)));
+                dispatch(movieActions
+                    .setMovies(
+                        _.uniqBy(
+                            _.union(
+                                results,
+                                responseRes
+                            ),
+                            "id"
+                        )
+                    )
+                );
                 setIsMoreActive(false);
             }
             dispatch(movieActions.setInfo(responseInfo));
