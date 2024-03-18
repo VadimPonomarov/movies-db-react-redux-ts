@@ -1,11 +1,11 @@
 import * as React from "react";
 import {FC, memo, useEffect, useState} from "react";
 
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 import {IMovieDetails} from "../../common";
 import {movieService} from "../../common/services";
-import {commonActions, useAppDispatch} from "../../storage";
+import {useAppDispatch} from "../../storage";
 
 import {IProps} from "./interfaces";
 import {MovieDetailsCard} from "./MovieDetailsCard";

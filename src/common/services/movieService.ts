@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import {myHttpUrls} from "../constants";
 import {ISearchParams} from "../hocs/interfaces";
 import {AuthSessionIdResponseType, IGenreListResponse, IMovieDetails, IMovieList, MovieCategoryEnum} from "../types";

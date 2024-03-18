@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useRef, useState} from "react";
+import {FC, useState} from "react";
 
 import {Box, Button} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -31,16 +31,13 @@ const MoviesPage: FC = () => {
     } = useAppMoviesEffect();
 
     const [isMoreVisible] = useState(true);
-    const ref = useRef(null);
     const movieChoiceLIst = useSelector(movieSelectors.getActiveCardList);
     const dispatch = useAppDispatch();
 
     const handleClickMore = () => {
         setIsMoreActive(true);
         nextPage();
-        ref.current.scrollIntoView();
     };
-
 
     return (
         <>
@@ -87,7 +84,6 @@ const MoviesPage: FC = () => {
                     {...divMoreMotion}
                 >
                     <Button
-                        ref={ref}
                         variant={"text"}
                         className={css.InView__Button_More}
                         onClick={handleClickMore}>
