@@ -7,6 +7,7 @@ import {MyInitMotionProvider} from "common/hocs";
 import {motion} from "framer-motion";
 import _, {slice} from "lodash";
 import moment from "moment";
+import {useInView} from "react-intersection-observer";
 import {useSelector} from "react-redux";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
@@ -40,6 +41,11 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
         getProps
     } =
         UseAppCircularBadgeProps({id, backdrop_path, setIsFullTitle, vote_average});
+    const {ref, inView} =
+        useInView({
+            threshold: 0,
+            triggerOnce: true
+        });
 
     return (
         <MyInitMotionProvider>
@@ -55,14 +61,17 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
                     }
                     onClick={handleOnClick}
                 >
-                    <Box className={css.Ep__Card_Box}
-                         sx={{
-                             backgroundImage: `url(${baseImagesUrl}${ImageSizeEnum.w300}${poster_path})`,
-                             overflow:
-                                 !isFullTitle ?
-                                     "hidden" :
-                                     "standard"
-                         }}
+                    <Box
+                        ref={ref}
+                        className={css.Ep__Card_Box}
+                        sx={{
+                            backgroundImage: inView &&
+                                `url(${baseImagesUrl}${ImageSizeEnum.w300}${poster_path})`,
+                            overflow:
+                                !isFullTitle ?
+                                    "hidden" :
+                                    "standard"
+                        }}
                     >
                         <CardContent
                             className={css.Ep__Card_Content}
