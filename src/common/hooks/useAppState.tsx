@@ -15,7 +15,8 @@ const useAppState = () => {
         .pipe(
             debounceTime(500),
             switchMap(async (value) => value),
-        );
+        )
+    ;
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
         const newPage =
             {page: "" + newValue};

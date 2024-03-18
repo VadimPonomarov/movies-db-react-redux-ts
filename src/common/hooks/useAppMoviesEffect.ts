@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useDeferredValue, useEffect, useMemo, useState} from "react";
 
 import {movieService} from "common/services";
 import {MovieCategoryEnum} from "common/types";
@@ -58,6 +58,7 @@ const useAppMoviesEffect = () => {
             // eslint-disable-next-line
         }, [category, getFetchService, params]);
 
+
     useEffect(() => {
         if (isCategoryChanged) {
             dispatch(
@@ -66,13 +67,16 @@ const useAppMoviesEffect = () => {
         }
     }, [category, dispatch, isCategoryChanged]);
 
-    useEffect(() => {
-        fetchFunc();
-    }, [fetchFunc]);
+    const deferredFetchFunc = useDeferredValue(fetchFunc);
+    const deferredSetQuery = useDeferredValue(setQuery);
 
     useEffect(() => {
-        setQuery({page: params.page});
-    }, [params.page, setQuery]);
+        deferredFetchFunc();
+    }, [deferredFetchFunc]);
+
+    useEffect(() => {
+        deferredSetQuery({page: params.page});
+    }, [params.page, deferredSetQuery]);
 
     const getFilteredResults = useMemo(() => {
         if (!with_genres.length) return results;
