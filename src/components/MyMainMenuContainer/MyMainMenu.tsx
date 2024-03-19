@@ -12,7 +12,7 @@ import {MyMainMenuItem} from "./SubComponents/MyMainMenuItem";
 
 const MyMainMenu: FC = React.memo(() => {
     const {category} = useParams();
-    const [isActive, setIsActive] = useState<string>();
+    const [isActive, setIsActive] = useState<string | undefined>();
 
     useEffect(() => {
         setIsActive(category);

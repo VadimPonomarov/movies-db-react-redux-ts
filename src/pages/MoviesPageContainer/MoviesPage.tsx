@@ -56,11 +56,18 @@ const MoviesPage: FC = () => {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={!!movieChoiceLIst.length}
-                            onChange={() => dispatch(movieActions.cleanActiveCardList())}
+                            checked={
+                                !!movieChoiceLIst.length
+                            }
+                            onChange={
+                                () => dispatch(movieActions.cleanActiveCardList())
+                            }
                         />
                     }
-                    label={!!movieChoiceLIst.length ? t("clear") : ""}
+                    label={
+                        !!movieChoiceLIst.length ?
+                            t("clear") : ""
+                    }
                 />
             </FormGroup>
 

@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -23,13 +23,15 @@ const MyToolBar: FC = () => {
     const dispatch = useAppDispatch();
     const userName = useSelector(authSelectors.getUserName);
     const [anchorEl, setAnchorEl] =
-        React.useState<null | HTMLElement>(null);
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleTheme = () => {
-        dispatch(commonActions.setThemeToggle());
-    };
+        useState<null | HTMLElement>(null);
+    const handleMenu: (event: React.MouseEvent<HTMLElement>) => void =
+        (event) => {
+            setAnchorEl(event.currentTarget);
+        };
+    const handleTheme: () => void =
+        () => {
+            dispatch(commonActions.setThemeToggle());
+        };
 
     return (
         <Toolbar className={css.myToolBar}>

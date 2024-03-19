@@ -10,16 +10,17 @@ import {useSelector} from "react-redux";
 
 import {authActions, authSelectors, useAppDispatch} from "../../storage";
 
-import css from "./index.module.scss"
+import css from "./index.module.scss";
 import {MyToolBar} from "./SubComponents/MyToolBar";
 
 const MyAppBar: FC = () => {
     const isAuth = useSelector(authSelectors.getIsAuth);
     const dispatch = useAppDispatch();
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(authActions.setIsAuth(event.target.checked));
-    };
+    const handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void =
+        (event) => {
+            dispatch(authActions.setIsAuth(event.target.checked));
+        };
 
 
     return (

@@ -1,11 +1,11 @@
 import * as React from "react";
-import {FC, memo, useEffect, useState} from "react";
+import {FC, memo, useEffect} from "react";
 
+import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 
-import {IMovieDetails} from "../../common";
-import {movieService} from "../../common/services";
 import {useAppDispatch} from "../../storage";
+import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 
 import {IProps} from "./interfaces";
 import {MovieDetailsCard} from "./MovieDetailsCard";
@@ -13,14 +13,16 @@ import {MovieDetailsCard} from "./MovieDetailsCard";
 
 const MoviePage_: FC<IProps> = () => {
     const {movieId} = useParams();
-    const [movieDetails, setMovieDetails] = useState<IMovieDetails>();
+    const movieDetails = useSelector(movieSelectors.getMovieDetails);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (movieId) {
-            movieService.getMovieById(+movieId)
-                .then(details => setMovieDetails(details));
+            dispatch(movieActions.fetchMovieDetails(+movieId));
         }
+        return () => {
+            dispatch(movieActions.cleanMovieDetails());
+        };
     }, [dispatch, movieId]);
 
     return (

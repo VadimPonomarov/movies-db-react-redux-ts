@@ -9,9 +9,12 @@ import {LoginForm} from "../../forms";
 const LoginPage: FC = () => {
     return (
         <Box>
-            <LoginForm props={{formLabel: "Login Form"}}/>
+            <LoginForm
+                props={{
+                    formLabel: "Login Form"
+                }}/>
         </Box>
     );
 };
 
-export {LoginPage}
+export {LoginPage};

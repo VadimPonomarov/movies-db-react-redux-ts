@@ -21,11 +21,12 @@ import {IProps} from "./interfaces";
 
 
 const SwipeAbleEdgeDrawer: FC<IProps> = () => {
+    const [open, setOpen] =
+        useState<boolean>(false);
     const isAuth = useSelector(authSelectors.getIsAuth);
     const genres = useSelector(movieSelectors.getGenres);
-    const [open, setOpen] = useState(false);
     const dispatch = useAppDispatch();
-    const {movieId} = useParams();
+    const {movieId} = useParams<string>();
     const navigate = useNavigate();
     const {t} = useTranslation();
 

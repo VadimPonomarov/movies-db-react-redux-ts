@@ -12,10 +12,11 @@ import css from "./index.module.scss";
 
 const BackDrop: FC = () => {
     const dispatch = useAppDispatch();
-    const backDropImgPath = useSelector(commonSelectors.setBackDropImgPath)
-    const handleClose = () => {
-        dispatch(commonActions.setBackDropImgPath(undefined));
-    };
+    const backDropImgPath = useSelector(commonSelectors.setBackDropImgPath);
+    const handleClose: () => void =
+        () => {
+            dispatch(commonActions.setBackDropImgPath(undefined));
+        };
 
     return (
         <Modal
@@ -26,7 +27,8 @@ const BackDrop: FC = () => {
                     className={css.BDrop__Box_Box}
                     onClick={handleClose}
                     sx={{
-                        backgroundImage: `url(${baseImagesUrl}${ImageSizeEnum.original}${backDropImgPath})`
+                        backgroundImage:
+                            `url(${baseImagesUrl}${ImageSizeEnum.original}${backDropImgPath})`
                     }}
                 />
             </Box>

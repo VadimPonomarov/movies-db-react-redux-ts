@@ -11,8 +11,12 @@ interface IProps {
     extraProps?: FormTextFieldProps | {};
 }
 
-const FormField = React.memo(({name, label, extraProps}: IProps) => {
-    const {register, formState: {errors}} = useFormContext();
+const FormField = ({name, label, extraProps}: IProps) => {
+    const {
+        register,
+        formState: {errors}
+    }
+        = useFormContext();
     return (
         <>
             <TextField
@@ -26,6 +30,6 @@ const FormField = React.memo(({name, label, extraProps}: IProps) => {
             />
         </>
     );
-});
+};
 
 export {FormField};

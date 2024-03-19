@@ -29,10 +29,11 @@ const MyRegistrationForm_: FC<IProps> = ({props}) => {
             resolver: yupResolver(formSchema),
             mode: "onBlur"
         });
-    const onSubmit = (data: IAuthCredentials) => {
-        storeCredentials(data);
-        navigate("/login");
-    };
+    const onSubmit: (data: IAuthCredentials) => void =
+        (data) => {
+            storeCredentials(data);
+            navigate("/login");
+        };
 
 
     return (

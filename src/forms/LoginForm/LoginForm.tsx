@@ -32,16 +32,17 @@ const LoginForm_: FC<IProps> = ({props}) => {
             resolver: yupResolver(formSchema),
             mode: "onBlur"
         });
-    const onSubmit = (data: IAuthCredentials) => {
-        const isAuth = isAuthWithCredentials(data);
-        if (isAuth) {
-            dispatch(authActions.setIsAuth(true));
-            const {name} = getCredentials();
-            dispatch(authActions.setUserName(name));
-        }
-        dispatch(authActions.setIsInit(true));
-        navigate("/");
-    };
+    const onSubmit: (data: IAuthCredentials) => void =
+        (data) => {
+            const isAuth = isAuthWithCredentials(data);
+            if (isAuth) {
+                dispatch(authActions.setIsAuth(true));
+                const {name} = getCredentials();
+                dispatch(authActions.setUserName(name));
+            }
+            dispatch(authActions.setIsInit(true));
+            navigate("/");
+        };
 
     return (
         <FormProvider {...methods}>

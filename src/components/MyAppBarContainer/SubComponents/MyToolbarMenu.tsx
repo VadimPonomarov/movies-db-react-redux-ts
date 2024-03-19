@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import _ from "lodash";
 import {useTranslation} from "react-i18next";
 
-import {UseAppMenuHandlers} from "../../../common/hooks/useAppMenuHandlers";
+import {UseAppMenuHandlers} from "../../../common";
 import {menuProps} from "../constants";
 import {IMenuProps as IProps} from "../interfaces";
 

@@ -16,9 +16,10 @@ const SelectLanguage: FC<IProps> = () => {
     const {language} = useSelector(commonSelectors.getSearchParams);
     const dispatch = useAppDispatch();
 
-    const handleChange = (event: SelectChangeEvent) => {
-        dispatch(commonActions.setSearchParams({language: event.target.value}));
-    };
+    const handleChange: (event: SelectChangeEvent) => void =
+        (event) => {
+            dispatch(commonActions.setSearchParams({language: event.target.value}));
+        };
 
     return (
         <FormControl

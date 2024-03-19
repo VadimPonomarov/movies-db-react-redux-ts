@@ -1,7 +1,7 @@
 import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolkit";
 import _ from "lodash";
 
-import {IGenre, IGenreListResponse, IMovieListInfo, IMovieResult} from "../../../common";
+import {IGenre, IGenreListResponse, IMovieDetails, IMovieListInfo, IMovieResult} from "../../../common";
 import {movieService} from "../../../common/services";
 
 import {initialState} from "./constants";
@@ -19,6 +19,7 @@ export const moviesSlice = createSliceWithThunks({
         getIsInit: state => state.isInit,
         getInfo: state => state.info,
         getMovies: state => state.movies,
+        getMovieDetails: state => state.movieDetails,
         getGenres: state => state.genres,
         getActiveCardList: state => state.activeCardList,
     },
@@ -45,6 +46,35 @@ export const moviesSlice = createSliceWithThunks({
         cleanActiveCardList: create.reducer((state) => {
             state.activeCardList = [];
         }),
+        cleanMovieDetails: create.reducer((state) => {
+            state.movieDetails = undefined;
+        }),
+        fetchMovieDetails: create.asyncThunk<IMovieDetails, number>(
+            async (id, {fulfillWithValue, rejectWithValue}) => {
+                const res = await movieService.getMovieById(id);
+                if (!res) {
+                    return rejectWithValue("Error message !");
+                }
+                return fulfillWithValue(res);
+            },
+            {
+                pending: state => {
+                    state.loading = true;
+                    state.error = null;
+                },
+                rejected: (state, action) => {
+                    state.loading = false;
+                    state.error = action.error.message || null;
+                },
+                fulfilled: (state, action) => {
+                    state.movieDetails = action.payload;
+                    state.error = null;
+                },
+                settled: (state) => {
+                    state.loading = false;
+                }
+            }
+        ),
         getGenreList: create.asyncThunk<IGenreListResponse, void>(
             async (_, {fulfillWithValue, rejectWithValue}) => {
                 const res = await movieService.getGenreList();

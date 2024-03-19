@@ -20,18 +20,20 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
-    const handleDisplay = () => {
-        if (caption === "discover" && !!with_genres.length) return "flex";
-        if (caption !== "discover") return "flex";
-        return "none";
-    };
+    const handleDisplay: () => string =
+        () => {
+            if (caption === "discover" && !!with_genres.length) return "flex";
+            if (caption !== "discover") return "flex";
+            return "none";
+        };
 
-    const handleOnClick = () => {
-        dispatch(commonActions.setIsCategoryChanged(true));
-        setTimeout(() => {
-            dispatch(commonActions.setIsCategoryChanged(false));
-        }, 300);
-    };
+    const handleOnClick: () => void =
+        () => {
+            dispatch(commonActions.setIsCategoryChanged(true));
+            setTimeout(() => {
+                dispatch(commonActions.setIsCategoryChanged(false));
+            }, 300);
+        };
 
     return (
         <LayoutGroup
