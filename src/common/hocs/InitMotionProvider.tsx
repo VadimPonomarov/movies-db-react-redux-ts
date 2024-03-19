@@ -9,7 +9,7 @@ interface IProps {
     children: ReactNode;
 }
 
-const MyInitMotionProvider: FC<IProps> = ({children}) => {
+const InitMotionProvider: FC<IProps> = ({children}) => {
     const isInit = useSelector(authSelectors.getIsInit);
     const dispatch = useAppDispatch();
 
@@ -56,4 +56,4 @@ const MyInitMotionProvider: FC<IProps> = ({children}) => {
     );
 };
 
-export {MyInitMotionProvider};
+export {InitMotionProvider};

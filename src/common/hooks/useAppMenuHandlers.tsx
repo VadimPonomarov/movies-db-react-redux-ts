@@ -9,32 +9,44 @@ interface IProps {
     setAnchorEl: Dispatch<React.SetStateAction<HTMLElement>>;
 }
 
-const UseAppMenuHandlers = ({setAnchorEl}: IProps) => {
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch()
+interface IReturn {
+    handleRegister: () => void,
+    handleLogin: () => void,
+    handleLogout: () => void,
+    handleClearStore: () => void
+}
 
-    const handleRegister = () => {
-        setAnchorEl(null);
-        navigate("/registration");
+const UseAppMenuHandlers: (props: IProps) => IReturn =
+    ({setAnchorEl}) => {
+        const navigate = useNavigate();
+        const dispatch = useAppDispatch();
 
-    };
-    const handleLogin = () => {
-        setAnchorEl(null);
-        navigate("/login");
-    };
-    const handleLogout = () => {
-        setAnchorEl(null);
-        dispatch(authActions.setIsAuth(false));
-    };
+        const handleRegister: () => void =
+            () => {
+                setAnchorEl(null);
+                navigate("/registration");
 
-    const handleClearStore = () => {
-        clearCredentials();
-        setAnchorEl(null);
-        dispatch(authActions.setIsAuth(false));
-        navigate("/registration")
-    };
+            };
+        const handleLogin: () => void =
+            () => {
+                setAnchorEl(null);
+                navigate("/login");
+            };
+        const handleLogout: () => void =
+            () => {
+                setAnchorEl(null);
+                dispatch(authActions.setIsAuth(false));
+            };
 
-    return {handleRegister, handleLogin, handleLogout, handleClearStore};
-};
+        const handleClearStore: () => void =
+            () => {
+                clearCredentials();
+                setAnchorEl(null);
+                dispatch(authActions.setIsAuth(false));
+                navigate("/registration");
+            };
+
+        return {handleRegister, handleLogin, handleLogout, handleClearStore};
+    };
 
 export {UseAppMenuHandlers};

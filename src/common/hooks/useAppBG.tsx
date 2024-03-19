@@ -5,27 +5,40 @@ import {useSelector} from "react-redux";
 
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
+import {ISearchParams} from "../hocs/interfaces";
+import {IGenre} from "../types";
 
-const useAppBg = () => {
-    const genres = useSelector(movieSelectors.getGenres);
-    const searchParams = useSelector(commonSelectors.getSearchParams);
-    const dispatch = useAppDispatch();
+interface IReturn {
+    genres: IGenre[],
+    searchParams: ISearchParams,
+    handleClick: (id: number) => void
+}
 
-    useEffect(() => {
-        dispatch(movieActions.getGenreList());
-    }, [dispatch]);
+const useAppBg: () => IReturn =
+    () => {
+        const genres = useSelector(movieSelectors.getGenres);
+        const searchParams = useSelector(commonSelectors.getSearchParams);
+        const dispatch = useAppDispatch();
 
-    const handleClick = (id: number) => {
-        if (indexOf(searchParams.with_genres, id) >= 0) {
-            dispatch(commonActions.setSearchParams({
-                ...searchParams,
-                with_genres: [...difference(searchParams.with_genres, [id])]
-            }));
-        } else {
-            dispatch(commonActions.setSearchParams({...searchParams, with_genres: [...searchParams.with_genres, id]}));
-        }
+        useEffect(() => {
+            dispatch(movieActions.getGenreList());
+        }, [dispatch]);
+
+        const handleClick: (id: number) => void =
+            (id) => {
+                if (indexOf(searchParams.with_genres, id) >= 0) {
+                    dispatch(commonActions.setSearchParams({
+                        ...searchParams,
+                        with_genres: [...difference(searchParams.with_genres, [id])]
+                    }));
+                } else {
+                    dispatch(commonActions.setSearchParams({
+                        ...searchParams,
+                        with_genres: [...searchParams.with_genres, id]
+                    }));
+                }
+            };
+        return {genres, searchParams, handleClick};
     };
-    return {genres, searchParams, handleClick};
-};
 
 export {useAppBg};

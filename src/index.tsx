@@ -1,12 +1,12 @@
 import React from "react";
 
-import {MyQueryClientProvider} from "common/hocs";
+import {MQueryClientProvider} from "common/hocs";
 import ReactDOM from "react-dom/client";
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router-dom";
 import {PersistGate} from "redux-persist/integration/react";
 
-import {MyThemeProviderMain, MyTranslationsProvider} from "./common/hocs";
+import {MThemeProvider, TranslationsProvider} from "./common/hocs";
 import {Router} from "./router";
 import {persistor, store} from "./storage";
 import "./index.scss";
@@ -21,15 +21,15 @@ root.render(
             loading={null}
             persistor={persistor}
         >
-            <MyQueryClientProvider>
-                <MyThemeProviderMain>
-                    <MyTranslationsProvider>
+            <MQueryClientProvider>
+                <MThemeProvider>
+                    <TranslationsProvider>
                         <RouterProvider
                             router={Router}
                         />
-                    </MyTranslationsProvider>
-                </MyThemeProviderMain>
-            </MyQueryClientProvider>
+                    </TranslationsProvider>
+                </MThemeProvider>
+            </MQueryClientProvider>
         </PersistGate>
     </Provider>
 );

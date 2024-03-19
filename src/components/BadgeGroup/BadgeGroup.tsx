@@ -4,12 +4,12 @@ import {FC} from "react";
 import {Chip, Container, Stack} from "@mui/material";
 import {indexOf} from "lodash";
 
-import {useAppBg} from "../../common/hooks/useAppBG";
+import {IGenre, useAppBg} from "../../common";
 
 import css from "./index.module.scss";
 
 
-const BadgeGroup: FC = React.memo(() => {
+const BadgeGroup: FC = () => {
 
     const {genres, searchParams, handleClick} = useAppBg();
 
@@ -21,7 +21,7 @@ const BadgeGroup: FC = React.memo(() => {
                 spacing={1}
             >
                 {!!genres.length &&
-                    genres.map(item =>
+                    genres.map((item: IGenre) =>
                         <Chip
                             key={item.id}
                             className={css.BG__Chip}
@@ -38,6 +38,6 @@ const BadgeGroup: FC = React.memo(() => {
             </Stack>
         </Container>
     );
-});
+};
 
 export {BadgeGroup};

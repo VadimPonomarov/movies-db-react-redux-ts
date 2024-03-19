@@ -1,40 +1,52 @@
-import React, {useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 
 import {ContentType} from "../../components/BadgeWithCircularContainer/interfaces";
 
-const UseAppEffectHook = () => {
+interface IReturn {
+    loading: boolean,
+    setLoading: Dispatch<SetStateAction<boolean>>,
+    success: boolean,
+    setSuccess: Dispatch<SetStateAction<boolean>>,
+    handleButtonClick: () => void,
+    valOrFunc: (val: ContentType) => Omit<ContentType, "FuncType">
+}
 
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
+const UseAppEffectHook: () => IReturn =
+    () => {
 
-    const timer = React.useRef<number>();
+        const [loading, setLoading] = useState<boolean>(false);
+        const [success, setSuccess] = useState<boolean>(false);
 
-    React.useEffect(() => {
-        return () => {
-            clearTimeout(timer.current);
-        };
-    }, []);
+        const timer = useRef<number>();
 
-    const handleButtonClick = () => {
-        if (!loading) {
-            setSuccess(false);
-            setLoading(true);
-            timer.current = window.setTimeout(() => {
-                setSuccess(true);
-                setLoading(false);
+        useEffect(() => {
+            return () => {
+                clearTimeout(timer.current);
+            };
+        }, []);
 
-            }, 2000);
-        }
+        const handleButtonClick: () => void =
+            () => {
+                if (!loading) {
+                    setSuccess(false);
+                    setLoading(true);
+                    timer.current = window.setTimeout(() => {
+                        setSuccess(true);
+                        setLoading(false);
+
+                    }, 2000);
+                }
+            };
+
+        const valOrFunc: (val: ContentType) => Omit<ContentType, "FuncType"> =
+            (val) => {
+                if (typeof val === "function") {
+                    return () => val();
+                }
+                return val;
+            };
+
+        return {loading, setLoading, success, setSuccess, handleButtonClick, valOrFunc};
     };
-
-    const valOrFunc = (val: ContentType): Omit<ContentType, "FuncType"> => {
-        if (typeof val === "function") {
-            return () => val();
-        }
-        return val;
-    };
-
-    return {loading, setLoading, success, setSuccess, handleButtonClick, valOrFunc};
-};
 
 export {UseAppEffectHook};

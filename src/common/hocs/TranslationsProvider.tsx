@@ -6,12 +6,14 @@ import {useSelector} from "react-redux";
 
 import {commonSelectors} from "../../storage";
 import {I18InitProps} from "../constants/i18InitProps";
+import {LanguageEnum} from "../types";
 
 import {IProps} from "./interfaces";
 
 
-const MyTranslationsProvider: FC<IProps> = ({children}) => {
-    const [lng, setLng] = useState("en");
+const TranslationsProvider: FC<IProps> = ({children}) => {
+    const [lng, setLng] =
+        useState<LanguageEnum>(LanguageEnum.en);
     const {language} = useSelector(commonSelectors.getSearchParams);
 
     i18n
@@ -32,4 +34,4 @@ const MyTranslationsProvider: FC<IProps> = ({children}) => {
     );
 };
 
-export {MyTranslationsProvider};
+export {TranslationsProvider};

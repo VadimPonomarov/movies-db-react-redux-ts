@@ -12,7 +12,7 @@ const queryClient = new QueryClient({
         },
     }
 });
-const MyQueryClientProvider: FC<IProps> = ({children}) => {
+const MQueryClientProvider: FC<IProps> = ({children}) => {
 
     return (
         <QueryClientProvider client={queryClient}>
@@ -21,4 +21,4 @@ const MyQueryClientProvider: FC<IProps> = ({children}) => {
     );
 };
 
-export {queryClient, MyQueryClientProvider};
+export {queryClient, MQueryClientProvider};

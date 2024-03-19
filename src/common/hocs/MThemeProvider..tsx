@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 
-import {ThemeProvider as MyThemeProvider, createTheme, Theme} from "@mui/material";
+import {createTheme, Theme, ThemeProvider as MyThemeProvider} from "@mui/material";
 import {myThemeComponents, myThemePalette} from "common/themes";
 import {useSelector} from "react-redux";
 
@@ -8,7 +8,7 @@ import {commonSelectors} from "../../storage";
 
 import {IProps} from "./interfaces";
 
-const MyThemeProviderMain: FC<IProps> = ({children}) => {
+const MThemeProvider: FC<IProps> = ({children}) => {
     const themeIsDark = useSelector(commonSelectors.getThemeIsDark);
 
     const extraPalette: Theme = createTheme({
@@ -17,7 +17,7 @@ const MyThemeProviderMain: FC<IProps> = ({children}) => {
         }
     });
 
-    const myThemeMain: Theme = createTheme(
+    const theme: Theme = createTheme(
         myThemeComponents,
         {
             ...myThemePalette,
@@ -26,12 +26,10 @@ const MyThemeProviderMain: FC<IProps> = ({children}) => {
     );
 
     return (
-        <MyThemeProvider
-            theme={{...myThemeMain}}
-        >
+        <MyThemeProvider theme={theme}>
             {children}
         </MyThemeProvider>
     );
 };
 
-export {MyThemeProviderMain};
+export {MThemeProvider};
