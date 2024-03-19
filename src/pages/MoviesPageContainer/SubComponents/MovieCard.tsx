@@ -20,8 +20,10 @@ import {ICardProps} from "../interfaces";
 
 
 const MovieCard_: FC<ICardProps> = ({props}) => {
-    const activeCardList = useSelector(movieSelectors.getActiveCardList);
-    const [isFullTitle, setIsFullTitle] = useState<boolean>(false);
+    const activeCardList =
+        useSelector(movieSelectors.getActiveCardList);
+    const [isFullTitle, setIsFullTitle] =
+        useState<boolean>(false);
     const {
         item: {
             id,
@@ -40,7 +42,12 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
         handleTitleClick,
         getProps
     } =
-        UseAppCircularBadgeProps({id, backdrop_path, setIsFullTitle, vote_average});
+        UseAppCircularBadgeProps({
+            id,
+            backdrop_path,
+            setIsFullTitle,
+            vote_average
+        });
     const {ref, inView} =
         useInView({
             threshold: 0,

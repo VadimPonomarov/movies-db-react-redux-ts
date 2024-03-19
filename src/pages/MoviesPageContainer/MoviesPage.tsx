@@ -30,14 +30,15 @@ const MoviesPage: FC = () => {
         setIsMoreActive
     } = useAppMoviesEffect();
 
-    const [isMoreVisible] = useState(true);
+    const [isMoreVisible] = useState<boolean>(true);
     const movieChoiceLIst = useSelector(movieSelectors.getActiveCardList);
     const dispatch = useAppDispatch();
 
-    const handleClickMore = () => {
-        setIsMoreActive(true);
-        nextPage();
-    };
+    const handleClickMore: () => void =
+        () => {
+            setIsMoreActive(true);
+            nextPage();
+        };
 
     return (
         <>
