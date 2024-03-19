@@ -14,20 +14,21 @@ const useContainerWidthResponsive: (props: IProps) => [MyBreakPointType] =
         const handleMaxWidth = useCallback(() => {
             const width = window.innerWidth;
 
-            Object.keys(breakpoints).forEach(item => {
-                    if (width < 360) {
-                        setValue(breakpoints.xs);
-                    } else if (width < 600) {
-                        setValue(breakpoints.sm);
-                    } else if (width < 960) {
-                        setValue(breakpoints.md);
-                    } else if (width < 1280) {
-                        setValue(breakpoints.lg);
-                    } else {
-                        setValue(breakpoints.xl);
+            Object.keys(breakpoints)
+                .forEach(() => {
+                        if (width < 360) {
+                            setValue(breakpoints.xs);
+                        } else if (width < 600) {
+                            setValue(breakpoints.sm);
+                        } else if (width < 960) {
+                            setValue(breakpoints.md);
+                        } else if (width < 1280) {
+                            setValue(breakpoints.lg);
+                        } else {
+                            setValue(breakpoints.xl);
+                        }
                     }
-                }
-            );
+                );
         }, [breakpoints]);
 
         useEffect(() => {
