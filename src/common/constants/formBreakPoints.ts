@@ -1,6 +1,6 @@
 import {MyBreakPointsType} from "../types";
 
-export const myFormBreakPoints: MyBreakPointsType = {
+export const formBreakPoints: MyBreakPointsType = {
     xs: "xs",
     sm: "xs",
     md: "xs",

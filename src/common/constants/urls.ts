@@ -3,7 +3,7 @@ import {MovieCategoryEnum, UrlType} from "../types";
 const baseUrl: string = "https://api.themoviedb.org/3/";
 const baseImagesUrl: string = "https://image.tmdb.org/t/p/";
 
-const myHttpUrls: UrlType = {
+const urls: UrlType = {
     auth:{
         sessionId: "authentication/guest_session/new"
     },
@@ -17,4 +17,4 @@ const myHttpUrls: UrlType = {
     getRatingById: (id: string) => `movie/${id}/rating`,
 };
 
-export {baseUrl, myHttpUrls, baseImagesUrl};
+export {baseUrl, urls, baseImagesUrl};

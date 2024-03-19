@@ -4,7 +4,7 @@ import {FC, memo} from "react";
 
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Box, Button, Container, FormLabel, Paper, Stack} from "@mui/material";
-import {myFormAnimateDefaultProps} from "common/constants/myFormAnimateDefaultProps";
+import {formAnimateDefaultProps} from "common/constants/formAnimateDefaultProps";
 import {useContainerWidthResponsive} from "common/hooks/useContainerWidthResponsive";
 import {FormProvider, useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
@@ -37,7 +37,7 @@ const MyRegistrationForm_: FC<IProps> = ({props}) => {
 
     return (
         <FormProvider {...methods}>
-            <Box style={css} {...animate && {...myFormAnimateDefaultProps}}>
+            <Box style={css} {...animate && {...formAnimateDefaultProps}}>
                 <Container>
                     <Container maxWidth={maxWidth}>
                         <Paper>

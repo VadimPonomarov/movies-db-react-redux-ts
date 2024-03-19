@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from "react";
 
-import {myFormBreakPoints} from "../constants";
+import {formBreakPoints} from "../constants";
 import {MyBreakPointType} from "../types";
 
 import {IProps} from "./interfaces";
@@ -8,7 +8,7 @@ import {IProps} from "./interfaces";
 const useContainerWidthResponsive = (props: IProps) => {
     const [value, setValue] = useState<MyBreakPointType>();
     const {breakPoints} = props;
-    const [breakpoints] = useState({...myFormBreakPoints, ...breakPoints});
+    const [breakpoints] = useState({...formBreakPoints, ...breakPoints});
 
     const handleMaxWidth = useCallback(() => {
         const width = window.innerWidth;

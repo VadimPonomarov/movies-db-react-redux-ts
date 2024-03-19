@@ -1,3 +1,3 @@
-export * from "./myFormBreakPoints"
-export * from "./myFormAnimateDefaultProps"
-export * from "./myHttpUrls"
+export * from "./formBreakPoints";
+export * from "./formAnimateDefaultProps";
+export * from "./urls";
