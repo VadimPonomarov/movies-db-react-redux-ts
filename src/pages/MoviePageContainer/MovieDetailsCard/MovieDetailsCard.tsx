@@ -39,52 +39,55 @@ const MovieDetailsCard: FC<IProps> = ({props}) => {
 
     return (
         <Box
-            className={css.MDC__Box_Container}
+            className={css.MDC__Container}
             sx={{
                 backgroundImage: `url(${baseImagesUrl}${ImageSizeEnum.original}${backdrop_path})`,
             }}
         >
             <Box>
                 <Stack
-                    className={css.MDC__Box_Card}
+                    className={css.MDC__Card}
                     direction={"row"}
                 >
                     <CardMedia
                         className={css.MDC__CardMedia}
                         component="img"
-                        image={`${baseImagesUrl}${ImageSizeEnum.w300}${poster_path}`}
+                        image={
+                            `${baseImagesUrl}${ImageSizeEnum.w300}${poster_path}`
+                        }
                     />
 
                     <CardContent>
-                        <Stack spacing={20}>
+                        <Stack
+                            spacing={20}
+                        >
                             <Box>
                                 <Typography
                                     variant="h3"
                                     color="white"
-                                    component="div"
                                 >
                                     {title} ({moment(release_date).format("YYYY")})
                                 </Typography>
                                 <Typography
-                                    className={css.MDC__CardContent_Stack_Stack_T_T}
+                                    className={css.MDC__Content_UnderTitle}
                                     variant="h6"
-                                    color="white"
-                                    component="div"
                                 >
                                     <Box
-                                        className={css.MDC__CardContent_Stack_Stack_T_T_Box}
+                                        className={css.MDC__Content_NumberBox}
                                         component={"span"}
                                     >
                                         {Math.floor(Math.random() * 100)}
                                     </Box>
-                                    <Box>
+                                    <Box
+                                        className={css.MDC__Content_Info}
+                                    >
                                         {moment(release_date).format("DD/MM/YYYY")}
                                         ({original_language.toUpperCase()})
                                         <FiberManualRecordIcon sx={{fontSize: "small"}}/>
                                         {genres.map(item => item.name).join(",")}
                                         <FiberManualRecordIcon sx={{fontSize: "small"}}/>
                                         {moment().hours(runtime / 60).format("H")}h
-                                        {moment().hours((runtime % 60) / 60).format("mm")}m
+                                        {moment().hours((runtime % 60) / 60).format("mm")}
 
                                     </Box>
                                 </Typography>
@@ -95,11 +98,15 @@ const MovieDetailsCard: FC<IProps> = ({props}) => {
                                     name="customized-10"
                                     defaultValue={vote_average}
                                     max={10}
-                                    emptyIcon={<StarIcon className={css.StarIcon}/>}
+                                    emptyIcon={
+                                        <StarIcon
+                                            className={css.StarIcon}
+                                        />
+                                    }
                                 />
                             </Box>
                             <Box
-                                className={css.MDC__CardContent_Stack_Box_Box}
+                                className={css.MDC__Overview}
                             >
                                 <Typography
                                     variant="subtitle1"

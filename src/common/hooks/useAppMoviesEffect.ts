@@ -1,7 +1,7 @@
-import {Dispatch, SetStateAction, useCallback, useDeferredValue, useEffect, useMemo, useState} from "react";
+import {useCallback, useDeferredValue, useEffect, useMemo, useState} from "react";
 
 import {movieService} from "common/services";
-import {IMovieListInfo, IMovieResult, MovieCategoryEnum} from "common/types";
+import {IMovieList, IMovieListInfo, IMovieResult, MovieCategoryEnum} from "common/types";
 import _ from "lodash";
 import {useSelector} from "react-redux";
 import {SetURLSearchParams, useParams, useSearchParams} from "react-router-dom";
@@ -20,8 +20,9 @@ interface IReturn {
     prevPage: () => void,
     nextPage: () => void,
     page: string,
-    setIsMoreActive: Dispatch<SetStateAction<boolean>>,
+    handleClickMore: () => void,
 }
+
 const useAppMoviesEffect: () => IReturn =
     () => {
         const [isMoreActive, setIsMoreActive] =
@@ -40,60 +41,6 @@ const useAppMoviesEffect: () => IReturn =
             useAppSelector(state => state.commonSlice);
 
         const dispatch = useAppDispatch();
-
-        const getFetchService = useMemo(() =>
-            category === "discover" ?
-                movieService.getDiscoverList :
-                movieService.getMovieList, [category]);
-
-        const fetchFunc: () => void =
-            useCallback(async () => {
-                const {results: responseRes, ...responseInfo} =
-                    await queryClient.fetchQuery({
-                        queryKey: [category, JSON.stringify(params)],
-                        queryFn: () =>
-                            getFetchService(
-                                Object(MovieCategoryEnum)[category],
-                                {...params})
-                    });
-                if (!isMoreActive) {
-                    dispatch(movieActions.setMovies(responseRes));
-                } else {
-                    dispatch(movieActions
-                        .setMovies(
-                            _.uniqBy(
-                                _.union(
-                                    results,
-                                    responseRes
-                                ),
-                                "id"
-                            )
-                        )
-                    );
-                    setIsMoreActive(false);
-                }
-                dispatch(movieActions.setInfo(responseInfo));
-                // eslint-disable-next-line
-            }, [category, getFetchService, params]);
-
-
-        useEffect(() => {
-            if (isCategoryChanged) {
-                dispatch(
-                    commonActions.setSearchParams({page: "1"})
-                );
-            }
-        }, [category, dispatch, isCategoryChanged]);
-
-        const deferredFetchFunc = useDeferredValue(fetchFunc);
-
-        useEffect(() => {
-            deferredFetchFunc();
-        }, [deferredFetchFunc]);
-
-        useEffect(() => {
-            setQuery({page: params.page});
-        }, [params.page, setQuery]);
 
         const getFilteredResults = useMemo(() => {
             if (!with_genres.length) return results;
@@ -117,6 +64,75 @@ const useAppMoviesEffect: () => IReturn =
                     {page: (+query.get("page") - 1).toString()};
                 dispatch(commonActions.setSearchParams(prevPage));
             };
+        const handleClickMore: () => void =
+            () => {
+                setIsMoreActive(true);
+                nextPage();
+            };
+
+        const getFetchService: (category: MovieCategoryEnum,
+                                params: Partial<ISearchParams>) => Promise<IMovieList> =
+            useMemo(() =>
+                category === "discover" ?
+                    movieService.getDiscoverList :
+                    movieService.getMovieList, [category]);
+
+        const fetchFunc: () => void =
+            useCallback(async () => {
+                const {results: responseRes, ...responseInfo} =
+                    await queryClient.fetchQuery({
+                        queryKey: [category, JSON.stringify(params)],
+                        queryFn: () =>
+                            getFetchService(
+                                Object(MovieCategoryEnum)[category],
+                                {...params})
+                    });
+                if (!isMoreActive) {
+                    dispatch(movieActions.setMovies(responseRes));
+                    dispatch(movieActions.setInfo({...responseInfo, total_results: 0}));
+                } else {
+                    dispatch(movieActions
+                        .setMovies(
+                            _.uniqBy(
+                                _.union(
+                                    results,
+                                    responseRes
+                                ),
+                                "id"
+                            )
+                        )
+                    );
+                    setIsMoreActive(false);
+                    dispatch(movieActions.setInfo(responseInfo));
+                }
+                // eslint-disable-next-line
+            }, [category, getFetchService, params]);
+
+
+        useEffect(() => {
+            if (isCategoryChanged) {
+                dispatch(
+                    commonActions.setSearchParams({page: "1"})
+                );
+            }
+        }, [category, dispatch, isCategoryChanged]);
+
+
+        const deferredFetchFunc = useDeferredValue(fetchFunc);
+
+        useEffect(() => {
+            deferredFetchFunc();
+        }, [deferredFetchFunc]);
+
+        useEffect(() => {
+            setQuery({page: params.page});
+        }, [params.page, setQuery]);
+
+        useEffect(() => {
+            if (!info?.total_results)
+                window.scrollTo(0, 0);
+        }, [info]);
+
 
         return {
             isInit,
@@ -127,7 +143,7 @@ const useAppMoviesEffect: () => IReturn =
             prevPage,
             nextPage,
             page: params.page,
-            setIsMoreActive
+            handleClickMore
         };
     };
 

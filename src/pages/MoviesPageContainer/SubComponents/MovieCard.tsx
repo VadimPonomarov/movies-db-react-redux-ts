@@ -20,10 +20,6 @@ import {ICardProps} from "../interfaces";
 
 
 const MovieCard_: FC<ICardProps> = ({props}) => {
-    const activeCardList =
-        useSelector(movieSelectors.getActiveCardList);
-    const [isFullTitle, setIsFullTitle] =
-        useState<boolean>(false);
     const {
         item: {
             id,
@@ -35,6 +31,11 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
             vote_average,
         }
     } = props;
+
+    const activeCardList =
+        useSelector(movieSelectors.getActiveCardList);
+    const [isFullTitle, setIsFullTitle] =
+        useState<boolean>(false);
 
     const {
         handleOriginalTitleClick,
@@ -48,6 +49,8 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
             setIsFullTitle,
             vote_average
         });
+
+
     const {ref, inView} =
         useInView({
             threshold: 0,
@@ -84,7 +87,7 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
                             className={css.Ep__Card_Content}
                         >
                             <Typography
-                                className={css.Original_Title}
+                                className={css.Ep__Card_Content_Original_Title}
                                 variant="h5"
                                 onClick={
                                     (e) =>

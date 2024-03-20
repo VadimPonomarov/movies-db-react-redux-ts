@@ -27,18 +27,13 @@ const MoviesPage: FC = () => {
         getFilteredResults,
         prevPage,
         nextPage,
-        setIsMoreActive
+        handleClickMore
     } = useAppMoviesEffect();
 
     const [isMoreVisible] = useState<boolean>(true);
     const movieChoiceLIst = useSelector(movieSelectors.getActiveCardList);
     const dispatch = useAppDispatch();
 
-    const handleClickMore: () => void =
-        () => {
-            setIsMoreActive(true);
-            nextPage();
-        };
 
     return (
         <>

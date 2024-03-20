@@ -1,52 +1,68 @@
-.MDC__Box_Container {
-  display: flex;
-  width: 100vw;
-  height: 77vh;
-  justify-content: center;
-  align-items: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  background-position: center;
+.MDC {
+  &__Container {
+    display: flex;
+    width: 100vw;
+    height: 77vh;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-position: center;
+  }
+
+  &__Card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: black;
+    position: relative;
+    opacity: .7;
+  }
+
+  &__CardMedia {
+    max-width: 300px;
+  }
+
+  &__Content {
+    &_UnderTitle {
+      width: 100%;
+      color: white;
+      display: flex;
+      gap: 8px;
+    }
+
+    &_NumberBox {
+      border: 1px solid;
+      padding: 0 3px;
+    }
+
+    &_Info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px
+    }
+  }
+
+  &__Rating {
+    left: 20px;
+    top: 20px;
+    height: 20px;
+    opacity: 1;
+    text-shadow: white;
+  }
+
+  &__Overview {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    padding: 10px;
+  }
 }
 
-.MDC__Box_Card {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  background-color: black;
-  position: relative;
-  opacity: .7;
-}
 
-.MDC__CardMedia {
-  max-width: 300px;
-}
-
-.MDC__CardContent_Stack_Stack_T_T {
-  width: 100%;
-  display: flex;
-  gap: 8px;
-}
-
-.MDC__CardContent_Stack_Stack_T_T_Box {
-  border: 1px solid;
-  padding: 0 3px;
-}
-
-.MDC__CardContent_Stack_Box_Box {
-  max-width: 800px;
-  display: flex;
-}
-
-.MDC__Rating {
-  left: 20px;
-  top: 20px;
-  height: 20px;
-  opacity: 1;
-  text-shadow: white;
-}
-
-.StarIcon{
+.StarIcon {
   opacity: .5;
   color: grey;
 }

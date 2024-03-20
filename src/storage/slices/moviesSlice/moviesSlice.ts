@@ -2,6 +2,7 @@ import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolk
 import _ from "lodash";
 
 import {IGenre, IGenreListResponse, IMovieDetails, IMovieListInfo, IMovieResult} from "../../../common";
+import {ISearchParams} from "../../../common/hocs/interfaces";
 import {movieService} from "../../../common/services";
 
 import {initialState} from "./constants";
@@ -49,9 +50,9 @@ export const moviesSlice = createSliceWithThunks({
         cleanMovieDetails: create.reducer((state) => {
             state.movieDetails = undefined;
         }),
-        fetchMovieDetails: create.asyncThunk<IMovieDetails, number>(
-            async (id, {fulfillWithValue, rejectWithValue}) => {
-                const res = await movieService.getMovieById(id);
+        fetchMovieDetails: create.asyncThunk<IMovieDetails, { id: number, searchParams: ISearchParams }>(
+            async ({id, searchParams}, {fulfillWithValue, rejectWithValue}) => {
+                const res = await movieService.getMovieById(id, searchParams);
                 if (!res) {
                     return rejectWithValue("Error message !");
                 }
