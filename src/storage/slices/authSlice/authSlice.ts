@@ -1,5 +1,7 @@
 import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolkit";
 
+import {commonActions} from "../commonSlice";
+
 import {initialState} from "./constants";
 
 
@@ -26,6 +28,12 @@ export const authSlice = createSliceWithThunks({
         setIsInit: create.reducer((state, action: PayloadAction<boolean>) => {
             state.isInit = action.payload;
         }),
+        logOut: create.asyncThunk<void, void>(
+            async (_, {dispatch}) => {
+                dispatch(commonActions.setSearchParams({page: "1"}));
+                dispatch(authActions.setIsInit(true));
+                dispatch(authActions.setIsAuth(false));
+            })
     }),
 });
 

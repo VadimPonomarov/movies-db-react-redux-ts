@@ -1,11 +1,11 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from "react";
 
 import {motion} from "framer-motion";
 
-import css from "../index.module.scss"
+import css from "../index.module.scss";
 import {IProps} from "../interfaces";
 
-const MenuUnderLine: FC<IProps> = ({props}) => {
+const MenuUnderLine_: FC<IProps> = ({props}) => {
     const {caption, isActive} = props
 
     return (
@@ -23,4 +23,4 @@ const MenuUnderLine: FC<IProps> = ({props}) => {
     )
 }
 
-export default MenuUnderLine;
+export const MenuUnderLine = memo(MenuUnderLine_);

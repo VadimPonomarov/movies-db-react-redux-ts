@@ -86,15 +86,14 @@ const useAppMoviesEffect: () => IReturn =
         }, [category, dispatch, isCategoryChanged]);
 
         const deferredFetchFunc = useDeferredValue(fetchFunc);
-        const deferredSetQuery = useDeferredValue(setQuery);
 
         useEffect(() => {
             deferredFetchFunc();
         }, [deferredFetchFunc]);
 
         useEffect(() => {
-            deferredSetQuery({page: params.page});
-        }, [params.page, deferredSetQuery]);
+            setQuery({page: params.page});
+        }, [params.page, setQuery]);
 
         const getFilteredResults = useMemo(() => {
             if (!with_genres.length) return results;

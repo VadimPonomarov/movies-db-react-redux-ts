@@ -11,7 +11,7 @@ import {commonActions, commonSelectors, useAppDispatch} from "../../../storage";
 import css from "../index.module.scss";
 import {IProps} from "../interfaces";
 
-import MenuUnderLine from "./MenuUnderLine";
+import {MenuUnderLine} from "./MenuUnderLine";
 
 
 const MyMainMenuItem: FC<IProps> = ({props}) => {

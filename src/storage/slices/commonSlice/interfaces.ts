@@ -9,6 +9,6 @@ export interface IInitialState {
     isPending: boolean;
     isFetching: boolean;
     backDropImgPath: string,
-    searchParams: Partial<ISearchParams>,
+    searchParams: ISearchParams,
     isCategoryChanged: boolean
 }
