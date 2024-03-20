@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, memo} from "react";
+import {FC} from "react";
 
 
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -22,7 +22,7 @@ import {formInputType, IProps} from "./formTypes";
 import css from "./index.module.scss";
 
 
-const LoginForm_: FC<IProps> = ({props}) => {
+const LoginForm: FC<IProps> = ({props}) => {
     const {formLabel = "Form", animate = true} = props;
     const currentCategory = useSelector(commonSelectors.getCurrentCategory);
     const [maxWidth] = useContainerWidthResponsive({});
@@ -84,4 +84,4 @@ const LoginForm_: FC<IProps> = ({props}) => {
     );
 };
 
-export const LoginForm = memo(LoginForm_);
+export {LoginForm};
