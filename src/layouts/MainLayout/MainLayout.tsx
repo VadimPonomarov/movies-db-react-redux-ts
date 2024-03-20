@@ -13,7 +13,8 @@ import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 const MainLayout: FC = () => {
     const isLoading = useSelector(commonSelectors.getIsLoading);
     const isSuccess = useSelector(commonSelectors.getIsSuccess);
-    const [showSuccess, setShowSuccess] = useState<boolean>(false);
+    const [showSuccess, setShowSuccess] =
+        useState<boolean>(false);
     const dispatch = useAppDispatch();
     const {t} = useTranslation();
 
@@ -25,7 +26,7 @@ const MainLayout: FC = () => {
                 dispatch(commonActions.setIsSuccess(undefined));
             }, 2000);
         }
-    }, [isSuccess]);
+    }, [dispatch, isSuccess]);
 
     return (
         <>

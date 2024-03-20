@@ -79,6 +79,7 @@ const useAppMoviesEffect: () => IReturn =
 
         const fetchFunc: () => void =
             useCallback(async () => {
+                dispatch(commonActions.setIsLoading(true));
                 const {results: responseRes, ...responseInfo} =
                     await queryClient.fetchQuery({
                         queryKey: [category, JSON.stringify(params)],
@@ -90,6 +91,7 @@ const useAppMoviesEffect: () => IReturn =
                 if (!isMoreActive) {
                     dispatch(movieActions.setMovies(responseRes));
                     dispatch(movieActions.setInfo({...responseInfo, total_results: 0}));
+
                 } else {
                     dispatch(movieActions
                         .setMovies(
@@ -105,6 +107,7 @@ const useAppMoviesEffect: () => IReturn =
                     setIsMoreActive(false);
                     dispatch(movieActions.setInfo(responseInfo));
                 }
+                dispatch(commonActions.setIsLoading(false));
                 // eslint-disable-next-line
             }, [category, getFetchService, params]);
 
