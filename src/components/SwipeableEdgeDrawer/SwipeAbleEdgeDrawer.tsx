@@ -97,9 +97,6 @@ const SwipeAbleEdgeDrawer: FC<IProps> = () => {
                 </FormGroup>
                 <StyledBox
                     className={css.Sed__StyledBox}
-                    sx={{
-                        top: -drawerBleeding
-                    }}
                 >
                     <Puller/>
                     <Typography
