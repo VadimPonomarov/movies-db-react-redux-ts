@@ -4,9 +4,9 @@ import _ from "lodash";
 import {IGenre, IGenreListResponse, IMovieDetails, IMovieListInfo, IMovieResult} from "../../../common";
 import {ISearchParams} from "../../../common/hocs/interfaces";
 import {movieService} from "../../../common/services";
+import {commonActions} from "../commonSlice";
 
 import {initialState} from "./constants";
-
 
 const createSliceWithThunks = buildCreateSlice({
     creators: {asyncThunk: asyncThunkCreator}
@@ -51,57 +51,74 @@ export const moviesSlice = createSliceWithThunks({
             state.movieDetails = undefined;
         }),
         fetchMovieDetails: create.asyncThunk<IMovieDetails, { id: number, searchParams: ISearchParams }>(
-            async ({id, searchParams}, {fulfillWithValue, rejectWithValue}) => {
-                const res = await movieService.getMovieById(id, searchParams);
-                if (!res) {
-                    return rejectWithValue("Error message !");
+            async ({id, searchParams},
+                   {dispatch, fulfillWithValue, rejectWithValue}) => {
+                try {
+                    dispatch(commonActions.setIsLoading(true));
+                    const res = await movieService.getMovieById(id, searchParams);
+                    dispatch(commonActions.setIsSuccess(true));
+                    return fulfillWithValue(res);
+                } catch (e) {
+                    dispatch(commonActions.setIsError(e.message));
+                    return rejectWithValue(e);
+                } finally {
+                    dispatch(commonActions.setIsLoading(false));
                 }
-                return fulfillWithValue(res);
             },
             {
-                pending: state => {
-                    state.loading = true;
-                    state.error = null;
-                },
-                rejected: (state, action) => {
-                    state.loading = false;
-                    state.error = action.error.message || null;
-                },
-                fulfilled: (state, action) => {
+                fulfilled: (state, action: PayloadAction<IMovieDetails>) => {
                     state.movieDetails = action.payload;
-                    state.error = null;
                 },
-                settled: (state) => {
-                    state.loading = false;
-                }
             }
         ),
         getGenreList: create.asyncThunk<IGenreListResponse, void>(
-            async (_, {fulfillWithValue, rejectWithValue}) => {
-                const res = await movieService.getGenreList();
-                if (!res) {
-                    return rejectWithValue("Error message !");
+            async (_,
+                   {dispatch, fulfillWithValue, rejectWithValue}) => {
+                try {
+                    dispatch(commonActions.setIsLoading(true));
+                    const res = await movieService.getGenreList();
+                    dispatch(commonActions.setIsSuccess(true));
+                    return fulfillWithValue(res);
+                } catch (e) {
+                    dispatch(commonActions.setIsError(e.message));
+                    return rejectWithValue(e);
+                } finally {
+                    dispatch(commonActions.setIsLoading(false));
                 }
-                return fulfillWithValue(res);
+
             },
             {
-                pending: state => {
-                    state.loading = true;
-                    state.error = null;
-                },
-                rejected: (state, action) => {
-                    state.loading = false;
-                    state.error = action.error.message || null;
-                },
                 fulfilled: (state, action) => {
                     state.genres = action.payload.genres;
-                    state.error = null;
                 },
-                settled: (state) => {
-                    state.loading = false;
+            }
+        ),
+        sendMovieRating: create.asyncThunk<IMovieDetails, { id: number, value: number }>(
+            async ({id, value},
+                   {dispatch, fulfillWithValue, rejectWithValue}) => {
+                try {
+                    dispatch(commonActions.setIsLoading(true));
+                    const res =
+                        await movieService
+                            .getSessionId()
+                            .then(({guest_session_id}) =>
+                                movieService
+                                    .postRating(
+                                        id,
+                                        {value},
+                                        guest_session_id
+                                    )
+                            );
+                    dispatch(commonActions.setIsSuccess(true));
+                    return fulfillWithValue(res);
+                } catch (e) {
+                    dispatch(commonActions.setIsError(e.message));
+                    return rejectWithValue(e);
+                } finally {
+                    dispatch(commonActions.setIsLoading(false));
                 }
             }
-        )
+        ),
     }),
 });
 

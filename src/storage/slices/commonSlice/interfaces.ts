@@ -7,8 +7,9 @@ export interface IInitialState {
     themeIsDark: boolean,
     isDrawer: boolean,
     isPagination: boolean,
-    isPending: boolean;
-    isFetching: boolean;
+    isLoading?: boolean,
+    isError?: boolean | string,
+    isSuccess?: boolean,
     backDropImgPath: string,
     searchParams: ISearchParams,
     isCategoryChanged: boolean,

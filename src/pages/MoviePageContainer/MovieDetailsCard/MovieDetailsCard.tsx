@@ -7,8 +7,9 @@ import {Box, CardContent, CardMedia, Rating, Stack, Typography} from "@mui/mater
 import moment from "moment";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
-import {movieService} from "../../../common/services";
 import {BadgeWithCircular} from "../../../components";
+import {useAppDispatch} from "../../../storage";
+import {movieActions} from "../../../storage/slices/moviesSlice";
 
 import css from "./index.module.scss";
 import {IProps} from "./interfaces";
@@ -29,19 +30,22 @@ const MovieDetailsCard: FC<IProps> = ({props}) => {
             runtime,
         }
     } = props;
+    const dispatch = useAppDispatch();
 
-    const handleSetRating = (e: SyntheticEvent, value: number | null) => {
-        movieService.getSessionId()
-            .then(({guest_session_id}) =>
-                movieService.postRating(id, {value}, guest_session_id)
+    const handleSetRating: (e: SyntheticEvent, value: number | null) => void =
+        (e, value) => {
+            dispatch(
+                movieActions
+                    .sendMovieRating({id, value})
             );
-    };
+        };
 
     return (
         <Box
             className={css.MDC__Container}
             sx={{
-                backgroundImage: `url(${baseImagesUrl}${ImageSizeEnum.original}${backdrop_path})`,
+                backgroundImage:
+                    `url(${baseImagesUrl}${ImageSizeEnum.original}${backdrop_path})`,
             }}
         >
             <Box>

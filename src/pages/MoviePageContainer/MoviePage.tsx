@@ -19,12 +19,20 @@ const MoviePage_: FC<IProps> = () => {
 
     useEffect(() => {
         if (movieId) {
-            dispatch(movieActions.fetchMovieDetails({id: +movieId, searchParams}));
+            dispatch(
+                movieActions
+                    .fetchMovieDetails({
+                        id: +movieId, searchParams
+                    })
+            );
         }
         return () => {
-            dispatch(movieActions.cleanMovieDetails());
+            dispatch(
+                movieActions
+                    .cleanMovieDetails()
+            );
         };
-    }, [dispatch, movieId]);
+    }, [dispatch, movieId, searchParams]);
 
     return (
         <>

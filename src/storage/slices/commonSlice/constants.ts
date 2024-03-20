@@ -13,8 +13,6 @@ export const initialState: IInitialState = {
     themeIsDark: true,
     isDrawer: false,
     isPagination: true,
-    isPending: false,
-    isFetching: false,
     backDropImgPath: undefined,
     searchParams: initialSearchParams,
     isCategoryChanged: false,

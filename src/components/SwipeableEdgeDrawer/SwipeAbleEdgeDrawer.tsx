@@ -15,7 +15,7 @@ import {authSelectors, commonActions, useAppDispatch} from "../../storage";
 import {movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
 
-import {drawerBleeding, Puller, Root, StyledBox, toggleDrawer} from "./constants";
+import {drawerBleeding, Puller, Root, toggleDrawer} from "./constants";
 import css from "./index.module.scss";
 import {IProps} from "./interfaces";
 
@@ -95,19 +95,15 @@ const SwipeAbleEdgeDrawer: FC<IProps> = () => {
                         label={t("clear")}
                     />
                 </FormGroup>
-                <StyledBox
-                    className={css.Sed__StyledBox}
+                <Puller/>
+                <Typography
+                    sx={{
+                        p: 2,
+                        color: "text.secondary"
+                    }}
                 >
-                    <Puller/>
-                    <Typography
-                        sx={{
-                            p: 2,
-                            color: "text.secondary"
-                        }}
-                    >
-                        {!_.upperCase(t("genres"))}
-                    </Typography>
-                </StyledBox>
+                    {!_.upperCase(t("genres"))}
+                </Typography>
                 <Container
                     className={css.Sed__BG_Container}
                 >

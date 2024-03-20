@@ -14,8 +14,9 @@ export const commonSlice = createSliceWithThunks({
     initialState,
     selectors: {
         getThemeIsDark: state => state.themeIsDark,
-        getIsPending: state => state.isPending,
-        getIsFetching: state => state.isFetching,
+        getIsLoading: state => state.isLoading,
+        getIsSuccess: state => state.isSuccess,
+        getIsError: state => state.isError,
         getIsDrawer: state => state.isDrawer,
         getIsPagination: state => state.isPagination,
         setBackDropImgPath: state => state.backDropImgPath,
@@ -27,14 +28,17 @@ export const commonSlice = createSliceWithThunks({
         setThemeToggle: create.reducer((state) => {
             state.themeIsDark = !state.themeIsDark;
         }),
-        setIsPending: create.reducer((state, action: PayloadAction<boolean>) => {
-            state.isPending = action.payload;
+        setIsLoading: create.reducer((state, action: PayloadAction<boolean>) => {
+            state.isLoading = action.payload;
+        }),
+        setIsSuccess: create.reducer((state, action: PayloadAction<boolean>) => {
+            state.isSuccess = action.payload;
+        }),
+        setIsError: create.reducer((state, action: PayloadAction<boolean>) => {
+            state.isError = action.payload;
         }),
         setIsPagination: create.reducer((state, action: PayloadAction<boolean>) => {
             state.isPagination = action.payload;
-        }),
-        setIsFetching: create.reducer((state, action: PayloadAction<boolean>) => {
-            state.isFetching = action.payload;
         }),
         setIsDrawer: create.reducer((state, action: PayloadAction<boolean>) => {
             state.isDrawer = action.payload;
