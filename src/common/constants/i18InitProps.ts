@@ -28,7 +28,7 @@ export const I18InitProps: InitOptions = {
                 "top rated": "найкращі",
                 "discover": "пошук",
                 "register": "реєстрація",
-                "login": "зайти",
+                "login": "увійти",
                 "logout": "вийти",
                 "clear store": "очистити",
                 "genres": "жанри",

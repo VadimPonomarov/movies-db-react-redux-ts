@@ -7,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import {useSelector} from "react-redux";
 
-import {getCredentials} from "../../../common/services";
 import {authSelectors, commonActions, useAppDispatch} from "../../../storage";
 import {MyMainMenu} from "../../MyMainMenuContainer";
 import {SelectLanguage} from "../../SelectLanguage";
@@ -19,7 +18,6 @@ import {MyToolbarMenu} from "./MyToolbarMenu";
 
 const MyToolBar: FC = () => {
     const isAuth = useSelector(authSelectors.getIsAuth);
-
     const dispatch = useAppDispatch();
     const userName = useSelector(authSelectors.getUserName);
     const [anchorEl, setAnchorEl] =
@@ -54,8 +52,7 @@ const MyToolBar: FC = () => {
                         aria-haspopup="true"
                         onClick={handleMenu}
                     >
-                        {!!getCredentials()
-                            && <AccountCircle/>}
+                        <AccountCircle/>
                     </IconButton>
 
                     <MyToolbarMenu

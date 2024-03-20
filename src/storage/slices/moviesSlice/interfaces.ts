@@ -3,8 +3,8 @@ import {IGenre, IMovieDetails, IMovieListInfo, IMovieResult} from "../../../comm
 export interface IInitialState {
     isInit: boolean,
     info: IMovieListInfo,
-    movieDetails?: IMovieDetails,
     movies: IMovieResult[],
+    movieDetails?: IMovieDetails,
     genres: IGenre[],
     activeCardList: number[],
     loading: boolean;

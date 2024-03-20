@@ -10,13 +10,14 @@ import {IProps} from "./interfaces";
 
 
 const AuthRequiredProvider: FC<IProps> = ({children}) => {
-    const isAuth = useSelector(authSelectors.getIsAuth);
+    const isAuth =
+        useSelector(authSelectors.getIsAuth);
     const navigate = useNavigate();
 
     useEffect(() => {
         const isRegistered = getCredentials();
         if (!isRegistered) navigate("/registration");
-    }, [navigate, isAuth]);
+    }, [isAuth, navigate]);
 
     if (!isAuth) return <Navigate to="/login"/>;
 

@@ -7,11 +7,12 @@ import {Box, Button, Container, FormLabel, Paper, Stack} from "@mui/material";
 import {formAnimateDefaultProps} from "common/constants/formAnimateDefaultProps";
 import {useContainerWidthResponsive} from "common/hooks/useContainerWidthResponsive";
 import {FormProvider, useForm} from "react-hook-form";
+import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {v4} from "uuid";
 
 import {getCredentials, isAuthWithCredentials} from "../../common/services";
-import {authActions, useAppDispatch} from "../../storage";
+import {authActions, commonSelectors, useAppDispatch} from "../../storage";
 import {IAuthCredentials} from "../MyRegistrationForm/formTypes";
 
 import {FormField} from "./FormField";
@@ -23,6 +24,7 @@ import css from "./index.module.scss";
 
 const LoginForm_: FC<IProps> = ({props}) => {
     const {formLabel = "Form", animate = true} = props;
+    const currentCategory = useSelector(commonSelectors.getCurrentCategory);
     const [maxWidth] = useContainerWidthResponsive({});
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -41,7 +43,9 @@ const LoginForm_: FC<IProps> = ({props}) => {
                 dispatch(authActions.setUserName(name));
             }
             dispatch(authActions.setIsInit(true));
-            navigate("/");
+            currentCategory ?
+                navigate(`/${currentCategory}`) :
+                navigate("/");
         };
 
     return (

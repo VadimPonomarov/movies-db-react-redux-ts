@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
+import {MovieCategoryEnum} from "../../../common";
 import {commonActions, commonSelectors, useAppDispatch} from "../../../storage";
 import css from "../index.module.scss";
 import {IProps} from "../interfaces";
@@ -30,6 +31,7 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     const handleOnClick: () => void =
         () => {
             dispatch(commonActions.setIsCategoryChanged(true));
+            dispatch(commonActions.setCurrentCategory(Object(MovieCategoryEnum)[caption]));
             setTimeout(() => {
                 dispatch(commonActions.setIsCategoryChanged(false));
             }, 300);

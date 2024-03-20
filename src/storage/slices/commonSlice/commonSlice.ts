@@ -1,5 +1,6 @@
 import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolkit";
 
+import {MovieCategoryEnum} from "../../../common";
 import {ISearchParams} from "../../../common/hocs/interfaces";
 
 import {initialState} from "./constants";
@@ -19,6 +20,8 @@ export const commonSlice = createSliceWithThunks({
         getIsPagination: state => state.isPagination,
         setBackDropImgPath: state => state.backDropImgPath,
         getSearchParams: state => state.searchParams,
+        getCurrentCategory: state => state.currentCategory,
+
     },
     reducers: create => ({
         setThemeToggle: create.reducer((state) => {
@@ -44,6 +47,9 @@ export const commonSlice = createSliceWithThunks({
         }),
         setIsCategoryChanged: create.reducer((state, action: PayloadAction<boolean>) => {
             state.isCategoryChanged = action.payload;
+        }),
+        setCurrentCategory: create.reducer((state, action: PayloadAction<MovieCategoryEnum>) => {
+            state.currentCategory = action.payload;
         }),
     })
 });

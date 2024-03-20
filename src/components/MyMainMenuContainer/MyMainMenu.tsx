@@ -2,8 +2,11 @@ import * as React from "react";
 import {FC, useEffect, useState} from "react";
 
 import {Box, ButtonGroup} from "@mui/material";
-import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
 import {v4} from "uuid";
+
+import {commonSelectors} from "../../storage";
 
 import {myMenuItems} from "./constants";
 import css from "./index.module.scss";
@@ -12,7 +15,9 @@ import {MyMainMenuItem} from "./SubComponents/MyMainMenuItem";
 
 const MyMainMenu: FC = React.memo(() => {
     const {category} = useParams();
-    const [isActive, setIsActive] = useState<string | undefined>();
+    const currentCategory = useSelector(commonSelectors.getCurrentCategory);
+    const [isActive, setIsActive] = useState<string | undefined>(currentCategory);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsActive(category);

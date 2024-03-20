@@ -1,3 +1,4 @@
+import {MovieCategoryEnum} from "../../../common";
 import {ISearchParams} from "../../../common/hocs/interfaces";
 
 export type ThemeType = "light" | "dark";
@@ -10,5 +11,6 @@ export interface IInitialState {
     isFetching: boolean;
     backDropImgPath: string,
     searchParams: ISearchParams,
-    isCategoryChanged: boolean
+    isCategoryChanged: boolean,
+    currentCategory?: MovieCategoryEnum,
 }

@@ -17,6 +17,6 @@ export const initialState: IInitialState = {
     isFetching: false,
     backDropImgPath: undefined,
     searchParams: initialSearchParams,
-    isCategoryChanged: false
+    isCategoryChanged: false,
 };
 
