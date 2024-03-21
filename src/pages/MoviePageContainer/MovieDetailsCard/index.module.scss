@@ -51,6 +51,7 @@
   &__Overview {
     max-width: 800px;
     @include flex_wrap_column_align();
+    text-align: justify;
     padding: 10px;
   }
 }
