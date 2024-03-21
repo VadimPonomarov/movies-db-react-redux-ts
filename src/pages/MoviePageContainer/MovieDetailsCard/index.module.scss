@@ -1,19 +1,17 @@
+@import "index.extras";
+
 .MDC {
   &__Container {
-    display: flex;
+    @include flex_wrap_row_align();
     width: 100vw;
     height: 77vh;
-    justify-content: center;
-    align-items: center;
     background-repeat: no-repeat;
     overflow: hidden;
     background-position: center;
   }
 
   &__Card {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    @include flex_wrap_row_align(null, flex-start);
     background-color: black;
     position: relative;
     opacity: .7;
@@ -37,9 +35,7 @@
     }
 
     &_Info {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+      @include flex_wrap_row_align();
       gap: 10px
     }
   }
@@ -54,9 +50,7 @@
 
   &__Overview {
     max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    text-align: justify;
+    @include flex_wrap_column_align();
     padding: 10px;
   }
 }

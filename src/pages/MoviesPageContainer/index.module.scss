@@ -1,38 +1,30 @@
+@import "index.extras";
+
 .Ep {
   &__Container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    @include flex_wrap_row_align();
   }
 
   &__Card {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex_wrap_column_align();
     margin: 10px;
     width: 200px;
     height: 435px;
 
     &_Button {
-      width: 100%;
-      height: 100%;
+      @extend %wh100
     }
 
     &_Box {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      width: 100%;
+      @include flex_wrap_column_align();
+      @extend %wh100;
       background-size: contain;
       background-repeat: no-repeat;
     }
 
     &_Content {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
+      @include flex_wrap_column_align(null, space-between);
       z-index: 1004;
       height: 100%;
 
@@ -47,14 +39,12 @@
     }
 
     &_Box_Box {
-      display: flex;
-      align-items: flex-end;
+      @include flex_wrap_row_align(null, flex-end);
       padding-left: 4px;
       padding-bottom: 4px;
 
       &_T {
-        display: flex;
-        flex-direction: column;
+        @include flex_wrap_column_align();
         text-align: right;
         width: 100%;
       }
@@ -64,19 +54,14 @@
   &__BG {
     &_Box {
       position: fixed;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      align-items: center;
       width: 100vw;
       top: 0;
       z-index: 1100;
+      @include flex_wrap_column_align();
 
       &_Container {
-        display: flex;
         max-height: 40px;
-        justify-content: center;
-        align-items: center;
+        @include flex_wrap_row_align();
       }
 
       &_Box {
@@ -90,13 +75,12 @@
 }
 
 
-
 .pie {
   display: inline-block;
+  position: relative;
   margin: .5em;
   width: 8em;
   height: 8em;
-  position: relative;
   border-radius: 50%;
 }
 

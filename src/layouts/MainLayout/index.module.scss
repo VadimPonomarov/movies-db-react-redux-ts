@@ -1,14 +1,14 @@
-.pattern {
-  position: fixed;
+@mixin pattern($top) {
+  position: fixed !important;
   width: 100vw;
-  top: 0;
-  z-index: 1400;
+  top: $top !important;
+  z-index: 9999 !important;
 }
 
 .LinearProgress {
-  @extend .pattern
+  @include pattern(0);
 }
 
 .Alert {
-  @extend .pattern
+  @include pattern(0);
 }

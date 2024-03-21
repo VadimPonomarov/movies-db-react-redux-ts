@@ -1,6 +1,6 @@
+@import "index.extras";
 .PSl__Grid{
-  display: flex;
-  align-items: center;
+  @include flex_wrap_row_align();
   gap: 16px;
 }
 

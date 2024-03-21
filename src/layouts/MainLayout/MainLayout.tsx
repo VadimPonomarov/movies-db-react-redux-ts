@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
 
-import {Alert, LinearProgress} from "@mui/material";
+import {Alert, Box, LinearProgress} from "@mui/material";
 import {MyAppBar} from "components/MyAppBarContainer/MyAppBar";
 import _ from "lodash";
 import {useTranslation} from "react-i18next";
@@ -25,7 +25,9 @@ const MainLayout: FC = () => {
             setShowSuccess(true);
             setTimeout(() => {
                 setShowSuccess(false);
-                dispatch(commonActions.setIsSuccess(undefined));
+                dispatch(
+                    commonActions.setIsSuccess(undefined)
+                );
             }, 2000);
         }
     }, [dispatch, isSuccess]);
@@ -34,16 +36,20 @@ const MainLayout: FC = () => {
         <>
             <MyAppBar/>
             {!!isLoading &&
-                <LinearProgress
-                    className={css.LinearProgress}
-                />}
+                <Box>
+                    <LinearProgress
+                        className={css.LinearProgress}
+                    />
+                </Box>
+            }
             {!!showSuccess &&
-                <Alert
-                    className={css.Alert}
-                    severity="success"
-                >
-                    {_.capitalize(t("success"))}
-                </Alert>
+                <Box className={css.Alert}>
+                    <Alert
+                        severity="success"
+                    >
+                        {_.capitalize(t("success"))}
+                    </Alert>
+                </Box>
             }
             <SwipeAbleEdgeDrawer/>
             <Outlet/>

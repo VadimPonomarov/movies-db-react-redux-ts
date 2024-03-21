@@ -1,9 +1,9 @@
+@import "index.extras";
 $button-w: 130px;
 
 .LG__Stack {
-  display: flex;
+  @include flex_wrap_row_align();
   width: $button-w;
-  align-items: center;
 }
 
 .LG__Button {
@@ -18,9 +18,7 @@ $button-w: 130px;
 }
 
 .BG__Box_Container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  @include flex_wrap_row_align();
 
 }
 

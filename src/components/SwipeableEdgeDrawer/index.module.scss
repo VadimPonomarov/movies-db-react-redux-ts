@@ -1,11 +1,12 @@
+@import "index.extras";
+
 .Sed__Box_Button {
   max-width: 100px;
 }
 
 .Sed__BG_Container {
   height: 100%;
-  display: flex;
-  align-items: flex-end;
+  @include flex_wrap_row_align();
 }
 
 .Pointer {

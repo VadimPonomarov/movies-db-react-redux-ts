@@ -1,9 +1,8 @@
+@import "index.extras";
+
 .BDrop__Box {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %wh100;
+  @include flex_wrap_row_align();
 }
 
 .BDrop__Box_Box {

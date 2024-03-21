@@ -1,6 +1,6 @@
+@import "index.extras";
 .myToolBar {
-  display: flex;
-  justify-content: space-between;
+  @include flex_wrap_row_align(space-between)
 }
 
 .Switch {

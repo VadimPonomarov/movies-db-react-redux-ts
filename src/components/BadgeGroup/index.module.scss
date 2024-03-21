@@ -1,13 +1,12 @@
+@import "index.extras";
+
 .BG__Container {
   display: flex;
   text-align: center;
 }
 
 .BG__Stack {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  @include flex_wrap_row_align();
   width: 100%;
   min-height: 150px;
 }

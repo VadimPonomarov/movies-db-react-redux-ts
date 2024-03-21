@@ -1,14 +1,17 @@
+@import "index.extras";
+
 .Badge__Box {
-  display: flex;
-  align-items: center; 
+  @include flex_wrap_row_align();
   position: absolute;
   top: 0;
   left: 0
 }
-.Badge__Box_Box{
+
+.Badge__Box_Box {
   margin: 8px;
 }
-.Badge__CP{
+
+.Badge__CP {
   position: absolute;
   z-index: 2;
 }

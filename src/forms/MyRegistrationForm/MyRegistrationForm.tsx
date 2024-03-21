@@ -16,7 +16,6 @@ import {FormField} from "./FormField";
 import {formFields} from "./formFields";
 import {formSchema} from "./formSchema";
 import {formInputType, IAuthCredentials, IProps} from "./formTypes";
-import css from "./index.module.scss";
 
 
 const MyRegistrationForm_: FC<IProps> = ({props}) => {
@@ -38,7 +37,7 @@ const MyRegistrationForm_: FC<IProps> = ({props}) => {
 
     return (
         <FormProvider {...methods}>
-            <Box style={css} {...animate && {...formAnimateDefaultProps}}>
+            <Box {...animate && {...formAnimateDefaultProps}}>
                 <Container>
                     <Container maxWidth={maxWidth}>
                         <Paper>
