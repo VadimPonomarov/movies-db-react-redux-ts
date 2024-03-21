@@ -1,4 +1,4 @@
-@import "index.extras";
+@import "../../extras.module";
 .PSl__Grid{
   @include flex_wrap_row_align();
   gap: 16px;

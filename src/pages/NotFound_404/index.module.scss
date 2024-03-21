@@ -1,4 +1,4 @@
-@import "index.extras";
+@import "../../extras.module";
 
 .container {
   @include flex_wrap_row_align();

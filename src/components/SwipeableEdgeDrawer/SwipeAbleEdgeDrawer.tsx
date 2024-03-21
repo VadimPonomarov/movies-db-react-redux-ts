@@ -31,7 +31,6 @@ const SwipeAbleEdgeDrawer: FC<IProps> = () => {
     const {t} = useTranslation();
 
 
-    // @ts-ignore
     return (
         <Root>
             <CssBaseline/>
