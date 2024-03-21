@@ -92,7 +92,7 @@ const SwipeAbleEdgeDrawer: FC<IProps> = () => {
                                 }
                             />
                         }
-                        label={t("clear")}
+                        label={t("clean")}
                     />
                 </FormGroup>
                 <Puller/>

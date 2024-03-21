@@ -62,7 +62,7 @@ const MoviesPage: FC = () => {
                     }
                     label={
                         !!movieChoiceLIst.length ?
-                            t("clear") : ""
+                            t("clean") : ""
                     }
                 />
             </FormGroup>

@@ -102,6 +102,13 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
                                 </motion.div>
                             </Typography>
                             <Typography
+                                sx={{
+                                    width: "100%",
+                                    height: "30%",
+                                    display: "flex",
+                                    alignItems: "flex-start",
+                                    justifyContent: "center"
+                                }}
                                 variant="subtitle1"
                                 color="text.secondary"
                                 onClick={

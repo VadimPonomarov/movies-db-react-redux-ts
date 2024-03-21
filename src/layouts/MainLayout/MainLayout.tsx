@@ -10,6 +10,8 @@ import {Outlet} from "react-router-dom";
 import {SwipeAbleEdgeDrawer} from "../../components";
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 
+import css from "./index.module.scss";
+
 const MainLayout: FC = () => {
     const isLoading = useSelector(commonSelectors.getIsLoading);
     const isSuccess = useSelector(commonSelectors.getIsSuccess);
@@ -33,22 +35,12 @@ const MainLayout: FC = () => {
             <MyAppBar/>
             {!!isLoading &&
                 <LinearProgress
-                    sx={{
-                        position: "absolute",
-                        width: "100vw",
-                        top: "0px",
-                        zIndex: 1400
-                    }}
+                    className={css.LinearProgress}
                 />}
             {!!showSuccess &&
                 <Alert
+                    className={css.Alert}
                     severity="success"
-                    sx={{
-                        position: "absolute",
-                        width: "100vw",
-                        top: 0,
-                        zIndex: 1400
-                    }}
                 >
                     {_.capitalize(t("success"))}
                 </Alert>
