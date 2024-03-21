@@ -3,6 +3,7 @@
 .Ep {
   &__Container {
     @include flex_wrap_row_align();
+    @extend %wh100;
   }
 
   &__Card {
@@ -21,12 +22,27 @@
       @extend %wh100;
       background-size: contain;
       background-repeat: no-repeat;
+
+      &_Box {
+        @include flex_wrap_row_align(null, flex-end);
+        @extend %wh100;
+        padding-left: 4px;
+        padding-bottom: 4px;
+
+        &_T {
+          position: absolute;
+          bottom: 5px;
+          @include flex_wrap_column_align();
+          text-align: right;
+          width: 100%;
+        }
+      }
     }
 
     &_Content {
       @include flex_wrap_column_align(null, space-between);
+      @extend %wh100;
       z-index: 1004;
-      height: 100%;
 
       &_Original_Title {
         transform: scale(.5, .5);
@@ -38,17 +54,7 @@
       }
     }
 
-    &_Box_Box {
-      @include flex_wrap_row_align(null, flex-end);
-      padding-left: 4px;
-      padding-bottom: 4px;
 
-      &_T {
-        @include flex_wrap_column_align();
-        text-align: right;
-        width: 100%;
-      }
-    }
   }
 
   &__BG {

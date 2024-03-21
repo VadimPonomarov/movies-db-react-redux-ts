@@ -101,40 +101,43 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
                                     {original_title}
                                 </motion.div>
                             </Typography>
-                            <Typography
+                            <Box
                                 sx={{
                                     width: "100%",
-                                    height: "30%",
+                                    height: "35%",
                                     display: "flex",
+                                    flexDirection: "column",
                                     alignItems: "flex-start",
-                                    justifyContent: "center"
-                                }}
-                                variant="subtitle1"
-                                color="text.secondary"
-                                onClick={
-                                    (e) => handleTitleClick(e)
-                                }
-                            >
-                                {isFullTitle ?
-                                    title :
-                                    slice(title
-                                        .split(" "), 0, 3)
-                                        .join(" ")
-                                        .trim() + " ..."
-                                }
-                            </Typography>
-                        </CardContent>
-                        <Box
-                            className={css.Ep__Card_Box_Box}
-                        >
+                                    justifyContent: "space-between"
+                                }}>
+                                <Typography
+                                    variant="subtitle1"
+                                    color="text.secondary"
+                                    onClick={
+                                        (e) => handleTitleClick(e)
+                                    }
+                                >
+                                    {isFullTitle ?
+                                        title :
+                                        slice(title
+                                            .split(" "), 0, 3)
+                                            .join(" ")
+                                            .trim() + " ..."
+                                    }
+                                </Typography>
+                                <Box
+                                    className={css.Ep__Card_Box_Box}
+                                >
 
-                            <Typography
-                                className={css.Ep__Card_Box_Box_T}
-                                variant={"caption"}
-                            >
-                                {moment(release_date).format("DD.MM.YYYY")}
-                            </Typography>
-                        </Box>
+                                    <Typography
+                                        className={css.Ep__Card_Box_Box_T}
+                                        variant={"caption"}
+                                    >
+                                        {moment(release_date).format("DD.MM.YYYY")}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </CardContent>
                     </Box>
                 </Button>
                 <BadgeWithCircular

@@ -2,7 +2,6 @@ import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolk
 import _ from "lodash";
 
 import {IGenre, IGenreListResponse, IMovieDetails, IMovieListInfo, IMovieResult} from "../../../common";
-import {ISearchParams} from "../../../common/hocs/interfaces";
 import {movieService} from "../../../common/services";
 import {commonActions} from "../commonSlice";
 
@@ -20,7 +19,6 @@ export const moviesSlice = createSliceWithThunks({
         getIsInit: state => state.isInit,
         getInfo: state => state.info,
         getMovies: state => state.movies,
-        getMovieDetails: state => state.movieDetails,
         getGenres: state => state.genres,
         getActiveCardList: state => state.activeCardList,
     },
@@ -47,30 +45,6 @@ export const moviesSlice = createSliceWithThunks({
         cleanActiveCardList: create.reducer((state) => {
             state.activeCardList = [];
         }),
-        cleanMovieDetails: create.reducer((state) => {
-            state.movieDetails = undefined;
-        }),
-        fetchMovieDetails: create.asyncThunk<IMovieDetails, { id: number, searchParams: ISearchParams }>(
-            async ({id, searchParams},
-                   {dispatch, fulfillWithValue, rejectWithValue}) => {
-                try {
-                    dispatch(commonActions.setIsLoading(true));
-                    const res = await movieService.getMovieById(id, searchParams);
-                    dispatch(commonActions.setIsSuccess(true));
-                    return fulfillWithValue(res);
-                } catch (e) {
-                    dispatch(commonActions.setIsError(e.message));
-                    return rejectWithValue(e);
-                } finally {
-                    dispatch(commonActions.setIsLoading(false));
-                }
-            },
-            {
-                fulfilled: (state, action: PayloadAction<IMovieDetails>) => {
-                    state.movieDetails = action.payload;
-                },
-            }
-        ),
         getGenreList: create.asyncThunk<IGenreListResponse, void>(
             async (_,
                    {dispatch, fulfillWithValue, rejectWithValue}) => {
