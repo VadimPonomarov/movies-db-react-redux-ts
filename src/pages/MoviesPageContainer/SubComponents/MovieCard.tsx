@@ -1,7 +1,7 @@
 import * as React from "react";
 import {FC, memo, useState} from "react";
 
-import {Box, Button, Card, CardContent, Typography} from "@mui/material";
+import {Box, Button, Card, CardContent, Container, Typography} from "@mui/material";
 import {red} from "@mui/material/colors";
 import {InitMotionProvider} from "common/hocs";
 import {motion} from "framer-motion";
@@ -117,7 +117,10 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
                                         slice(title
                                             .split(" "), 0, 3)
                                             .join(" ")
-                                            .trim() + " ..."
+                                            .trim()
+                                    }
+                                    {(!isFullTitle && title.split(" ").length > 3) &&
+                                        <Container>...</Container>
                                     }
                                 </Typography>
                                 <Box
