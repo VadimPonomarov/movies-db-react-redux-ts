@@ -53,14 +53,14 @@ const useAppMoviesEffect: () => IReturn =
 
         const nextPage: () => void =
             () => {
-                const nextPage: Partial<ISearchParams> =
+                const nextPage: ISearchParams =
                     {page: (+query.get("page") + 1).toString()};
                 dispatch(commonActions.setSearchParams(nextPage));
             };
 
         const prevPage: () => void =
             () => {
-                const prevPage: Partial<ISearchParams> =
+                const prevPage: ISearchParams =
                     {page: (+query.get("page") - 1).toString()};
                 dispatch(commonActions.setSearchParams(prevPage));
             };
