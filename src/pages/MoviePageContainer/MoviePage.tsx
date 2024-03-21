@@ -25,7 +25,7 @@ const MoviePage_: FC<IProps> = () => {
         isSuccess,
         data: movieDetails,
     } = useQuery({
-        queryKey: ["movieDetails", movieId],
+        queryKey: ["movieDetails", movieId, searchParams],
         queryFn: () =>
             movieService.getMovieById(+movieId, searchParams)
     });
@@ -42,7 +42,7 @@ const MoviePage_: FC<IProps> = () => {
             dispatch(commonActions.setIsError(false));
         }
 
-    }, [isError, isLoading, isFetching, isFetched, isSuccess, dispatch]);
+    }, [isError, isLoading, isFetching, isFetched, isSuccess, dispatch, searchParams]);
 
     if (!isSuccess || !isFetched) return null;
 
