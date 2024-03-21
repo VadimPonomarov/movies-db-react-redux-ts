@@ -71,4 +71,4 @@ const MyRegistrationForm_: FC<IProps> = ({props}) => {
     );
 };
 
-export const MyRegistrationForm = memo(MyRegistrationForm_);
+export const RegistrationForm = memo(MyRegistrationForm_);

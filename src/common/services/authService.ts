@@ -1,6 +1,6 @@
 import {Md5} from "ts-md5";
 
-import {IAuthCredentials} from "../../forms/MyRegistrationForm/formTypes";
+import {IAuthCredentials} from "../../forms/RegistrationForm/formTypes";
 
 const getHashed = (data: string) => Md5.hashStr(data);
 const storeCredentials: (data: IAuthCredentials) => void =

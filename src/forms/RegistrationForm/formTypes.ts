@@ -1,6 +1,4 @@
-import {
-    BaseTextFieldProps,
-} from "@mui/material/TextField/TextField";
+import {BaseTextFieldProps,} from "@mui/material/TextField/TextField";
 
 import {formSchema} from "./formSchema";
 

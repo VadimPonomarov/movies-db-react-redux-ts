@@ -13,7 +13,7 @@ import {v4} from "uuid";
 
 import {getCredentials, isAuthWithCredentials} from "../../common/services";
 import {authActions, commonSelectors, useAppDispatch} from "../../storage";
-import {IAuthCredentials} from "../MyRegistrationForm/formTypes";
+import {IAuthCredentials} from "../RegistrationForm/formTypes";
 
 import {FormField} from "./FormField";
 import {formFields} from "./formFields";
