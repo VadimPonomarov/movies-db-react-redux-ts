@@ -3,6 +3,7 @@ import {FC} from "react";
 
 import {FormControl, Select, SelectChangeEvent} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import {t} from "i18next";
 import _ from "lodash";
 import {useSelector} from "react-redux";
 
@@ -44,7 +45,7 @@ const SelectSortBy: FC<IProps> = () => {
                             key={Object(MovieSortByEnum)[item]}
                             value={Object(MovieSortByEnum)[item]}
                         >
-                            {_.upperCase(item)}
+                            {_.upperCase(t(item))}
                         </MenuItem>)
                 }
 

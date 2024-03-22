@@ -142,6 +142,7 @@ export enum MovieSortByEnum {
     "original_title.desc" = "original_title.desc",
     "popularity.asc" = "popularity.asc",
     "popularity.desc" = "popularity.desc",
+    "revenue.asc" = "revenue.asc",
     "revenue.desc" = "revenue.desc",
     "primary_release_date.asc" = "primary_release_date.asc",
     "primary_release_date.desc" = "primary_release_date.desc",
