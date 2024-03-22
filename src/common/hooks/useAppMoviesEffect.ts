@@ -48,7 +48,8 @@ const useAppMoviesEffect: () => IReturn =
             if (!with_genres.length) return results;
             return results
                 .filter(item =>
-                    !!_.intersection(item.genre_ids, with_genres).length
+                    !!_.intersection(item.genre_ids, with_genres)
+                        .length
                 );
         }, [results, with_genres]);
 
@@ -57,14 +58,18 @@ const useAppMoviesEffect: () => IReturn =
             () => {
                 const nextPage: ISearchParams =
                     {page: (+query.get("page") + 1).toString()};
-                dispatch(commonActions.setSearchParams(nextPage));
+                dispatch(
+                    commonActions.setSearchParams(nextPage)
+                );
             };
 
         const prevPage: () => void =
             () => {
                 const prevPage: ISearchParams =
                     {page: (+query.get("page") - 1).toString()};
-                dispatch(commonActions.setSearchParams(prevPage));
+                dispatch(
+                    commonActions.setSearchParams(prevPage)
+                );
             };
         const handleClickMore: () => void =
             () => {
@@ -81,7 +86,9 @@ const useAppMoviesEffect: () => IReturn =
 
         const fetchFunc: () => void =
             useCallback(async () => {
-                dispatch(commonActions.setIsLoading(true));
+                dispatch(
+                    commonActions.setIsLoading(true)
+                );
                 const {results: responseRes, ...responseInfo} =
                     await queryClient.fetchQuery({
                         queryKey: [category, JSON.stringify(params)],
@@ -91,8 +98,12 @@ const useAppMoviesEffect: () => IReturn =
                                 {...params})
                     });
                 if (!isMoreActive) {
-                    dispatch(movieActions.setMovies(responseRes));
-                    dispatch(movieActions.setInfo({...responseInfo, total_results: 0}));
+                    dispatch(
+                        movieActions.setMovies(responseRes)
+                    );
+                    dispatch(
+                        movieActions.setInfo({...responseInfo, total_results: 0})
+                    );
 
                 } else {
                     dispatch(movieActions
@@ -115,9 +126,13 @@ const useAppMoviesEffect: () => IReturn =
         const getChoicesFromCache: () => IMovieResult[] =
             () => {
                 const {results} =
-                    queryClient.getQueryData<IMovieList>([category, JSON.stringify(params)]);
-                return results.filter(item =>
-                    !!_.includes(choices, item.id));
+                    queryClient
+                        .getQueryData<IMovieList>(
+                            [category, JSON.stringify(params)]
+                        );
+                return results
+                    .filter(item =>
+                        !!_.includes(choices, item.id));
             };
 
 
