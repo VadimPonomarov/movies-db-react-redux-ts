@@ -18,8 +18,8 @@ const movieService = {
         apiService.get(urls.getMovieById(id), {params})
             .then(({data}) => data),
 
-    getGenreList: (): Promise<IGenreListResponse> =>
-        apiService.get(urls.list.genreList)
+    getGenreList: (params: ISearchParams): Promise<IGenreListResponse> =>
+        apiService.get(urls.list.genreList, {params})
             .then(({data}) => data),
 
     getDiscoverList: (category: MovieCategoryEnum = MovieCategoryEnum.discover,

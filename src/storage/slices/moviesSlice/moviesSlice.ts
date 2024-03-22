@@ -2,6 +2,7 @@ import {asyncThunkCreator, buildCreateSlice, PayloadAction} from "@reduxjs/toolk
 import _ from "lodash";
 
 import {IGenre, IGenreListResponse, IMovieDetails, IMovieListInfo, IMovieResult} from "../../../common";
+import {ISearchParams} from "../../../common/hocs/interfaces";
 import {movieService} from "../../../common/services";
 import {commonActions} from "../commonSlice";
 
@@ -16,6 +17,7 @@ export const moviesSlice = createSliceWithThunks({
     name: "moviesSlice",
     initialState,
     selectors: {
+        getShowChoices: state => state.showChoices,
         getIsInit: state => state.isInit,
         getInfo: state => state.info,
         getMovies: state => state.movies,
@@ -23,6 +25,9 @@ export const moviesSlice = createSliceWithThunks({
         getActiveCardList: state => state.activeCardList,
     },
     reducers: create => ({
+        setShowChoices: create.reducer((state, action: PayloadAction<boolean>) => {
+            state.showChoices = action.payload;
+        }),
         setIsInit: create.reducer((state, action: PayloadAction<boolean>) => {
             state.isInit = action.payload;
         }),
@@ -45,12 +50,12 @@ export const moviesSlice = createSliceWithThunks({
         cleanActiveCardList: create.reducer((state) => {
             state.activeCardList = [];
         }),
-        getGenreList: create.asyncThunk<IGenreListResponse, void>(
-            async (_,
+        getGenreList: create.asyncThunk<IGenreListResponse, ISearchParams>(
+            async (seachParams,
                    {dispatch, fulfillWithValue, rejectWithValue}) => {
                 try {
                     dispatch(commonActions.setIsLoading(true));
-                    const res = await movieService.getGenreList();
+                    const res = await movieService.getGenreList(seachParams);
                     dispatch(commonActions.setIsSuccess(true));
                     return fulfillWithValue(res);
                 } catch (e) {

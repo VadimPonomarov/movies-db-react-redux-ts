@@ -21,8 +21,8 @@ const useAppBg: () => IReturn =
         const dispatch = useAppDispatch();
 
         useEffect(() => {
-            dispatch(movieActions.getGenreList());
-        }, [dispatch]);
+            dispatch(movieActions.getGenreList(searchParams));
+        }, [dispatch, searchParams]);
 
         const handleClick: (id: number) => void =
             (id) => {

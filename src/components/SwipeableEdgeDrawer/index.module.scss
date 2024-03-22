@@ -1,5 +1,12 @@
 @import "../../extras.module";
 
+.FG {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+}
+
 .Sed__Box_Button {
   max-width: 100px;
 }

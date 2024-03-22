@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
 import {authSelectors, commonActions, useAppDispatch} from "../../storage";
-import {movieSelectors} from "../../storage/slices/moviesSlice";
+import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
 import {SelectSortBy} from "../SelectSortBy";
 
@@ -26,6 +26,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
         useState<boolean>(false);
     const isAuth = useSelector(authSelectors.getIsAuth);
     const genres = useSelector(movieSelectors.getGenres);
+    const showChoices = useSelector(movieSelectors.getShowChoices);
     const dispatch = useAppDispatch();
     const {movieId} = useParams<string>();
     const navigate = useNavigate();
@@ -81,7 +82,9 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                 }}
 
             >
-                <FormGroup>
+                <FormGroup
+                    className={css.FG}
+                >
                     <FormControlLabel
                         control={
                             <Switch
@@ -98,6 +101,23 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                     <span>
                         <SelectSortBy/>
                     </span>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={!!showChoices}
+                                onChange={
+                                    () =>
+                                        dispatch(
+                                            movieActions.setShowChoices(!showChoices)
+                                        )
+                                }
+                            />
+                        }
+                        label={
+                            !showChoices ?
+                                t("choices") :
+                                t("clean choices")}
+                    />
                 </FormGroup>
                 <Puller/>
                 <Typography

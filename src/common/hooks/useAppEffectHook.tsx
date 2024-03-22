@@ -17,6 +17,7 @@ const UseAppEffectHook: () => IReturn =
         const [loading, setLoading] = useState<boolean>(false);
         const [success, setSuccess] = useState<boolean>(false);
 
+
         const timer = useRef<number>();
 
         useEffect(() => {

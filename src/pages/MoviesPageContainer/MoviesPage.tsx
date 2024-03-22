@@ -27,11 +27,13 @@ const MoviesPage: FC = () => {
         getFilteredResults,
         prevPage,
         nextPage,
-        handleClickMore
+        handleClickMore,
+        getChoicesFromCache
     } = useAppMoviesEffect();
 
     const [isMoreVisible] = useState<boolean>(true);
     const movieChoiceLIst = useSelector(movieSelectors.getActiveCardList);
+    const showChoices = useSelector(movieSelectors.getShowChoices);
     const dispatch = useAppDispatch();
 
 
@@ -71,7 +73,7 @@ const MoviesPage: FC = () => {
                 className={css.Ep__Container}
             >
                 <BackDrop/>
-                {!!getFilteredResults.length &&
+                {(!showChoices && !!getFilteredResults.length) &&
                     getFilteredResults.map(item =>
                         <MovieCard
                             key={item.id}
@@ -81,6 +83,15 @@ const MoviesPage: FC = () => {
                         />
                     )
                 }
+                {!!showChoices &&
+                    getChoicesFromCache().map(item =>
+                        <MovieCard
+                            key={item.id}
+                            props={{
+                                item
+                            }}
+                        />
+                    )}
             </Box>
             {!!isMoreVisible &&
                 <motion.div

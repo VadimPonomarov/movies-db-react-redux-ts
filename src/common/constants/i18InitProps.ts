@@ -18,7 +18,8 @@ export const I18InitProps: InitOptions = {
                 "next": "след",
                 "more": "еще",
                 "clean": "очистить",
-                "success": "успех"
+                "success": "успех",
+                "choices": "показать отобранные",
             }
         },
         uk: {
@@ -37,7 +38,8 @@ export const I18InitProps: InitOptions = {
                 "next": "вперед",
                 "more": "далі",
                 "clean": "очистити",
-                "success": "успіх"
+                "success": "успіх",
+                "choices": "показати відібрані",
             }
         }
     },

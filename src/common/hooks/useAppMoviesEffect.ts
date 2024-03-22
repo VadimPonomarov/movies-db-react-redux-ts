@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import {SetURLSearchParams, useParams, useSearchParams} from "react-router-dom";
 
 import {commonActions, commonSelectors, useAppDispatch, useAppSelector} from "../../storage";
-import {movieActions} from "../../storage/slices/moviesSlice";
+import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 import {queryClient} from "../hocs";
 import {ISearchParams} from "../hocs/interfaces";
 
@@ -21,6 +21,7 @@ interface IReturn {
     nextPage: () => void,
     page: string,
     handleClickMore: () => void,
+    getChoicesFromCache: () => IMovieResult[]
 }
 
 const useAppMoviesEffect: () => IReturn =
@@ -37,6 +38,7 @@ const useAppMoviesEffect: () => IReturn =
             useSelector(commonSelectors.getSearchParams);
         const {with_genres} =
             useSelector(commonSelectors.getSearchParams);
+        const choices = useSelector(movieSelectors.getActiveCardList);
         const {isCategoryChanged} =
             useAppSelector(state => state.commonSlice);
 
@@ -110,6 +112,13 @@ const useAppMoviesEffect: () => IReturn =
                 dispatch(commonActions.setIsLoading(false));
                 // eslint-disable-next-line
             }, [category, getFetchService, params]);
+        const getChoicesFromCache: () => IMovieResult[] =
+            () => {
+                const {results} =
+                    queryClient.getQueryData<IMovieList>([category, JSON.stringify(params)]);
+                return results.filter(item =>
+                    !!_.includes(choices, item.id));
+            };
 
 
         useEffect(() => {
@@ -146,7 +155,8 @@ const useAppMoviesEffect: () => IReturn =
             prevPage,
             nextPage,
             page: params.page,
-            handleClickMore
+            handleClickMore,
+            getChoicesFromCache
         };
     };
 

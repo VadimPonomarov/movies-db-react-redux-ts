@@ -11,7 +11,11 @@ import css from "./index.module.scss";
 
 const BadgeGroup: FC = () => {
 
-    const {genres, searchParams, handleClick} = useAppBg();
+    const {
+        genres,
+        searchParams,
+        handleClick
+    } = useAppBg();
 
     return (
         <Container className={css.BG__Container}>
@@ -26,11 +30,16 @@ const BadgeGroup: FC = () => {
                             key={item.id}
                             className={css.BG__Chip}
                             style={{
-                                backgroundColor: indexOf(searchParams.with_genres, item.id) >= 0 ? "lightblue" : "white"
+                                backgroundColor:
+                                    indexOf(searchParams.with_genres, item.id) >= 0 ?
+                                        "lightblue" :
+                                        "white"
                             }}
                             label={item.name}
                             variant="outlined"
-                            onClick={() => handleClick(item.id)}
+                            onClick={
+                                () => handleClick(item.id)
+                            }
                             clickable
                         />
                     )
