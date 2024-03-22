@@ -29,16 +29,18 @@ const useAppMoviesEffect: () => IReturn =
         const [isMoreActive, setIsMoreActive] =
             useState<boolean>(false);
         const {isInit, info, movies: results} =
-            useAppSelector(state => state.moviesSlice);
+            useAppSelector(state =>
+                state.moviesSlice);
         const [query, setQuery] =
             useSearchParams({page: "1"});
         const {category} =
             useParams();
         const params =
             useSelector(commonSelectors.getSearchParams);
-        const {with_genres} =
+        const {with_genres, sort_by} =
             useSelector(commonSelectors.getSearchParams);
-        const choices = useSelector(movieSelectors.getActiveCardList);
+        const choices =
+            useSelector(movieSelectors.getActiveCardList);
         const {isCategoryChanged} =
             useAppSelector(state => state.commonSlice);
 
@@ -46,18 +48,33 @@ const useAppMoviesEffect: () => IReturn =
 
         const getFilteredResults = useMemo(() => {
             if (!with_genres.length) return results;
-            return results
-                .filter(item =>
-                    !!_.intersection(item.genre_ids, with_genres)
-                        .length
-                );
-        }, [results, with_genres]);
+            const [sortBy, direction] =
+                sort_by
+                    .split(".");
+            const sortFunc = () => _.sortBy(
+                results
+                    .filter(item =>
+                        !!_.intersection(
+                            item.genre_ids,
+                            with_genres
+                        )
+                            .length
+                    ),
+                [category !== "discover" && sortBy]
+            );
+
+            if (direction === "asc") return sortFunc();
+            return sortFunc().reverse();
+        }, [category, results, sort_by, with_genres]);
 
 
         const nextPage: () => void =
             () => {
                 const nextPage: ISearchParams =
-                    {page: (+query.get("page") + 1).toString()};
+                    {
+                        page: (+query.get("page") + 1)
+                            .toString()
+                    };
                 dispatch(
                     commonActions.setSearchParams(nextPage)
                 );
