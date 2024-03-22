@@ -46,26 +46,32 @@ const useAppMoviesEffect: () => IReturn =
 
         const dispatch = useAppDispatch();
 
-        const getFilteredResults = useMemo(() => {
-            if (!with_genres.length) return results;
-            const [sortBy, direction] =
-                sort_by
-                    .split(".");
-            const sortFunc = () => _.sortBy(
-                results
-                    .filter(item =>
-                        !!_.intersection(
-                            item.genre_ids,
-                            with_genres
-                        )
-                            .length
-                    ),
-                [category !== "discover" && sortBy]
-            );
+        const getFilteredResults = useMemo(
+            () => {
+                if (!with_genres.length) return results;
+                if (sort_by) {
+                    const [sortBy, direction] =
+                        sort_by
+                            .split(".");
+                    const sortFunc = () => _.sortBy(
+                        results
+                            .filter(item =>
+                                !!_.intersection(
+                                    item.genre_ids,
+                                    with_genres
+                                )
+                                    .length
+                            ),
+                        [category !== "discover" && sortBy]
+                    );
 
-            if (direction === "asc") return sortFunc();
-            return sortFunc().reverse();
-        }, [category, results, sort_by, with_genres]);
+                    if (direction === "asc") return sortFunc();
+                    return sortFunc()
+                        .reverse();
+                }
+                return results;
+
+            }, [category, results, sort_by, with_genres]);
 
 
         const nextPage: () => void =

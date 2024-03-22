@@ -15,7 +15,7 @@ import {IProps} from "./interfaces";
 
 
 const SelectSortBy: FC<IProps> = () => {
-    const {sort_by} = useSelector(commonSelectors.getSearchParams);
+    const {sort_by, with_genres} = useSelector(commonSelectors.getSearchParams);
     const dispatch = useAppDispatch();
 
     const handleChange: (event: SelectChangeEvent) => void =
@@ -33,7 +33,7 @@ const SelectSortBy: FC<IProps> = () => {
             sx={{m: 1}}
             size="small"
         >
-            <Select
+            {!!with_genres.length && <Select
                 variant={"standard"}
                 defaultValue={MovieSortByEnum["vote_average.desc"]}
                 value={sort_by}
@@ -49,7 +49,7 @@ const SelectSortBy: FC<IProps> = () => {
                         </MenuItem>)
                 }
 
-            </Select>
+            </Select>}
         </FormControl>
     );
 };

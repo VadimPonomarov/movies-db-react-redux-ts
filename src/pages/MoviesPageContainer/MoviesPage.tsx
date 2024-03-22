@@ -51,22 +51,27 @@ const MoviesPage: FC = () => {
             <FormGroup
                 className={css.FG}
             >
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={
-                                !!movieChoiceLIst.length
-                            }
-                            onChange={
-                                () => dispatch(movieActions.cleanActiveCardList())
-                            }
-                        />
-                    }
-                    label={
-                        !!movieChoiceLIst.length ?
-                            t("clean") : ""
-                    }
-                />
+                {!showChoices &&
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={
+                                    !!movieChoiceLIst.length
+                                }
+                                onChange={
+                                    () =>
+                                        dispatch(
+                                            movieActions.cleanActiveCardList()
+                                        )
+                                }
+                            />
+                        }
+                        label={
+                            !!movieChoiceLIst.length ?
+                                t("clean") : ""
+                        }
+                    />
+                }
             </FormGroup>
 
             <Box
@@ -84,14 +89,15 @@ const MoviesPage: FC = () => {
                     )
                 }
                 {!!showChoices &&
-                    getChoicesFromCache().map(item =>
-                        <MovieCard
-                            key={item.id}
-                            props={{
-                                item
-                            }}
-                        />
-                    )}
+                    getChoicesFromCache()
+                        .map(item =>
+                            <MovieCard
+                                key={item.id}
+                                props={{
+                                    item
+                                }}
+                            />
+                        )}
             </Box>
             {!!isMoreVisible &&
                 <motion.div

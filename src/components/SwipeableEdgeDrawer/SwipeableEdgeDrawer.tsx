@@ -27,6 +27,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
     const isAuth = useSelector(authSelectors.getIsAuth);
     const genres = useSelector(movieSelectors.getGenres);
     const showChoices = useSelector(movieSelectors.getShowChoices);
+    const isChoices = useSelector(movieSelectors.getActiveCardList);
     const dispatch = useAppDispatch();
     const {movieId} = useParams<string>();
     const navigate = useNavigate();
@@ -105,6 +106,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                         control={
                             <Switch
                                 checked={!!showChoices}
+                                disabled={!isChoices.length}
                                 onChange={
                                     () =>
                                         dispatch(
@@ -116,7 +118,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                         label={
                             !showChoices ?
                                 t("choices") :
-                                t("clean choices")}
+                                t("disable")}
                     />
                 </FormGroup>
                 <Puller/>
