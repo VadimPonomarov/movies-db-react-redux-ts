@@ -136,3 +136,19 @@ export enum LanguageEnum {
     uk = "uk-Uk",
     ru = "ru-Ru",
 }
+
+export enum IMovieSortBy {
+    "original_title.asc" = "original_title.asc",
+    "original_title.desc" = "original_title.desc",
+    "popularity.asc" = "popularity.asc",
+    "popularity.desc" = "popularity.desc",
+    "revenue.desc" = "revenue.desc",
+    "primary_release_date.asc" = "primary_release_date.asc",
+    "primary_release_date.desc" = "primary_release_date.desc",
+    "title.asc" = "title.asc",
+    "title.desc" = "title.desc",
+    "vote_average.asc" = "vote_average.asc",
+    "vote_average.desc" = "vote_average.desc",
+    "vote_count.asc" = "vote_count.asc",
+    "vote_count.desc" = "vote_count.desc"
+}
