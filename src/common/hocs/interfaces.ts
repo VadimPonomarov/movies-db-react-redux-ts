@@ -1,6 +1,6 @@
 import {Dispatch, ReactNode, SetStateAction} from "react";
 
-import {LanguageEnum} from "../types";
+import {LanguageEnum, MovieSortByEnum} from "../types";
 
 export interface IAuthContext {
     theme: "light" | "dark",
@@ -15,4 +15,6 @@ export interface ISearchParams {
     page?: string,
     language?: LanguageEnum;
     with_genres?: number[];
+    with_keywords?: string;
+    sort_by?: MovieSortByEnum
 }

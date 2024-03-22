@@ -10,10 +10,10 @@ import {commonSelectors} from "../../storage";
 
 import {myMenuItems} from "./constants";
 import css from "./index.module.scss";
-import {MyMainMenuItem} from "./SubComponents/MyMainMenuItem";
+import {MainMenuItem} from "./SubComponents/MainMenuItem";
 
 
-const MyMainMenu: FC = React.memo(() => {
+const MainMenu: FC = React.memo(() => {
     const {category} = useParams();
     const currentCategory = useSelector(commonSelectors.getCurrentCategory);
     const [isActive, setIsActive] = useState<string | undefined>(currentCategory);
@@ -32,7 +32,7 @@ const MyMainMenu: FC = React.memo(() => {
                 {myMenuItems &&
                     myMenuItems.map(item =>
                         Object.keys(item).map(key =>
-                            <MyMainMenuItem
+                            <MainMenuItem
                                 key={v4()}
                                 props={{
                                     ...Object(item)[key].props,
@@ -45,4 +45,4 @@ const MyMainMenu: FC = React.memo(() => {
     );
 });
 
-export {MyMainMenu};
+export {MainMenu};

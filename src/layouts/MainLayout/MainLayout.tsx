@@ -1,13 +1,13 @@
 import {FC, useEffect, useState} from "react";
 
 import {Alert, Box, LinearProgress} from "@mui/material";
-import {MyAppBar} from "components/MyAppBarContainer/MyAppBar";
+import {MyAppBar} from "components/AppBarContainer/MyAppBar";
 import _ from "lodash";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {Outlet} from "react-router-dom";
 
-import {SwipeAbleEdgeDrawer} from "../../components";
+import {SwipeableEdgeDrawer} from "../../components";
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 
 import css from "./index.module.scss";
@@ -51,7 +51,7 @@ const MainLayout: FC = () => {
                     </Alert>
                 </Box>
             }
-            <SwipeAbleEdgeDrawer/>
+            <SwipeableEdgeDrawer/>
             <Outlet/>
         </>
     );

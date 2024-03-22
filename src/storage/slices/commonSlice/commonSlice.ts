@@ -46,7 +46,7 @@ export const commonSlice = createSliceWithThunks({
         setBackDropImgPath: create.reducer((state, action: PayloadAction<string>) => {
             state.backDropImgPath = action.payload;
         }),
-        setSearchParams: create.reducer((state, action: PayloadAction<ISearchParams>) => {
+        setSearchParams: create.reducer((state, action: PayloadAction<Partial<ISearchParams>>) => {
             state.searchParams = {...state.searchParams, ...action.payload};
         }),
         setIsCategoryChanged: create.reducer((state, action: PayloadAction<boolean>) => {

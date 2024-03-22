@@ -14,13 +14,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import {authSelectors, commonActions, useAppDispatch} from "../../storage";
 import {movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
+import {SelectSortBy} from "../SelectSortBy";
 
 import {drawerBleeding, Puller, Root, toggleDrawer} from "./constants";
 import css from "./index.module.scss";
 import {IProps} from "./interfaces";
 
 
-const SwipeAbleEdgeDrawer: FC<IProps> = () => {
+const SwipeableEdgeDrawer: FC<IProps> = () => {
     const [open, setOpen] =
         useState<boolean>(false);
     const isAuth = useSelector(authSelectors.getIsAuth);
@@ -94,6 +95,9 @@ const SwipeAbleEdgeDrawer: FC<IProps> = () => {
                         }
                         label={t("clean")}
                     />
+                    <span>
+                        <SelectSortBy/>
+                    </span>
                 </FormGroup>
                 <Puller/>
                 <Typography
@@ -114,4 +118,4 @@ const SwipeAbleEdgeDrawer: FC<IProps> = () => {
     );
 };
 
-export {SwipeAbleEdgeDrawer};
+export {SwipeableEdgeDrawer};

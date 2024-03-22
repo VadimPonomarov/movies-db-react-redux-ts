@@ -8,7 +8,7 @@ import Toolbar from "@mui/material/Toolbar";
 import {useSelector} from "react-redux";
 
 import {authSelectors, commonActions, useAppDispatch} from "../../../storage";
-import {MyMainMenu} from "../../MyMainMenuContainer";
+import {MainMenu} from "../../MainMenuContainer";
 import {SelectLanguage} from "../../SelectLanguage";
 import {iconButtonMenuProps} from "../constants";
 import css from "../index.module.scss";
@@ -39,7 +39,7 @@ const MyToolBar: FC = () => {
             >
                 <MenuIcon/>
             </IconButton>
-            <MyMainMenu/>
+            <MainMenu/>
             <Badge
                 invisible={!userName || !isAuth}
                 color="secondary"

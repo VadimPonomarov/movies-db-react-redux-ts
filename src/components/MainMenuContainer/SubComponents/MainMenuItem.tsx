@@ -15,7 +15,7 @@ import {IProps} from "../interfaces";
 import {MenuUnderLine} from "./MenuUnderLine";
 
 
-const MyMainMenuItem: FC<IProps> = ({props}) => {
+const MainMenuItem: FC<IProps> = ({props}) => {
     const {caption, uri, elementProps, isActive} = props;
     const {with_genres} = useSelector(commonSelectors.getSearchParams);
     const {t} = useTranslation();
@@ -73,4 +73,4 @@ const MyMainMenuItem: FC<IProps> = ({props}) => {
     );
 };
 
-export {MyMainMenuItem};
+export {MainMenuItem};

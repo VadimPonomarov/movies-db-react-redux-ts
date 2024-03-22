@@ -137,7 +137,7 @@ export enum LanguageEnum {
     ru = "ru-Ru",
 }
 
-export enum IMovieSortBy {
+export enum MovieSortByEnum {
     "original_title.asc" = "original_title.asc",
     "original_title.desc" = "original_title.desc",
     "popularity.asc" = "popularity.asc",
