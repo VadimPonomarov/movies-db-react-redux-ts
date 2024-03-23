@@ -28,7 +28,7 @@ const useAppMoviesEffect: () => IReturn =
     () => {
         const [isMoreActive, setIsMoreActive] =
             useState<boolean>(false);
-        const {isInit, info, movies: results} =
+        const {isInit, info, movies: results, movieSearchInTitleLocal} =
             useAppSelector(state =>
                 state.moviesSlice);
         const [query, setQuery] =
@@ -53,17 +53,40 @@ const useAppMoviesEffect: () => IReturn =
                     const [sortBy, direction] =
                         sort_by
                             .split(".");
-                    const sortFunc = () => _.sortBy(
-                        results
-                            .filter(item =>
-                                !!_.intersection(
-                                    item.genre_ids,
-                                    with_genres
-                                )
-                                    .length
-                            ),
-                        [category !== "discover" && sortBy]
-                    );
+                    const sortFunc = () =>
+                        !movieSearchInTitleLocal ?
+                            _.sortBy(
+                                results
+                                    .filter(item =>
+                                        !!_.intersection(
+                                            item.genre_ids,
+                                            with_genres
+                                        )
+                                            .length
+                                    ),
+
+                                [category !== "discover" && sortBy]
+                            ) :
+                            _.sortBy(
+                                results
+                                    .filter(item =>
+                                        !!_.intersection(
+                                            item.genre_ids,
+                                            with_genres
+                                        )
+                                            .length
+                                    )
+                                    .filter(item =>
+                                        item.title.toLowerCase()
+                                            .match(
+                                                movieSearchInTitleLocal
+                                                    .toLowerCase()
+                                                    .trim())
+                                    ),
+
+                                [category !== "discover" && sortBy]
+                            );
+
 
                     if (direction === "asc") return sortFunc();
                     return sortFunc()
@@ -71,7 +94,7 @@ const useAppMoviesEffect: () => IReturn =
                 }
                 return results;
 
-            }, [category, results, sort_by, with_genres]);
+            }, [category, movieSearchInTitleLocal, results, sort_by, with_genres]);
 
 
         const nextPage: () => void =

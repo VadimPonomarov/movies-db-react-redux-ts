@@ -5,7 +5,7 @@ export interface IInitialState {
     isInit: boolean,
     info: IMovieListInfo,
     movies: IMovieResult[],
-    moviesFiltered?: IMovieResult[],
+    movieSearchInTitleLocal?: string,
     genres: IGenre[],
     activeCardList: number[],
     loading: boolean;

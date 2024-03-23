@@ -48,7 +48,12 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
 
     const handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void =
         (e) => {
-            console.log(e.target.value);
+            dispatch(
+                movieActions
+                    .setMovieSearchInTitleLocal(
+                        e.target.value
+                    )
+            );
         };
 
 
