@@ -54,38 +54,25 @@ const useAppMoviesEffect: () => IReturn =
                         sort_by
                             .split(".");
                     const sortFunc = () =>
-                        !movieSearchInTitleLocal ?
-                            _.sortBy(
-                                results
-                                    .filter(item =>
-                                        !!_.intersection(
-                                            item.genre_ids,
-                                            with_genres
-                                        )
-                                            .length
-                                    ),
-
-                                [category !== "discover" && sortBy]
-                            ) :
-                            _.sortBy(
-                                results
-                                    .filter(item =>
-                                        !!_.intersection(
-                                            item.genre_ids,
-                                            with_genres
-                                        )
-                                            .length
+                        _.sortBy(
+                            results
+                                .filter(item =>
+                                    !!_.intersection(
+                                        item.genre_ids,
+                                        with_genres
                                     )
-                                    .filter(item =>
-                                        item.title.toLowerCase()
-                                            .match(
-                                                movieSearchInTitleLocal
-                                                    .toLowerCase()
-                                                    .trim())
-                                    ),
+                                        .length
+                                )
+                                .filter(item =>
+                                    item.title.toLowerCase()
+                                        .match(
+                                            movieSearchInTitleLocal
+                                                .toLowerCase()
+                                                .trim())
+                                ),
 
-                                [category !== "discover" && sortBy]
-                            );
+                            [category !== "discover" && sortBy]
+                        );
 
 
                     if (direction === "asc") return sortFunc();
