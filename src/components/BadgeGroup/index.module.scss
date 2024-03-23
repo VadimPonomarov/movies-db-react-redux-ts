@@ -2,13 +2,15 @@
 
 .BG__Container {
   display: flex;
+  width: 100vw;
   text-align: center;
+  max-height: 80px;
 }
 
 .BG__Stack {
   @include flex_wrap_row_align();
-  width: 100%;
-  min-height: 150px;
+  overflow-y: auto;
+  gap: 5px
 }
 
 .BG__Chip {

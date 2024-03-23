@@ -21,6 +21,7 @@ export const moviesSlice = createSliceWithThunks({
         getIsInit: state => state.isInit,
         getInfo: state => state.info,
         getMovies: state => state.movies,
+        getMoviesFiltered: state => state.moviesFiltered,
         getGenres: state => state.genres,
         getActiveCardList: state => state.activeCardList,
     },
@@ -33,6 +34,9 @@ export const moviesSlice = createSliceWithThunks({
         }),
         setMovies: create.reducer((state, action: PayloadAction<IMovieResult[]>) => {
             state.movies = action.payload;
+        }),
+        setMoviesFiltered: create.reducer((state, action: PayloadAction<IMovieResult[]>) => {
+            state.moviesFiltered = action.payload;
         }),
         setInfo: create.reducer((state, action: PayloadAction<IMovieListInfo>) => {
             state.info = action.payload;

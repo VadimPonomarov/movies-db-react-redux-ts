@@ -2,7 +2,8 @@ import * as React from "react";
 import {FC, useState} from "react";
 
 import {Global} from "@emotion/react";
-import {Box, Button, Container, CssBaseline, SwipeableDrawer, Typography} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import {Box, Button, Checkbox, CssBaseline, SwipeableDrawer, TextField, Typography} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Switch from "@mui/material/Switch";
@@ -11,9 +12,11 @@ import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
+import {useAppBg, useAppMoviesEffect} from "../../common";
 import {authSelectors, commonActions, useAppDispatch} from "../../storage";
 import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
+import {MainMenu} from "../MainMenuContainer";
 import {SelectSortBy} from "../SelectSortBy";
 
 import {drawerBleeding, Puller, Root, toggleDrawer} from "./constants";
@@ -24,14 +27,32 @@ import {IProps} from "./interfaces";
 const SwipeableEdgeDrawer: FC<IProps> = () => {
     const [open, setOpen] =
         useState<boolean>(false);
-    const isAuth = useSelector(authSelectors.getIsAuth);
-    const genres = useSelector(movieSelectors.getGenres);
-    const showChoices = useSelector(movieSelectors.getShowChoices);
-    const isChoices = useSelector(movieSelectors.getActiveCardList);
-    const dispatch = useAppDispatch();
-    const {movieId} = useParams<string>();
-    const navigate = useNavigate();
-    const {t} = useTranslation();
+    const isAuth =
+        useSelector(authSelectors.getIsAuth);
+    const movies =
+        useSelector(movieSelectors.getMovies);
+    const genres =
+        useSelector(movieSelectors.getGenres);
+    const showChoices =
+        useSelector(movieSelectors.getShowChoices);
+    const isChoices =
+        useSelector(movieSelectors.getActiveCardList);
+    const dispatch =
+        useAppDispatch();
+    const {movieId} =
+        useParams<string>();
+    const navigate =
+        useNavigate();
+    const {t} =
+        useTranslation();
+    const {handleChange, checked} =
+        useAppBg();
+    const {getFilteredResults} = useAppMoviesEffect();
+
+    const handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void =
+        (e) => {
+            console.log(e.target.value);
+        };
 
 
     return (
@@ -83,6 +104,15 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                 }}
 
             >
+                <TextField
+                    className={css.SearchField}
+                    label={<SearchIcon/>}
+                    variant="standard"
+                    onChange={
+                        (e) =>
+                            handleInputChange(e)
+                    }
+                />
                 <FormGroup
                     className={css.FG}
                 >
@@ -91,9 +121,12 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                             <Switch
                                 checked={!!genres.length}
                                 onChange={
-                                    () => dispatch(commonActions
-                                        .setSearchParams({with_genres: []})
-                                    )
+                                    () =>
+                                        dispatch(commonActions
+                                            .setSearchParams({
+                                                with_genres: []
+                                            })
+                                        )
                                 }
                             />
                         }
@@ -110,7 +143,10 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                                 onChange={
                                     () =>
                                         dispatch(
-                                            movieActions.setShowChoices(!showChoices)
+                                            movieActions
+                                                .setShowChoices(
+                                                    !showChoices
+                                                )
                                         )
                                 }
                             />
@@ -130,12 +166,24 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                 >
                     {!_.upperCase(t("genres"))}
                 </Typography>
-                <Container
+                <Box
                     className={css.Sed__BG_Container}
                 >
+                    <Checkbox
+                        sx={{position: "absolute", top: "20px"}}
+                        checked={!checked}
+                        onChange={handleChange}
+                    />
+
                     <BadgeGroup/>
-                </Container>
+                </Box>
+                <Box
+                    className={css.Menu}
+                >
+                    <MainMenu/>
+                </Box>
             </SwipeableDrawer>
+
         </Root>
     );
 };

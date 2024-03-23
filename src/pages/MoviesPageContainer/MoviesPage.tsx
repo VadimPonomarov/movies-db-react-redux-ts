@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 
 import {Box, Button} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -36,6 +36,9 @@ const MoviesPage: FC = () => {
     const showChoices = useSelector(movieSelectors.getShowChoices);
     const dispatch = useAppDispatch();
 
+    useEffect(() => {
+
+    }, [getFilteredResults]);
 
     return (
         <>
@@ -79,14 +82,15 @@ const MoviesPage: FC = () => {
             >
                 <BackDrop/>
                 {(!showChoices && !!getFilteredResults.length) &&
-                    getFilteredResults.map(item =>
-                        <MovieCard
-                            key={item.id}
-                            props={{
-                                item
-                            }}
-                        />
-                    )
+                    getFilteredResults
+                        .map(item =>
+                            <MovieCard
+                                key={item.id}
+                                props={{
+                                    item
+                                }}
+                            />
+                        )
                 }
                 {!!showChoices &&
                     getChoicesFromCache()

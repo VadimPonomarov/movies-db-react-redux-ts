@@ -1,7 +1,7 @@
 import * as React from "react";
 import {FC} from "react";
 
-import {Chip, Container, Stack} from "@mui/material";
+import {Box, Chip, Container} from "@mui/material";
 import {indexOf} from "lodash";
 
 import {IGenre, useAppBg} from "../../common";
@@ -18,11 +18,9 @@ const BadgeGroup: FC = () => {
     } = useAppBg();
 
     return (
-        <Container className={css.BG__Container}>
-            <Stack
+        <Box className={css.BG__Container}>
+            <Container
                 className={css.BG__Stack}
-                direction={"row"}
-                spacing={1}
             >
                 {!!genres.length &&
                     genres.map((item: IGenre) =>
@@ -44,8 +42,8 @@ const BadgeGroup: FC = () => {
                         />
                     )
                 }
-            </Stack>
-        </Container>
+            </Container>
+        </Box>
     );
 };
 
