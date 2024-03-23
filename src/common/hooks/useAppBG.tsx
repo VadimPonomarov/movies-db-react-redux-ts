@@ -3,7 +3,6 @@ import {useEffect} from "react";
 
 import _, {difference, indexOf} from "lodash";
 import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
 
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
 import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
@@ -28,7 +27,6 @@ const useAppBg: () => IReturn =
             useSelector(commonSelectors.getSearchParams);
         const dispatch =
             useAppDispatch();
-        const navigate = useNavigate();
 
         const handleChange = () => {
             dispatch(commonActions.setSearchParams({

@@ -12,7 +12,7 @@ import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
-import {useAppBg, useAppMoviesEffect} from "../../common";
+import {useAppBg} from "../../common";
 import {authSelectors, commonActions, useAppDispatch} from "../../storage";
 import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
@@ -29,8 +29,6 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
         useState<boolean>(false);
     const isAuth =
         useSelector(authSelectors.getIsAuth);
-    const movies =
-        useSelector(movieSelectors.getMovies);
     const genres =
         useSelector(movieSelectors.getGenres);
     const showChoices =
@@ -47,7 +45,6 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
         useTranslation();
     const {handleChange, checked} =
         useAppBg();
-    const {getFilteredResults} = useAppMoviesEffect();
 
     const handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void =
         (e) => {
