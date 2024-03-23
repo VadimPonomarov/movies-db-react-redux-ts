@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useState} from "react";
+import {FC, useRef, useState} from "react";
 
 import {Global} from "@emotion/react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -13,7 +13,7 @@ import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
 import {useAppBg} from "../../common";
-import {authSelectors, commonActions, useAppDispatch} from "../../storage";
+import {authSelectors, commonActions, commonSelectors, useAppDispatch} from "../../storage";
 import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
 import {MainMenu} from "../MainMenuContainer";
@@ -35,6 +35,10 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
         useSelector(movieSelectors.getShowChoices);
     const isChoices =
         useSelector(movieSelectors.getActiveCardList);
+    const {with_genres} =
+        useSelector(commonSelectors.getSearchParams);
+    const movieSearchInTitleLocal =
+        useSelector(movieSelectors.getMovieSearchInTitleLocal);
     const dispatch =
         useAppDispatch();
     const {movieId} =
@@ -43,17 +47,31 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
         useNavigate();
     const {t} =
         useTranslation();
-    const {handleChange, checked} =
+    const {checked, handleChange} =
         useAppBg();
 
+    const ref = useRef(null);
+
     const handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void =
-        (e) => {
+        async (e) => {
             dispatch(
                 movieActions
                     .setMovieSearchInTitleLocal(
                         e.target.value
                     )
             );
+        };
+
+    const handleOnChange: () => void =
+        async () => {
+            dispatch(commonActions
+                .setSearchParams({
+                    with_genres: []
+                })
+            );
+            dispatch(
+                movieActions
+                    .setMovieSearchInTitleLocal(""));
         };
 
 
@@ -107,9 +125,12 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
 
             >
                 <TextField
+                    ref={ref}
                     className={css.SearchField}
                     label={<SearchIcon/>}
                     variant="standard"
+                    disabled={!with_genres.length}
+                    value={!!movieSearchInTitleLocal ? movieSearchInTitleLocal : ""}
                     onChange={
                         (e) =>
                             handleInputChange(e)
@@ -123,12 +144,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                             <Switch
                                 checked={!!genres.length}
                                 onChange={
-                                    () =>
-                                        dispatch(commonActions
-                                            .setSearchParams({
-                                                with_genres: []
-                                            })
-                                        )
+                                    handleOnChange
                                 }
                             />
                         }
@@ -173,7 +189,8 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                 >
                     <Checkbox
                         sx={{position: "absolute", top: "20px"}}
-                        checked={!checked}
+                        defaultChecked={!!with_genres.length}
+                        checked={checked}
                         onChange={handleChange}
                     />
 

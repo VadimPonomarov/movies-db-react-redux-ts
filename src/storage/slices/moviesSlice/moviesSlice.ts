@@ -21,7 +21,7 @@ export const moviesSlice = createSliceWithThunks({
         getIsInit: state => state.isInit,
         getInfo: state => state.info,
         getMovies: state => state.movies,
-        getMoviesFiltered: state => state.movieSearchInTitleLocal,
+        getMovieSearchInTitleLocal: state => state.movieSearchInTitleLocal,
         getGenres: state => state.genres,
         getActiveCardList: state => state.activeCardList,
     },

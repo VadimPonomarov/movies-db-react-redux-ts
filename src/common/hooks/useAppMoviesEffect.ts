@@ -63,12 +63,14 @@ const useAppMoviesEffect: () => IReturn =
                                     )
                                         .length
                                 )
-                                .filter(item =>
-                                    item.title.toLowerCase()
-                                        .match(
-                                            movieSearchInTitleLocal
-                                                .toLowerCase()
-                                                .trim())
+                                .filter(item => {
+                                        if (!!movieSearchInTitleLocal) return item.title.toLowerCase()
+                                            .match(
+                                                movieSearchInTitleLocal
+                                                    .toLowerCase()
+                                                    .trim());
+                                        return item;
+                                    }
                                 ),
 
                             [category !== "discover" && sortBy]
