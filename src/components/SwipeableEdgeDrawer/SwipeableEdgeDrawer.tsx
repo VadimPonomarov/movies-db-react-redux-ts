@@ -3,7 +3,7 @@ import {FC, useRef, useState} from "react";
 
 import {Global} from "@emotion/react";
 import SearchIcon from "@mui/icons-material/Search";
-import {Box, Button, Checkbox, CssBaseline, SwipeableDrawer, TextField, Typography} from "@mui/material";
+import {Badge, Box, Button, Checkbox, CssBaseline, SwipeableDrawer, TextField, Typography} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Switch from "@mui/material/Switch";
@@ -187,12 +187,20 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                 <Box
                     className={css.Sed__BG_Container}
                 >
-                    <Checkbox
-                        sx={{position: "absolute", top: "20px"}}
-                        defaultChecked={!!with_genres.length}
-                        checked={checked}
-                        onChange={handleChange}
-                    />
+                    <Badge
+                        className={css.Badge}
+                        badgeContent={"inverse"}
+                        color="secondary"
+                    >
+                        <Checkbox
+                            sx={{marginY: .5}}
+                            defaultChecked={
+                                !!with_genres.length
+                            }
+                            checked={checked}
+                            onChange={handleChange}
+                        />
+                    </Badge>
 
                     <BadgeGroup/>
                 </Box>
