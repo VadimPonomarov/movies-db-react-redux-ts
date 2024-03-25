@@ -1,5 +1,11 @@
 @import "../../extras.module";
 
+%Pointer {
+  position: absolute;
+  color: white;
+  z-index: 2400;
+}
+
 .Ep {
   &__Container {
     @include flex_wrap_row_align();
@@ -117,5 +123,23 @@
   position: fixed;
   bottom: 2px;
   right: 2px;
+}
+
+
+.Pointer_Badge {
+  @extend %Pointer;
+  top: 17px;
+}
+
+.Pointer_Title {
+  @extend %Pointer;
+  left: 50%;
+  top: 70px;
+}
+
+.Pointer_Body {
+  @extend .Pointer_Title;
+  top: 245px;
+  color: orange;
 }
 

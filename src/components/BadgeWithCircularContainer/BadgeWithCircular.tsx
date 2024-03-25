@@ -1,7 +1,6 @@
-import React, {FC, useEffect, useRef, useState} from "react";
+import React, {FC, useRef} from "react";
 
-import {Box, CircularProgress, Fab, FabPropsColorOverrides, Typography} from "@mui/material";
-import {fromEvent, merge, tap} from "rxjs";
+import {Box, CircularProgress, Fab, FabPropsColorOverrides} from "@mui/material";
 
 import {UseAppEffectHook} from "../../common";
 import {useAppDispatch} from "../../storage";
@@ -62,24 +61,6 @@ const BadgeWithCircular: FC<IBadgeGrProps> =
             };
 
         const ref = useRef(null);
-        const [showPointer, setShowPointer] = useState<boolean>(false);
-
-
-        useEffect(() => {
-            const enter$ =
-                fromEvent(ref.current, "mouseenter")
-                    .pipe(tap(() => setShowPointer(true)));
-            const leave$ =
-                fromEvent(ref.current, "mouseleave")
-                    .pipe(tap(() => setShowPointer(false)));
-            const mouseMoveCompleted$ =
-                merge(enter$, leave$);
-            const sub = mouseMoveCompleted$.subscribe();
-
-            return () => {
-                sub.unsubscribe();
-            };
-        }, []);
 
         return (
             <Box
@@ -94,16 +75,6 @@ const BadgeWithCircular: FC<IBadgeGrProps> =
                         sx={buttonSx}
                         onClick={handleClick}
                     >
-                        <Typography
-                            className={css.Pointer}
-                            display={
-                                showPointer ?
-                                    "block" :
-                                    "none"
-                            }
-                        >
-                            👈 Click
-                        </Typography>
                         <>
                             {!(success || loading) && valOrFunc(initial_)}
                             {loading && valOrFunc(whileLoading)}

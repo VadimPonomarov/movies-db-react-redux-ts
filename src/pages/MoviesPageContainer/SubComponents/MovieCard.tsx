@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, memo, useState} from "react";
+import {FC, memo, useEffect, useRef, useState} from "react";
 
 import {Box, Button, Card, CardContent, Container, Typography} from "@mui/material";
 import {red} from "@mui/material/colors";
@@ -9,6 +9,7 @@ import _, {slice} from "lodash";
 import moment from "moment";
 import {useInView} from "react-intersection-observer";
 import {useSelector} from "react-redux";
+import {fromEvent, merge, tap} from "rxjs";
 
 import {baseImagesUrl, ImageSizeEnum} from "../../../common";
 import {UseAppCircularBadgeProps} from "../../../common/hooks/useAppCircularBadgeProps";
@@ -57,11 +58,56 @@ const MovieCard_: FC<ICardProps> = ({props}) => {
             triggerOnce: true
         });
 
+    const [showPointer, setShowPointer] = useState<boolean>(false);
+    const refCard = useRef(null);
+
+    useEffect(() => {
+        const enter$ =
+            fromEvent(refCard.current, "mouseenter")
+                .pipe(tap(() => setShowPointer(true)));
+        const leave$ =
+            fromEvent(refCard.current, "mouseleave")
+                .pipe(tap(() => setShowPointer(false)));
+        const mouseMoveCompleted$ =
+            merge(enter$, leave$);
+        const sub = mouseMoveCompleted$.subscribe();
+
+        return () => {
+            sub.unsubscribe();
+        };
+    }, []);
+
+    const display = {
+        display: showPointer ?
+            "block" :
+            "none"
+    };
+
+
     return (
         <InitMotionProvider>
             <Card
+                ref={refCard}
                 className={css.Ep__Card}
             >
+                <Typography
+                    className={css.Pointer_Badge}
+                    {...display}
+                >
+                    👈 Click
+                </Typography>
+                <Typography
+                    className={css.Pointer_Title}
+                    {...display}
+                >
+                    👆 Click
+                </Typography>
+                <Typography
+                    className={css.Pointer_Body}
+                    {...display}
+                >
+                    👆 Click
+                </Typography>
                 <Button
                     className={css.Ep__Card_Button}
                     sx={
