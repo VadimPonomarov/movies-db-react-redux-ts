@@ -4,7 +4,7 @@
   @include flex_wrap_row_align();
   position: absolute;
   top: 0;
-  left: 0
+  left: 0;
 }
 
 .Badge__Box_Box {
@@ -14,4 +14,9 @@
 .Badge__CP {
   position: absolute;
   z-index: 2;
+
+  &:hover {
+    padding: 1px;
+    border-radius: 50%;
+  }
 }

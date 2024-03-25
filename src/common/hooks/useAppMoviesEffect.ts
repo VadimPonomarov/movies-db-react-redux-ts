@@ -64,9 +64,14 @@ const useAppMoviesEffect: () => IReturn =
                                         .length
                                 )
                                 .filter(item => {
-                                        if (!!movieSearchInTitleLocal) return item.title.toLowerCase()
+                                    if (!!movieSearchInTitleLocal)
+                                        return item
+                                            .title
+                                            .replaceAll("ё", "е")
+                                            .toLowerCase()
                                             .match(
                                                 movieSearchInTitleLocal
+                                                    .replaceAll("ё", "е")
                                                     .toLowerCase()
                                                     .trim());
                                         return item;
