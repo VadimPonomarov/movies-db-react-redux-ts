@@ -35,7 +35,6 @@ const SelectSortBy: FC<IProps> = () => {
         >
             {!!with_genres.length && <Select
                 variant={"standard"}
-                defaultValue={MovieSortByEnum["vote_average.desc"]}
                 value={sort_by}
                 onChange={handleChange}
             >
