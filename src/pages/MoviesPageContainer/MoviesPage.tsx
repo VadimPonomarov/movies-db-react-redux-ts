@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 
 import {Box, Button} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -40,9 +40,6 @@ const MoviesPage: FC = () => {
     const dispatch =
         useAppDispatch();
 
-    useEffect(() => {
-
-    }, [getFilteredResults]);
 
     return (
         <>
