@@ -78,16 +78,17 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
 
     const fetchFunc: () => void =
         useCallback(async () => {
-            dispatch(
-                commonActions.setIsLoading(true)
-            );
             const {genres} =
-                await queryClient.fetchQuery({
-                    queryKey: ["genres", searchParams.language],
-                    queryFn: () =>
-                        movieService.getGenreList(searchParams)
-                });
-            dispatch(movieActions.setGenres(genres));
+                await queryClient
+                    .fetchQuery({
+                        queryKey: ["genres", JSON.stringify(searchParams)],
+                        queryFn: () =>
+                            movieService
+                                .getGenreList(searchParams)
+                    });
+            dispatch(
+                movieActions.setGenres(genres)
+            );
         }, [dispatch, searchParams]);
 
     useEffect(() => {

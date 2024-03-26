@@ -15,8 +15,10 @@ import {IProps} from "./interfaces";
 
 
 const SelectSortBy: FC<IProps> = () => {
-    const {sort_by, with_genres} = useSelector(commonSelectors.getSearchParams);
-    const dispatch = useAppDispatch();
+    const {sort_by, with_genres} =
+        useSelector(commonSelectors.getSearchParams);
+    const dispatch =
+        useAppDispatch();
 
     const handleChange: (event: SelectChangeEvent) => void =
         (event) => {

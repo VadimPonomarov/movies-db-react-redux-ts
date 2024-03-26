@@ -31,10 +31,14 @@ const MoviesPage: FC = () => {
         getChoicesFromCache
     } = useAppMoviesEffect();
 
-    const [isMoreVisible] = useState<boolean>(true);
-    const movieChoiceLIst = useSelector(movieSelectors.getActiveCardList);
-    const showChoices = useSelector(movieSelectors.getShowChoices);
-    const dispatch = useAppDispatch();
+    const [isMoreVisible] =
+        useState<boolean>(true);
+    const movieChoiceLIst =
+        useSelector(movieSelectors.getActiveCardList);
+    const showChoices =
+        useSelector(movieSelectors.getShowChoices);
+    const dispatch =
+        useAppDispatch();
 
     useEffect(() => {
 

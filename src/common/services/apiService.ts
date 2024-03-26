@@ -9,9 +9,10 @@ const apiService = axios.create({
     baseURL: baseUrl,
 });
 
+
 apiService.interceptors.request.use(
     (config) => {
-        const token = getCredentials().token;
+        const token = getCredentials()?.token;
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`;
             config.headers["accept"] = "application/json;charset=utf-8";

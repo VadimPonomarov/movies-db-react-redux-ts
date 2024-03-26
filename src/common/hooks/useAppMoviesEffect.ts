@@ -128,9 +128,6 @@ const useAppMoviesEffect: () => IReturn =
 
         const fetchFunc: () => void =
             useCallback(async () => {
-                dispatch(
-                    commonActions.setIsLoading(true)
-                );
                 const {results: responseRes, ...responseInfo} =
                     await queryClient.fetchQuery({
                         queryKey: [category, JSON.stringify(params)],
@@ -162,9 +159,13 @@ const useAppMoviesEffect: () => IReturn =
                         )
                     );
                     setIsMoreActive(false);
-                    dispatch(movieActions.setInfo(responseInfo));
+                    dispatch(
+                        movieActions.setInfo(responseInfo)
+                    );
                 }
-                dispatch(commonActions.setIsLoading(false));
+                dispatch(
+                    commonActions
+                        .setIsLoading(false));
                 // eslint-disable-next-line
             }, [category, getFetchService, params]);
         const getChoicesFromCache: () => IMovieResult[] =
