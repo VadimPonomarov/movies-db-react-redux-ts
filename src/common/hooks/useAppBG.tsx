@@ -1,11 +1,10 @@
 import * as React from "react";
-import {useEffect} from "react";
 
 import _, {difference, indexOf} from "lodash";
 import {useSelector} from "react-redux";
 
 import {commonActions, commonSelectors, useAppDispatch} from "../../storage";
-import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
+import {movieSelectors} from "../../storage/slices/moviesSlice";
 import {ISearchParams} from "../hocs/interfaces";
 import {IGenre} from "../types";
 
@@ -41,10 +40,6 @@ const useAppBg: () => IReturn =
             setChecked(!checked);
         };
 
-
-        useEffect(() => {
-            dispatch(movieActions.getGenreList(searchParams));
-        }, [dispatch, searchParams]);
 
         const handleClick: (id: number) => void =
             (id) => {

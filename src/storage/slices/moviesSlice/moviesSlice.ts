@@ -60,7 +60,6 @@ export const moviesSlice = createSliceWithThunks({
                 try {
                     dispatch(commonActions.setIsLoading(true));
                     const res = await movieService.getGenreList(seachParams);
-                    dispatch(commonActions.setIsSuccess(true));
                     return fulfillWithValue(res);
                 } catch (e) {
                     dispatch(commonActions.setIsError(e.message));

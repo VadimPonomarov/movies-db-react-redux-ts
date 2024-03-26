@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useRef, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 
 import {Global} from "@emotion/react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -35,7 +35,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
         useSelector(movieSelectors.getShowChoices);
     const isChoices =
         useSelector(movieSelectors.getActiveCardList);
-    const {with_genres} =
+    const searchParams =
         useSelector(commonSelectors.getSearchParams);
     const movieSearchInTitleLocal =
         useSelector(movieSelectors.getMovieSearchInTitleLocal);
@@ -74,6 +74,12 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                     .setMovieSearchInTitleLocal(""));
         };
 
+    useEffect(() => {
+        dispatch(
+            movieActions
+                .getGenreList(searchParams));
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <Root>
@@ -129,7 +135,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                     className={css.SearchField}
                     label={<SearchIcon/>}
                     variant="standard"
-                    disabled={!with_genres.length}
+                    disabled={!searchParams.with_genres.length}
                     value={!!movieSearchInTitleLocal ? movieSearchInTitleLocal : ""}
                     onChange={
                         (e) =>
@@ -195,7 +201,7 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                         <Checkbox
                             sx={{marginY: .5}}
                             defaultChecked={
-                                !!with_genres.length
+                                !!searchParams.with_genres.length
                             }
                             checked={checked}
                             onChange={handleChange}

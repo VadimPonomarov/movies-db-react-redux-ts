@@ -99,7 +99,8 @@ const useAppMoviesEffect: () => IReturn =
                             .toString()
                     };
                 dispatch(
-                    commonActions.setSearchParams(nextPage)
+                    commonActions
+                        .setSearchParams(nextPage)
                 );
             };
 
@@ -108,7 +109,8 @@ const useAppMoviesEffect: () => IReturn =
                 const prevPage: ISearchParams =
                     {page: (+query.get("page") - 1).toString()};
                 dispatch(
-                    commonActions.setSearchParams(prevPage)
+                    commonActions
+                        .setSearchParams(prevPage)
                 );
             };
         const handleClickMore: () => void =
@@ -139,10 +141,12 @@ const useAppMoviesEffect: () => IReturn =
                     });
                 if (!isMoreActive) {
                     dispatch(
-                        movieActions.setMovies(responseRes)
+                        movieActions
+                            .setMovies(responseRes)
                     );
                     dispatch(
-                        movieActions.setInfo({...responseInfo, total_results: 0})
+                        movieActions
+                            .setInfo({...responseInfo, total_results: 0})
                     );
 
                 } else {
