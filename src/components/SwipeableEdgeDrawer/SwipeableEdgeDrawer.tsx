@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FC, useEffect, useRef, useState} from "react";
+import {FC, useCallback, useEffect, useRef, useState} from "react";
 
 import {Global} from "@emotion/react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -13,6 +13,8 @@ import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 
 import {useAppBg} from "../../common";
+import {queryClient} from "../../common/hocs";
+import {movieService} from "../../common/services";
 import {authSelectors, commonActions, commonSelectors, useAppDispatch} from "../../storage";
 import {movieActions, movieSelectors} from "../../storage/slices/moviesSlice";
 import {BadgeGroup} from "../BadgeGroup";
@@ -74,12 +76,23 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                     .setMovieSearchInTitleLocal(""));
         };
 
+    const fetchFunc: () => void =
+        useCallback(async () => {
+            dispatch(
+                commonActions.setIsLoading(true)
+            );
+            const {genres} =
+                await queryClient.fetchQuery({
+                    queryKey: ["genres", searchParams.language],
+                    queryFn: () =>
+                        movieService.getGenreList(searchParams)
+                });
+            dispatch(movieActions.setGenres(genres));
+        }, [dispatch, searchParams]);
+
     useEffect(() => {
-        dispatch(
-            movieActions
-                .getGenreList(searchParams));
-        // eslint-disable-next-line
-    }, []);
+        fetchFunc();
+    }, [fetchFunc]);
 
     return (
         <Root>
@@ -200,9 +213,6 @@ const SwipeableEdgeDrawer: FC<IProps> = () => {
                     >
                         <Checkbox
                             sx={{marginY: .5}}
-                            defaultChecked={
-                                !!searchParams.with_genres.length
-                            }
                             checked={checked}
                             onChange={handleChange}
                         />
