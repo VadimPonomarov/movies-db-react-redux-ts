@@ -102,7 +102,8 @@ const MoviesPage: FC = () => {
                                     item
                                 }}
                             />
-                        )}
+                        )
+                }
             </Box>
             {!!isMoreVisible &&
                 <motion.div

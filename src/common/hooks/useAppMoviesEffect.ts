@@ -170,14 +170,14 @@ const useAppMoviesEffect: () => IReturn =
             }, [category, getFetchService, params]);
         const getChoicesFromCache: () => IMovieResult[] =
             () => {
-                const {results} =
+                const results =
                     queryClient
                         .getQueryData<IMovieList>(
                             [category, JSON.stringify(params)]
                         );
-                return results
+                return results?.results
                     .filter(item =>
-                        !!_.includes(choices, item.id));
+                        !!_.includes(choices, item.id)) || [];
             };
 
 
